@@ -1,24 +1,281 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
-        <title>Document</title>
+    <title>La Tresse - Accueil</title>
 
-    </head>
+</head>
 
-    <body>
-        yo écrivez ici 
-        ici
+<body>
+
+    <header>
+        <img class="header_logo" src="img/logo/logo1.png" alt="Logo de la Tresse">
+        <nav>
+            <img id="nav_burger" class="pointer" src="img/icons/burger3.png" alt="burger menu icon">
+            <div id="menu_container">
+                <ul>
+                    <li>
+                        <ul>
+                            <li>
+                                <a href="historique.html">Historique</a>
+                            </li>
+                            <li>
+                                <a href="services.html">Services</a>
+                            </li>
+                            <li>
+                                <a href="communaute.html">Communauté</a>
+                            </li>
+                            <li>
+                                <a href="cartographie.html">Cartographie</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="tierslieux.html">Tiers-Lieux</a>
+                    </li>
+                    <li>
+                        <a href="projets.html">Projets</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                    <li>
+                        <a class="nav_actualites" href="actualites.php">Actualités</a>
+                    </li>
+                    <li>
+                        <a class="nav_connexion" href="connexion.html">NomRS</a>
+                    </li>
+                </ul>
+                <img id="close_button" class="pointer" src="img/icons/close.png" alt="burger menu icon">
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="hero">
+            <div class="herotext_container">
+                <p id="maintitle">
+                    <span class="ochrebg">
+                        La Tresse
+                    </span>
+                </p>
+                <h3>
+                    <span class="ochrebg">
+                        (Premier) tiers-lieu de <br>
+                        familles rurales 83
+                    </span>
+                </h3>
+                <h1>
+                    <span class="ochrebg">
+                        Créer du lien social à travers des tiers-lieux <br>
+                        et s'inscrire dans le cadre de l'éducation <br>
+                        populaire auprès de publics divers et de <br>
+                        générations différentes
+                    </span>
+                </h1>
+                <a href="adhesion.html">
+                    <button class="button_adhere pointer">
+                        <p>Adhérer</p>
+                        <img src="img/icons/chevron_right.svg" alt="">
+                    </button>
+                </a>
+            </div>
+            
+        </section>
+
+        <section id="nouveau">
+            <div class="nouveau_container">
+                <div class="nouveautxt">
+                    <img class="nouveau_logo_pattern" src="img/logo/logo_pattern.png" alt="Frange Logo">
+                    <h2>
+                        Nouveau&nbsp;!
+                    </h2>
+                    <p>
+                        La Tresse a désormais son <br>
+                        réseau social pour échanger, <br>
+                        participer, proposer des projets&nbsp;! 
+                    </p>
+                </div>
+
+                <div class="nouveau_buttons_container">
+                    <h2>
+                        "NomRS"
+                    </h2>
+                    <h4>
+                        Rejoignez la communauté&nbsp;!
+                    </h4>
+                    <div class="nouveau_buttons_prox_container">
+                        <div class="button_connexion">
+                            <a href="connexion.html">
+                                Se connecter
+                            </a>
+                        </div>
+                        <div class="button_inscription">
+                            <a href="inscription.html">
+                                S’inscrire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="actualites">
+            <div class="actualites_container">
+                <div class="button_yellow_edging_container">
+                    <a href="actualites.php">
+                        <button class="button_yellow pointer">
+                            <p>Actualités <span>de la Tresse</span></p>
+                            <img src="img/icons/chevron_right_bluetext.svg" alt="">
+                        </button>
+                    </a>
+                    <div class="actualites_edging"></div>
+                </div>
+
+                <article class="actualites_card">
+                    <div class="actualites_card_left"></div>
+                    <div class="actualites_card_right">
+                        <h5>Titre article</h5>
+                        <p class="actualites_card_date">16 juin 2023</p>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias ...Lorem, ipsum dolor sit amet.
+                        </p>
+                        <div class="button_actualites_card_container">
+                            <a href="#" class="button_actualites_card">
+                                Lire
+                            </a>
+                        </div>
     
+                    </div>
+                </article>
+            </div>
+        </section>
 
+        <section class="landing_tierslieux">
 
+            <article>
+                <div class="landing_tierslieux_heading_container">
+                    <div class="landing_tierslieux_heading">
+                        Qu'est-ce qu'un tiers-lieu&nbsp;? 
+                    </div>
+                </div>
+                <img src="img/tierslieu320-800.jpg" alt="Tiers-Lieu" class="landing_tierslieux_img">
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta. 
+                </p>
+                <a href="tierslieux.html">
+                    <div class="center">
+                        <p class="landing_tierslieux_button">
+                            En savoir plus
+                        </p>
+                    </div>
+                </a>
+            </article>
+
+            <article>
+                <div class="landing_tierslieux_heading_container">
+                    <div class="landing_tierslieux_heading">
+                        Qu'est-ce qu'un tiers-lieu&nbsp;? 
+                    </div>
+                </div>
+                <img src="img/tierslieu320-800.jpg" alt="Tiers-Lieu" class="landing_tierslieux_img">
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta. 
+                </p>
+                <a href="tierslieux.html">
+                    <div class="center">
+                        <p class="landing_tierslieux_button">
+                            En savoir plus
+                        </p>
+                    </div>
+                </a>
+            </article>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <section id="footer_cta">
+            <div class="center column">
+                    <div class="footer_cta_heading">
+                        S'abonner à la Newsletter
+                    </div>
+
+                <form action="newsletterinscription.php" method="post">
+                    <div class="footer_cta_form">
+                        <div class="footer_cta_form_input_container_left">
+                            <input type="text" placeholder="Prénom" name="firstname" id="firstname">
+                        </div>
+                        <div class="footer_cta_form_input_container_right">
+                            <input type="email" placeholder="E-mail" name="email" id="email">
+                        </div>
+                    </div>
+                        <button type="submit" id="footer_cta_form_submit" class="button_yellow pointer">
+                            <p>
+                                S'abonner
+                            </p>
+                            <img src="img/icons/chevron_right_bluetext.svg" alt="">
+                        </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="footer_blue_part">
+            <div class="footer_main">
+                <img src="img/logo/logo_footer.png" alt="logo" class="footer_logo">
+                <div class="footer_main_right">
+
+                </div>
+                <ul>
+                    <li>
+                        <a href="historique.html">Historique</a>
+                    </li>
+                    <li>
+                        <a href="services.html">Services</a>
+                    </li>
+                    <li>
+                        <a href="communaute.html">Communauté</a>
+                    </li>
+                    <li>
+                        <a href="cartographie.html">Cartographie</a>
+                    </li>
+                    <li>
+                        <a href="tierslieux.html">Tiers-Lieux</a>
+                    </li>
+                    <li>
+                        <a href="projets.html">Projets</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                    <li class="footer_actualites">
+                        <a href="actualites.php">Actualités</a>
+                    </li>
+                    <li class="footer_adhesion">
+                        <a href="adhesion.html">Adhérer</a>
+                    </li>
+                </ul>
+            </div>
+   
+            <div class="footer_bottom">
+                <p><a href="legal.html">Mentions légales</a></p>
+                <p><a href="triolet.html">&copy; 2023 Triolet</a></p>
+            </div>
+        </section>
         
-    </body>
+    </footer>
 
+
+    <script src="js/burger.js"></script>
+</body>
 </html>
