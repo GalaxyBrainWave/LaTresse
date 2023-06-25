@@ -1,0 +1,178 @@
+footer
+{
+    width: 100%;
+    background-color: var(--blue-text);
+}
+
+.footer_logo
+{
+    width: 70px;
+    height: 29px;
+    margin: auto;
+    display: block;
+}
+
+footer ul
+{
+    text-align: center;
+    margin-top: 30px;
+}
+
+footer ul li a
+{
+    color: var(--beige);
+    font-size: 10px;
+}
+
+.footer_actualites,
+.footer_adhesion
+{
+    border-radius: 10px;
+    width: 80px;
+    text-align: center;
+    margin-top: 5px;
+    padding-bottom: 3px;
+    margin-bottom: 5px;
+}
+
+.footer_actualites
+{
+    background-color: var(--ochre);
+}
+
+.footer_actualites a,
+.footer_adhesion a
+{
+    color: var(--blue-text);
+}
+
+.footer_adhesion
+{
+    background-color: var(--beige);
+}
+
+footer > p 
+{
+    text-align: center;
+    color: var(--beige);
+    margin: 5px 0 10px;
+    text-transform: uppercase;
+    margin-top: 25px;
+}
+
+.footer_bottom
+{
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 30px;
+}
+
+.footer_bottom > p > a
+{
+    color: var(--beige);
+    font-size: 10px;
+}
+
+footer .button_yellow
+{
+    border: solid 2px var(--ochre);
+}
+
+footer .button_yellow:hover
+{
+    background-color: var(--blue-text);
+}
+
+footer .button_yellow:hover p 
+{
+    color: var(--ochre);
+}
+
+footer .button_yellow:hover svg path
+{
+    fill: red;
+}
+
+.footer_blue_part
+{
+    padding: 30px;
+}
+
+.footer_buttons
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+
+
+
+@media screen and (min-width: 780px)
+{
+    .footer_main
+    {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .footer_blue_part ul 
+    {
+        display: flex;
+        flex-direction: column;
+        margin-right: 50px;
+        gap: 15px;
+    }
+
+    .footer_blue_part ul div 
+    {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    .footer_logo
+    {
+        margin: 15px 15px;
+    }
+
+    footer
+    {
+        background-color: var(--blue-text);
+    }
+
+    .footer_actualites,
+    .footer_adhesion
+    {
+        width: 120px;
+        padding-bottom: 3px;
+        margin-bottom: 5px;
+    }
+
+    .footer_bottom
+    {
+        justify-content: flex-end;
+        margin-right: 50px;
+    }
+}
+
+
+@media screen and (min-width: 1000px){
+    .footer_logo
+    {
+        margin: 15px 135px;
+    }
+}
+
+
+@media screen and (min-width: 1200px){
+    .footer_blue_part ul,
+    .footer_bottom
+    {
+        margin-right: 135px;
+    }
+}

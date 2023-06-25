@@ -1,0 +1,177 @@
+#actualites
+{
+    padding: 0 5% 20px;
+    margin-bottom: 30px;
+}
+
+
+
+#actualites .button_yellow
+{
+    margin: 30px auto;
+}
+
+#actualites .button_yellow p span
+{
+    display: none;
+}
+
+
+#actualites .button_yellow:hover
+{
+    background-color: var(--blue-text);
+}
+
+#actualites .button_yellow:hover p 
+{
+    color: var(--ochre);
+}
+
+/* .actualites_container
+{
+    margin: 0 15px;
+    width: 90%;
+} */
+
+.actualites_card
+{
+    display: flex;
+    /* margin: 0 5%;
+    width: 90%; */
+    border: solid 1px var(--blue-text);
+    border-radius: 20px;
+}
+
+
+
+.actualites_card_left
+{
+    width: 34%;
+    min-width: 98px;
+    background-image: url(../../img/triolet.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px 0 0 20px;
+}
+
+.actualites_card_right
+{
+    padding: 16px 16px 20px;
+}
+
+.actualites_card_right p 
+{
+    margin-bottom: 10px;
+}
+
+.long_edging
+{
+    height: 30px;
+    background-image: url(../../img/logo/logo_pattern.png);
+    background-repeat: repeat-x;
+    background-size: contain;
+}
+
+.actualites_card_date
+{
+    font-size: 10px;
+    color: var(--green);
+    margin-bottom: 8px;
+}
+
+.button_actualites_card
+{
+    width: 100px;
+    background-color: var(--blue);
+    color: var(--beige);
+    padding: 5px 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    border: solid 2px var(--blue);
+    border-radius: 50px;
+}
+
+.button_actualites_card:hover
+{
+    background-color: var(--beige);
+    color: var(--blue);
+}
+
+
+@media screen and (min-width: 780px) {
+    #actualites
+    {
+        padding: 6px 50px 20px;
+    }
+
+    .actualites_container
+    {
+        margin: 0 auto 20px;
+        max-width: 750px;
+    }
+
+    #actualites .button_yellow
+    {
+        width: 317px;
+        margin: 30px 0;
+    }
+
+    #actualites .button_yellow p
+    {
+        font-size: 20px;
+    }
+
+    #actualites .button_yellow p span
+    {
+        display: inline;
+    }
+
+    .button_yellow_edging_container
+    {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+    }
+
+    .actualites_edging
+    {
+        height: 30px;
+        background-image: url(../../img/logo/logo_pattern.png);
+        background-repeat: repeat-x;
+        background-size: contain;
+    }
+
+    .actualites_card
+    {
+        padding: 37px;
+    }
+
+    .actualites_card_left
+    {
+        border-radius: 0;
+        width: 100%;
+        max-width: 230px;
+        height: 177px;
+    }
+
+    .actualites_card h5
+    {
+        font-size: 14px;
+    }
+
+    .button_actualites_card_container
+    {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+@media screen and (min-width: 1200px)
+{
+    .actualites_container
+    {
+        max-width: 1000px;
+
+    }
+}
