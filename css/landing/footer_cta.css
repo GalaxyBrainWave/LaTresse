@@ -5,9 +5,7 @@
     margin-top: 20px;
 }
 
-#icon_menu_down{
-    display: none;
-}
+
 
 .footer_cta_heading
 {
@@ -113,11 +111,7 @@
     }
 }
 
-@media screen and (min-width:900px) {
-    #icon_menu_down{
-        display: inline;
-    }
-}
+
 
 @media screen and (min-width:1200px)
 {

@@ -5,14 +5,14 @@ let closeButton = document.getElementById("close_button");
 
 
 function openBurger() {
-  if (menu.style.display = 'none') {
+  if (menu.style.display == 'none') {
     menu.style.display = 'flex';
     burger.style.display = 'none';
   }
 }
 
 function closeBUrger() {
-    if (menu.style.display = 'flex') {
+    if (menu.style.display == 'flex') {
         menu.style.display = 'none';
         burger.style.display = 'flex';
       }
