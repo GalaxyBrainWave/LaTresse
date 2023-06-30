@@ -1,0 +1,106 @@
+#historique_historicards {
+    width: 100%;
+    margin: 30px auto;
+}
+
+#historique_historicards h2 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.historique_historicards_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.historicard,
+.hcard_rs {
+    max-width: 345px;
+    border: solid 2px var(--green);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 6px 6px 0 0 var(--ochre);
+    margin-bottom: 18px;
+}
+
+.historicard .center {
+    order: 2;
+}
+
+.historicard_img {
+    width: 100%;
+}
+
+.historicard h4,
+.historicard h3 {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.historicard p,
+.historicard_img {
+    margin-bottom: 10px;
+}
+
+.historicard_left {
+    display: flex;
+    flex-direction: column;
+}
+
+.historicard_left h3 {
+    justify-self: center;
+}
+
+@media screen and (min-width:850px) {
+    .historicard {
+        width: 90%;
+        max-width: 750px;
+        max-height: 350px;
+        flex-direction: row;
+        gap: 20px;
+        padding: 20px;
+        justify-content: space-between;
+        margin-bottom: 35px;
+    }
+
+    .historicard p {
+        max-width: 410px;
+        text-align: justify;
+    }
+
+    .historicard h4,
+    .historicard h3 {
+        text-align: left;
+    }
+
+    .historicard_img {
+        width: 325px;
+        margin: 0;
+    }
+
+    #historique_historicards > h2 {
+        margin-bottom: 35px;
+    }
+
+    .hcard_rs {
+        display: block;
+        width: 90%;
+        max-width: 750px;
+        max-height: 350px;
+        padding: 20px;
+        margin-bottom: 35px;
+        max-height: none;
+        height: 354px;
+    }
+
+    .hcard_rs_top {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+}

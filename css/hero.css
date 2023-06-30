@@ -1,6 +1,6 @@
 #hero
 {
-    background-image: url('../../img/hero320-800.jpg');
+    background-image: url('../img/hero320-800.jpg');
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -13,6 +13,10 @@
 .herotext_container
 {
     width: 270px;
+}
+
+.hero_h2_main_variation {
+    margin-bottom: 20px;
 }
 
 #maintitle
@@ -68,7 +72,7 @@
 @media screen and (min-width: 780px) {
     #hero
     {
-        background-image: url(../../img/hero800-1200.jpg);
+        background-image: url(../img/hero800-1200.jpg);
         height: 400px;
         justify-content: flex-start;
     }
@@ -77,6 +81,10 @@
     {
         width:750px;
         margin: auto;
+    }
+
+    .herotext_widthcontrol {
+        width: 500px;
     }
 
     #maintitle
@@ -112,7 +120,7 @@
 {
     #hero
     {
-        background-image: url(../../img/hero1200-2000.jpg);
+        background-image: url(../img/hero1200-2000.jpg);
     }
 }
 
