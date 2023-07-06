@@ -1,0 +1,75 @@
+.landing_tierslieux
+{
+    padding: 23px 16px 30px;
+    margin-top: 30px;
+}
+
+.landing_tierslieux article
+{
+    width:90%;
+    max-width: 290px;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+.landing_tierslieux_heading_container
+{
+    width:100%;
+    max-width: 290px;
+}
+
+.landing_tierslieux_heading
+{
+    width:100%;
+    max-width: 290px;
+    text-align: center;
+    padding: 8px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: solid 1px var(--green);
+    box-shadow: 6px 6px var(--green);
+    margin: 0 auto 25px;
+}
+
+
+.landing_tierslieux_img
+{
+    width:100%;
+    max-width: 290px;
+    margin-bottom: 12px;
+}
+
+.landing_tierslieux_button
+{
+    text-align: center;
+    margin-top: 16px;
+    border: solid 2px var(--blue-text);
+    width: 150px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 0;
+}
+
+.landing_tierslieux_button:hover
+{
+    background-color: var(--blue-text);
+    color: var(--beige);
+}
+
+@media screen and (min-width:700px)
+{
+    .landing_tierslieux
+    {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        margin-top: 50px;
+    }
+
+    .landing_tierslieux article
+    {
+        margin: 0;
+    }
+    
+}

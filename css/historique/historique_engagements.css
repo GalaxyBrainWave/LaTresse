@@ -1,0 +1,21 @@
+#engagements {
+    padding: 30px 30px;
+    background-color: var(--blue-text);
+    color: var(--beige);
+}
+
+#engagements h2 {
+    color: var(--beige);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+#engagements p {
+    color: var(--beige);
+    margin-bottom: 18px;
+}
+
+#engagements li {
+    color: var(--beige);
+}

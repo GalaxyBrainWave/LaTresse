@@ -1,0 +1,203 @@
+#nouveau
+{
+    background-color: var(--green);
+    padding: 16px 5vw;
+    animation: colorCycle 20s infinite;
+}
+
+.nouveau_container
+{
+    margin: auto;
+    width: 100%;
+    background-color: var(--beige);
+    padding: 15px 12px;
+    border-radius: 15px;
+}
+
+.nouveau_container p
+{
+    text-align: center;
+    margin: 10px 0;
+}
+
+.nouveau_buttons_container
+{
+    background-color: var(--blue-text);
+    border-radius: 20px;
+    padding: 32px 0 28px;
+    max-width: 350px;
+    margin: auto;
+}
+
+.nouveau_buttons_container h2
+{
+    color: var(--beige);
+}
+
+.nouveau_buttons_container h4 
+{
+    color: var(--beige);
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.nouveau_buttons_prox_container
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 65px;
+}
+
+.button_connexion
+{
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--beige);
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 20px;
+    width: 174px;
+}
+
+.button_connexion:hover
+{
+    background-color: var(--ochre);
+}
+
+.button_inscription
+{
+    font-size: 16px;
+    font-weight: bold;
+    border: solid 2px var(--beige);
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 20px;
+    width: 174px;
+    margin-top: 16px;
+}
+
+.button_inscription a 
+{
+    color: var(--beige);
+}
+
+.button_inscription:hover
+{
+    background-color: var(--ochre); 
+    border: solid 2px var(--ochre);;   
+}
+
+.button_inscription:hover a 
+{
+    color: var(--blue-text);
+}
+
+@media screen and (min-width: 780px)
+{
+    #nouveau
+    {
+        padding: 40px 0;
+        margin: auto;
+    }
+    .nouveautxt h2,
+    .nouveautxt p
+    {
+        text-align: left;
+    }
+
+    .nouveautxt p
+    {
+        font-size: 20px;
+    }
+
+    .nouveau_container
+    {
+        max-width: 750px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+
+
+    .nouveau_logo_pattern
+    {
+        display: block;
+        width: 92px;
+        height: 26px;
+        margin-bottom: 10px;
+        object-fit: contain;
+    }
+
+    .nouveau_buttons_container
+    {
+        min-width: 350px;
+    }
+
+    .nouveautxt
+    {
+        min-width: 350px;
+        padding-left: 20px;
+    }
+
+    .button_connexion,
+    .button_inscription
+    {
+        font-size: 20px;
+        width: 210px;
+    }
+}
+
+@media screen and (min-width:950px)
+{
+    .nouveautxt p
+    {
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width: 1200px)
+{
+
+    .nouveautxt
+    {
+        padding-left: 40px;
+        width:50%;
+    }
+
+    .nouveau_buttons_prox_container
+    {
+        flex-direction: row;
+        gap: 28px;
+    }
+
+    .button_inscription
+    {
+        margin-top: 0;
+    }
+
+    .nouveau_container
+    {
+        min-width: 1000px;
+    }
+    .nouveau_buttons_container
+    {
+        padding: 32px 25px 28px;
+        width: 50%;
+        max-width: none;
+    }
+}
+
+@keyframes colorCycle {
+    0%, 28% {
+      background-color: var(--green);
+    }
+    33%, 64% {
+      background-color: var(--ochre);
+    }
+    68%, 95% {
+      background-color: var(--blue);
+    }
+}
