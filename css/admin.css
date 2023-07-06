@@ -1,0 +1,351 @@
+/* Date et heure */
+
+#datetime {
+    display: flex;
+    flex-flow: row-reverse;
+    margin: 16px auto;
+    width: 88%;
+}
+
+#date-hour {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    border: 3px solid var(--ochre);
+    border-radius: 10px;
+    margin: 0 24px;
+    width: 50%;
+}
+
+#date,
+#hour {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 16px 0;
+    width: 50%;
+}
+
+#hour {
+    border-left: 3px solid var(--blue-text);
+}
+
+#date svg,
+#hour svg {
+    margin: 0;
+}
+
+/* Nouveautés */
+
+#news-dashboard {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 48px;
+    width: 100%;
+}
+
+.news-info {
+    border: 3px solid var(--ochre);
+    border-radius: 10px;
+    margin: 16px auto;
+    padding: 8px 8px;
+    text-align: justify;
+    width: 80%;
+    height: 102px;
+}
+
+.news-nb {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 8px;
+}
+
+.news-nb span {
+    font-size: 2rem;
+    color: var(--blue-text);
+}
+
+/* Tableaux */
+
+.content-section {
+    width: 100%;
+}
+
+.card-section {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 100%;
+}
+
+.title-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--ochre);
+    border-radius: 10px;
+    height: 86px;
+    width: 100%;
+}
+
+.table-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px auto;
+    width: 100%;
+}
+
+.table-section table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    border: 3px solid var(--blue);
+    width: 95%;
+    
+}
+
+.table-section thead {
+    background-color: var(--blue-text);
+    width: 100%;
+    height: 78px;
+}
+
+.table-section tr {
+    width: 100%;
+}
+
+.table-section th {
+    color: var(--bg-color);
+    font-size: 0.6em;
+    text-align: center;
+    min-width: 10%;
+}
+
+.table-section td {
+    border-top: 1px solid var(--blue);
+    color: var(--blue);
+    font-size: 0.5em;
+    min-width: 10%;
+    height: 48px;
+    text-align: center;
+}
+
+.table-section button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue-text);
+    border-radius: 20px;
+    width: 60%;
+    height: 90%;
+    margin: auto auto;
+}
+
+.table-section svg {
+    margin-top: 0;
+}
+
+.table-section path {
+    fill: var(--bg-color);
+}
+
+/* Création d'articles de blog */
+
+.blog-creation {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 24px auto 0 auto;
+    width: 100%;
+}
+
+.blog-section {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    min-height: 50%; 
+}
+
+.title-img {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100px;
+    margin: 16px auto;
+}
+
+.title-img input {
+    border: 3px solid var(--green);
+    margin: 16px auto;
+    padding: 16px;
+    text-align: justify;
+    width: 90%;
+}
+
+.title-img input[type="file"] {
+    height: 200px;
+    object-fit: contain;
+}
+
+.text-editor {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.text-editor textarea {
+    border: 3px solid var(--green);
+    margin: 16px auto;
+    padding: 16px;
+    text-align: justify;
+    width: 90%;
+}
+
+.add-section {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-section button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.2rem;
+    color: var(--blue-text);
+    margin: 0;
+    padding-right: 8px;
+}
+
+.add-section button:hover {
+    color: var(--green);
+}
+
+.send-help {
+    background-color: var(--blue-text);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10px;
+    height: 100px;
+    margin-top: 32px;
+}
+
+.send-help button {
+    background-color: transparent;
+    color: var(--bg-color);
+    border: none;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.send-help path {
+    fill: var(--bg-color);
+}
+
+.send-help button:hover {
+    color: var(--ochre);
+}
+
+#section-more1 {
+    display: flex;
+    flex-flow: row-wrap;
+    width: 100%;
+    min-height: 50%;
+}
+
+/* Responsive supérieur à 780px */
+
+@media screen and (min-width: 780px) {
+
+    /* Accueil dashboard */
+
+    #datetime {
+        width: 83%;
+    }
+
+    #date-hour {
+        width: 40%;
+    }
+
+    #news-dashboard {
+        margin: 48px auto;
+        width: 90%;
+    }
+
+    .news-info {
+        width: 30%;
+    }
+
+    .card-section {
+        border: 3px solid var(--ochre);
+        border-radius: 20px;
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .table-section th {
+        font-size: 1em;
+    }
+
+    .table-section td {
+        font-size: 0.9em;
+    }
+
+    /* Blog section */
+
+    .blog-section {
+        flex-flow: row wrap;
+        margin-bottom: 8px;
+    }
+
+    .title-img {
+        width: 50%;
+    }
+
+    .text-editor {
+        width: 50%;
+        margin: 16px 0;
+    }
+
+    .bottom-form {
+        display: flex;
+        flex-flow: column wrap;
+        width: 100%;
+    }
+
+    .add-section {
+        width: 90%;
+        justify-content: flex-end;
+        margin: 0 auto;
+    }
+
+    .send-help {
+        width: 50%;
+        margin: 24px auto 8px auto;
+    }
+
+    .send-help button {
+        font-size: 1.3rem;
+    }
+
+    #section-more1 {
+        display: flex;
+        flex-flow: reverse-row wrap;
+        width: 100%;
+        min-height: 50%;
+    }
+}
