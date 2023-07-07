@@ -39,20 +39,14 @@
 
                         <div class="title-img">
                             <input type="text" name="title" id="title1" placeholder="Titre de l'article">
-                            <input type="file" name="img-container" id="img-container1" accept=".png, .jpg, .jpeg" placeholder="Choisir une image">
+                            <input type="file" name="img-container" id="img-container" accept=".png, .jpg, .jpeg" placeholder="Choisir une image">
                         </div>
 
                         <div class="text-editor">
-                            <textarea name="text-edit" id="text-edit1" cols="30" rows="11" placeholder="Ecrire l'article"></textarea>
+                            <textarea name="text-edit" id="text-edit" cols="30" rows="11" placeholder="Ecrire l'article"></textarea>
                         </div>
 
-                        <div id="section-more1">
-
-                            <div class="title-img">
-                            </div>
-
-                            <div class="text-editor">
-                            </div>
+                        <div id="section-plus">
 
                         </div>
 

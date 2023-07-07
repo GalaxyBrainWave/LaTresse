@@ -21,7 +21,7 @@
 #dashboard-admin {
     height: 0;
     width: 100%;
-    background-color: var(--bg-color);
+    background-color: var(--beige);
     border: 3px solid var(--ochre);
     position: fixed;
     top: 0;
@@ -74,7 +74,7 @@
 
 #menu-burger2 button {
     border: none;
-    background-color: var(--bg-color);
+    background-color: var(--beige);
     display: inline-block;
     font-size: 2rem;
     font-weight: bold;
@@ -99,7 +99,7 @@
 }
 
 #menu-admin a {
-    color: var(--bg-color);
+    color: var(--beige);
 }
 
 #closeBtn2 {

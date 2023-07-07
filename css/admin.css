@@ -2,7 +2,7 @@
 
 #datetime {
     display: flex;
-    flex-flow: row-reverse;
+    flex-flow: row-reverse wrap;
     margin: 16px auto;
     width: 88%;
 }
@@ -20,15 +20,20 @@
 #date,
 #hour {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: space-evenly;
     align-items: center;
-    padding: 16px 0;
+    padding: 16px 8px;
     width: 50%;
 }
 
 #hour {
     border-left: 3px solid var(--blue-text);
+}
+
+#date h5,
+#hour h5 {
+    margin: 0;
 }
 
 #date svg,
@@ -120,7 +125,7 @@
 }
 
 .table-section th {
-    color: var(--bg-color);
+    color: var(--beige);
     font-size: 0.6em;
     text-align: center;
     min-width: 10%;
@@ -151,7 +156,7 @@
 }
 
 .table-section path {
-    fill: var(--bg-color);
+    fill: var(--beige);
 }
 
 /* Création d'articles de blog */
@@ -165,9 +170,11 @@
     width: 100%;
 }
 
-.blog-section {
+.blog-section,
+#section-plus {
     display: flex;
     flex-flow: column nowrap;
+    justify-content: center;
     width: 100%;
     min-height: 50%; 
 }
@@ -244,7 +251,7 @@
 
 .send-help button {
     background-color: transparent;
-    color: var(--bg-color);
+    color: var(--beige);
     border: none;
     display: flex;
     flex-flow: column nowrap;
@@ -253,18 +260,11 @@
 }
 
 .send-help path {
-    fill: var(--bg-color);
+    fill: var(--beige);
 }
 
 .send-help button:hover {
     color: var(--ochre);
-}
-
-#section-more1 {
-    display: flex;
-    flex-flow: row-wrap;
-    width: 100%;
-    min-height: 50%;
 }
 
 /* Responsive supérieur à 780px */
@@ -309,6 +309,10 @@
 
     .blog-section {
         flex-flow: row wrap;
+    }
+
+    #section-plus {
+        flex-flow: row-reverse wrap;
         margin-bottom: 8px;
     }
 
@@ -342,10 +346,4 @@
         font-size: 1.3rem;
     }
 
-    #section-more1 {
-        display: flex;
-        flex-flow: reverse-row wrap;
-        width: 100%;
-        min-height: 50%;
-    }
 }
