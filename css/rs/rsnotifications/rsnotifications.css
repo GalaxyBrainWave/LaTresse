@@ -1,0 +1,52 @@
+.notifications_container {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.notifications_container h2 {
+  margin: 24px 0 16px;
+  color: var(--beige);
+  text-align: center;
+}
+
+.notif_card {
+  width: 100%;
+  border-radius: 10px;
+  background: var(--blue-text);
+  filter: drop-shadow(6px 6px 0px var(--ochre));
+  padding: 8px;
+  margin-bottom: 24px;
+}
+
+.notif_card_top_pic_container img {
+  display: block;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.notif_card_top {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.notif_card_bottom {
+  width: 100%;
+  text-align: right;
+}
+
+.notif_card_bottom p {
+  color: var(--blue-light)!important;
+}
+
+@media screen and (min-width: 850px) {
+  .notif_card_top {
+    gap: 16px;
+  }
+  .notif_card {
+    padding: 8px 16px;
+  }
+}

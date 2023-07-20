@@ -1,0 +1,50 @@
+.rsprojets h2 {
+  color: var(--beige);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.rsprojets h3 {
+  text-align: center;
+  margin: 16px 0;
+}
+
+.rs_card {
+  position: relative;
+  box-shadow: 6px 6px 0px 0px var(--ochre);
+  background-color: var(--blue-text);
+  border-radius: 10px;
+  width: 300px;
+  margin-bottom: 32px;
+}
+
+.rs_card p {
+  margin: 16px;
+  text-align: center;
+}
+
+.rsprojets .rscontent {
+  padding: 24px;
+}
+
+.rscards_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.rs_cards_container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+#project-category {
+  margin-top: 16px;
+  border-radius: 5px;
+  min-width: 256px;
+  text-align: center;
+  padding: 4px
+}

@@ -1,0 +1,80 @@
+.rsreseau h2 {
+  color: var(--beige);
+  margin-bottom: 24px;
+}
+
+.rsreseau .rscontent {
+  padding: 32px 24px;
+}
+
+.rs_card_banner {
+  border-radius: 5px 5px 0px 0px;
+  width: 300px;
+  height: 72px;
+}
+
+.rs_card_profile_pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: absolute;
+  top: 48px;
+  left: 126px;
+  object-fit: cover;
+}
+
+.members_number {
+  display: inline-block;
+  padding: 8px;
+  background-color: var(--blue);
+  color: var(--beige);
+  border-radius: 5px;
+}
+
+.rs_card_middle {
+  box-shadow: 0 2px var(--darkblue);
+  padding-bottom: 2px;
+  margin-bottom: 16px;
+}
+
+.rs_card_location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 8px 0 16px;
+}
+
+.rs_card_location p {
+  margin: 0;
+  color: var(--blue-light)!important;
+}
+
+.rsreseau .rs_card h3 {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.participation_score_title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.participation_score_title p {
+  margin: 0;
+}
+
+.participation_score {
+  display: flex;
+  justify-content: center;
+}
+
+.participation_score p {
+  padding: 8px 16px;
+  background-color: var(--blue);
+  border-radius: 5px;
+  max-width: 56px;
+
+}

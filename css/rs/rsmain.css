@@ -1,0 +1,44 @@
+@import url(rsheader.css);
+@import url(rsform.css);
+@import url(rsaccueil/bjrmrc.css);
+@import url(rsaccueil/bmcard.css);
+@import url(rsaccueil/acrsasd.css);
+@import url(rscreerprojet/rscreerprojet.css);
+@import url(rsupdateprofile/rsupdateprofile.css);
+@import url(rsnotifications/rsnotifications.css);
+@import url(rsprojets/rsprojets.css);
+@import url(rsreseau/rsreseau.css);
+@import url(rsprofil/rsprofil.css);
+@import url(rspageprojet/rspageprojet.css);
+
+.rscontent {
+    background-color: var(--darkblue);
+    width: 100%;
+    padding-top: 16px;
+    min-height: 100vh;
+}
+
+.rscontent :is(p, h3, h5) {
+    color: var(--beige);
+}
+
+
+@media screen and (min-width: 520px) {
+    .accueilrs {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 3vw;
+    }
+    .acrsmiddle {
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 830px) {
+    .acrsmiddle {
+        flex-grow: 0;
+        margin: 0;
+    }
+}
+

@@ -30,13 +30,20 @@
 
 <body>
 
+
+
+
+
+
+
+
     <header>
         <a href="index.php">
             <img class="header_logo" src="img/logo/logo1.png" alt="Logo de la Tresse">
         </a>
         <nav>
-            <img id="nav_burger" class="pointer" src="img/icons/burger3.png" alt="burger menu icon">
-            <div id="menu_container">
+            <img id="nav_burger" class="pointer" src="img/icons/burger3.png" alt="burger menu icon">            
+            <div id="menu_container"> <!-- display hidden on small screens, d:block from 900px, d property manipulated in js -->
                 <ul>
                     <li id="navbar_submenu_container"> 
                         <p id="nav_decouvrir">

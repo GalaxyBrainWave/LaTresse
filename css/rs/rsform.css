@@ -1,0 +1,84 @@
+.rsform {
+  width: 100%;
+  padding: 24px 12px;
+}
+
+.rsform h2 {
+  color: var(--beige);
+  margin-bottom: 8px;
+}
+
+.rsform #title,
+.rsform textarea,
+.rsform #category {
+  border-radius: 5px;
+}
+
+.rsform label[for="picinput"],
+.rsform #publish {
+  border-radius: 10px;
+}
+
+.rsform #category {
+  width: 200px;
+  margin: 12px 0 16px;
+  padding: 2px 8px;
+}
+
+.rsform #title,
+.rsform textarea {
+  width: 100%;
+}
+
+.rsform label[for="picinput"] {
+  width: 180px;
+ padding: 2px 8px;
+}
+
+.rsform textarea {
+  padding: 6px 12px;
+}
+
+.rsform textarea::placeholder,
+.rsform #title::placeholder {
+  font-size: 14px;
+}
+
+.rsform #publish {
+  padding: 4px 10px;
+}
+
+.rsform #publish p {
+  font-weight: bold;
+}
+
+.rsform #title {
+  margin-bottom: 16px;
+  padding: 2px 8px;
+}
+
+
+.rsform #description {
+  margin: 16px 0;
+}
+
+
+@media screen and (min-width:850px) {
+  .rsform label[for="picinput"] {
+    width: 200px;
+  }
+
+  .rsform {
+    padding-top: 72px!important;
+  }
+
+  .rsform textarea::placeholder,
+  .rsform #title::placeholder {
+    font-size: 16px;
+  }
+
+  .rsform #title {
+    margin-bottom: 16px;
+    padding: 8px 12px 4px;
+  }
+}          

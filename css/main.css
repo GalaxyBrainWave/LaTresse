@@ -12,6 +12,7 @@
 @import url(historique/historique_historicards.css);
 @import url(historique/historique_engagements.css);
 @import url(historique/historique_documents.css);
+@import url(rs/rsmain.css);
 
 
 /* Fonts - police */
@@ -93,6 +94,8 @@ p {
     line-height: 140%;
 }
 
+// utilitarian classes
+
 .pointer
 {
     cursor: pointer;
@@ -103,6 +106,10 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.dblock {
+    display: block;
 }
 
 .column
@@ -122,6 +129,38 @@ p {
 
 .upcase {
     text-transform: uppercase;
+}
+
+.cbeige {
+    color: var(--beige);
+}
+
+.cbluetxt {
+    color: var(--blue-text)!important;
+}
+
+.fillbeige {
+    fill: var(--beige);
+}
+
+.fillbluetxt {
+    fill: var(--blue-text);
+}
+
+.horiz_btn_w_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.yel_btn_white_border {
+    border: 4px solid var(--beige);
+    background: linear-gradient(180deg, #FFF176 0%, var(--ochre) 100%);
+}
+
+.cbluetxt {
+    color: var(--blue-text);
 }
 
 
