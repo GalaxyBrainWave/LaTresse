@@ -1,0 +1,73 @@
+#services_servicescards {
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+
+#services_servicescards h2 {
+    padding: 30px;
+    text-align: center;
+}
+
+.servicescards h3, 
+.servicescards p {
+    padding: 20px;
+    text-align: center;
+}
+
+.services-p h6 {
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px ;
+    text-align: justify;
+}
+
+.services_servicescards_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.servicescard_img {
+    justify-content: center;
+}
+
+.servicescards {
+    display: flex;
+    flex-direction: column;
+    /* le flex suivant correspond au flex du parent services_servicards_container*/
+    flex: 1 0 100%; 
+    margin: 10px;
+    border: 2px solid var(--green);
+    box-shadow: 6px 6px 0px 0px var(--green);
+    padding: 10px;
+    align-items: center;
+}
+
+@media screen and (min-width:800px) 
+{ 
+    #services_servicescards {
+        padding-left: 100px;
+        padding-right: 100px ;
+    }
+
+}
+
+@media screen and (min-width:1234px) 
+{ 
+#services_servicescards {
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 30px;
+}
+
+    .servicescards {
+        flex: 1 0 30%; 
+    }
+
+}
+

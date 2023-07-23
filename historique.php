@@ -2,8 +2,7 @@
     include "phpinclude/header.php";
 
     $h2 = "Notre histoire";
-    $h3 = "Genèse d'une initiative populaire";
-    $h1 = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique.";
+    $h1 = "<strong> Genèse d'une initiative populaire </strong> <br> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique.";
 
     include "phpinclude/hero.php";
 
@@ -15,7 +14,7 @@
         <h2 class="upcase tcenter">
             L'historique de la Tresse
         </h2>
-        <div class="historique_historicards_container">
+        <div class="historique_historicards_container1">
             <div class="historicard">
                 <div class="historicard_left">
                     <h4>2010</h4>
@@ -29,7 +28,9 @@
                     <img class="historicard_img" src="img/historicard.png" alt="description">
                 </div>
             </div>
-
+        </div>
+        
+        <div class="historique_historicards_container2">
             <div class="historicard">
                 <div class="historicard_left">
                     <h4>2010</h4>
@@ -43,7 +44,9 @@
                     <img class="historicard_img" src="img/historicard.png" alt="description">
                 </div>
             </div>
+        </div>
 
+        <div class="historique_historicards_container1">
             <div class="historicard">
                 <div class="historicard_left">
                     <h4>2010</h4>
@@ -57,7 +60,9 @@
                     <img class="historicard_img" src="img/historicard.png" alt="description">
                 </div>
             </div>
+        </div>
 
+        <div class="historique_historicards_container2">
             <div class="historicard">
                 <div class="historicard_left">
                     <h4>2010</h4>
@@ -71,7 +76,9 @@
                     <img class="historicard_img" src="img/historicard.png" alt="description">
                 </div>
             </div>
+        </div>
 
+        <div class="historique_historicards_container1">
             <div class="historicard">
                 <div class="historicard_left">
                     <h4>2010</h4>
@@ -85,7 +92,9 @@
                     <img class="historicard_img" src="img/historicard.png" alt="description">
                 </div>
             </div>
+        </div>
 
+        <div class="historique_historicards_container2">
             <div class="hcard_rs">
                 <div class="hcard_rs_top">
                     <div class="historicard_left">
@@ -100,17 +109,28 @@
                         <img class="historicard_img" src="img/triolet2.png" alt="description">
                     </div>
                 </div>
-
+                    
                 <div class="hcard_rs_bottom">
                     <h3>
                         Rejoignez la communauté&nbsp;! 
                     </h3>
-
-
+                
+                    <div class="button_connexion_historic">
+                        <a href="connexion.html">
+                            Se connecter
+                        </a>
+                    </div>
+                    <div class="button_inscription_historic">
+                        <a href="inscription.html">
+                            S'inscrire
+                        </a>
+                    </div>
 
                 </div>
+                
             </div>
         </div>
+
     </section>
 </div>
 
@@ -119,7 +139,7 @@
     include "phpinclude/longedging.php";
 ?>
 
-
+<div id="engagements-container">
 <section id="engagements">
     <h2>Les engagements de la Tesse&nbsp;:</h2>
     <p>
@@ -143,6 +163,7 @@
         </li>
     </ul>
 </section>
+</div>
 
 <section id="documents">
     <h2>Nos documents</h2>

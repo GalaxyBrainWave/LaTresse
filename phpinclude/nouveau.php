@@ -2,7 +2,7 @@
     <div class="nouveau_container">
         <div class="nouveautxt">
             <div class="actualites_edging w92"></div>
-            <h2>
+            <h2 class="tcenter">
                 Nouveau&nbsp;!
             </h2>
             <p>

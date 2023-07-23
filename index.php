@@ -7,7 +7,7 @@
     <div class="herotext_container">
         <p id="maintitle">
             <span class="ochrebg">
-                La Tresse
+            &nbsp; La Tresse &nbsp;
             </span>
         </p>
         <h3>

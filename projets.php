@@ -10,7 +10,12 @@
 ?>
 
 <div class="main_content">
-    <h2>Les derniers projets soutenus par la Tresse</h2>
+    <section id="projet_procards">
+        <h2 class="upcase tcenter">
+            Les derniers projets soutenus par la Tresse
+        </h2>
+        
+    
 
 
 

@@ -8,7 +8,8 @@
     text-align: center;
 }
 
-.historique_historicards_container {
+.historique_historicards_container1,
+.historique_historicards_container2 {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -54,9 +55,75 @@
     justify-self: center;
 }
 
-@media screen and (min-width:850px) {
-    .historicard {
+.hcard_rs_bottom {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button_connexion_historic,
+.button_inscription_historic {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 20px;
+    width: 174px;
+    background-color: var(--ochre);
+    margin-top: 16px;
+}
+
+.button_connexion_historic a,
+.button_inscription_historic a {
+    color: var(--blue-text);
+}
+
+
+.button_connexion_historic:hover
+{
+    background-color: var(--ochre);
+    padding: 3px 0;
+    border: solid 2px var(--blue-text);
+}
+
+.button_connexion_historic:hover a
+{
+    color: var(--blue-text);
+}
+
+.button_inscription_historic:hover
+{
+    background-color: var(--ochre);
+    padding: 3px 0;
+    border: solid 2px var(--blue-text);  
+}
+
+.button_inscription_historic:hover a 
+{
+    color: var(--blue-text);
+}
+
+@media screen and (min-width:880px) {
+
+    .historique_historicards_container1
+    {
         width: 90%;
+        display:flex ;
+        flex-direction: row;
+        
+    }
+
+    .historique_historicards_container2
+    {
+        width: 90%;
+        display: flex;
+        flex-direction: row-reverse;
+        margin-left: auto;
+    }
+
+    .historicard {
+        width: 100%;
         max-width: 750px;
         max-height: 350px;
         flex-direction: row;
@@ -64,12 +131,14 @@
         padding: 20px;
         justify-content: space-between;
         margin-bottom: 35px;
+        
     }
-
+   
     .historicard p {
         max-width: 410px;
         text-align: justify;
     }
+
 
     .historicard h4,
     .historicard h3 {
@@ -89,11 +158,11 @@
         display: block;
         width: 90%;
         max-width: 750px;
-        max-height: 350px;
+        
         padding: 20px;
         margin-bottom: 35px;
         max-height: none;
-        height: 354px;
+        
     }
 
     .hcard_rs_top {
@@ -103,4 +172,19 @@
         gap: 20px;
     }
 
+    .hcard_rs_bottom {
+        padding-top: 20px;
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .hcard_rs_bottom h3 {
+        font-size: 16px;
+    }
+
+    .button_connexion_historic,
+    .button_inscription_historic {
+    margin-top: 0px;
+    }
 }
