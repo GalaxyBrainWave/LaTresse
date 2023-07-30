@@ -10,8 +10,8 @@ Il s'agit de
 
 Le projet a démarré le 27 / 04 / 2023
 
-L'avant-projet a été validé le 05 / 08 / 2023
+L'avant-projet a été validé le 08 / 05 / 2023
 
-La production du front a démarré immédiatement
+La production du front est pratiquement achevée
 
 La partie back-end est en cours de production depuis le 21 / 07 / 2023
