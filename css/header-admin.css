@@ -21,13 +21,13 @@
 #dashboard-admin {
     height: 0;
     width: 100%;
-    background-color: var(--beige);
+    background-color: var(--ochre-light);
     border: 3px solid var(--ochre);
     position: fixed;
     top: 0;
     overflow-y: hidden;
     z-index: 1; 
-    transition: 0.5s;
+    transition: all 0.5s ease-in-out;
 }
 
 #dashboard-admin h3 {
@@ -40,6 +40,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: flex-end;
+    margin: 8px;
     padding: 0;
 }
 
@@ -47,10 +48,9 @@
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    padding: 0;
+    padding: 8px;
     font-size: 0.5rem;
     color: var(--blue-text);
-    display: inline-block;
     transition: 0.3s;
     text-align: justify;
     width: 100%;
@@ -64,6 +64,15 @@
     align-items: center;
     margin: 16px 0;
     padding: 8px 0;
+}
+
+.title-display h3 {
+    font-size : 1.2rem;
+}
+
+#dashboard-admin > ul > li > a {
+    font-size: 1rem;
+    padding-left: 8px;
 }
 
 #menu-burger2 {

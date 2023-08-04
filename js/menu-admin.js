@@ -1,24 +1,37 @@
-let x = window.matchMedia("(max-width: 780px)");
-let w = window.innerWidth;
+const X = window.matchMedia("(max-width: 780px)");
+const W = window.innerWidth;
+const H = window.innerHeight;
+
+window.addEventListener("load", (e) => {
+    let btnOpen = document.querySelector("#openBtn2");
+    btnOpen.addEventListener("click", (event) => {
+        openNav();
+    })
+});
 
 function openNav() {
-    if (x.matches) {
-        document.getElementById("dashboard-admin").style.width = w;
-        document.getElementById("dashboard-admin").style.height = "300px";
-        document.getElementsByClassName("header-admin").style.marginTop = "300px";
+    if (X.matches) {
+        let dimensions = document.querySelector("#dashboard-admin");
+        dimensions.style.width = W + "px";
+        dimensions.style.height = H + "px";
+
+        let btnClose = document.querySelector("#closeBtn2");
+        btnClose.addEventListener("click", closeNav);
     } else {
-        document.getElementById("dashboard-admin").style.width = "270px";
+        let dimensions = document.querySelector("#dashboard-admin");
+        dimensions.style.width = "270px";
         document.getElementById("menu-burger2").style.marginLeft = "270px";
         document.getElementById("main-dash").style.marginLeft = "270px";
+
+        let btnClose = document.querySelector("#closeBtn2");
+        btnClose.addEventListener("click", closeNav);
     }
-   
 }
 
 function closeNav() {
-    if (x.matches) {
-        document.getElementById("dashboard-admin").style.width = w;
+    if (X.matches) {
+        document.getElementById("dashboard-admin").style.width = W + "px";
         document.getElementById("dashboard-admin").style.height = "0";
-        document.getElementsByClassName("header-admin").style.marginTop = "0";
     } else {
         document.getElementById("dashboard-admin").style.width = "0";
         document.getElementById("menu-burger2").style.marginLeft= "0";

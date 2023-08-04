@@ -1,3 +1,27 @@
+#main-dash button:hover,
+.header-admin button:hover {
+    opacity: 0.8;
+    filter: brightness(2);
+}
+
+/* SVG Admin */
+
+#main-dash svg,
+.header-admin svg {
+    width: 30px;
+    height: 30px;
+    margin-top: 0;
+}
+
+#main-dash path:hover,
+.header-admin path:hover {
+    fill: var(--green);
+}
+
+.header-admin path {
+    fill: var(--blue-text);
+}
+
 /* Date et heure */
 
 #datetime {
@@ -5,6 +29,11 @@
     flex-flow: row-reverse wrap;
     margin: 16px auto;
     width: 88%;
+}
+
+#datetime path,
+.add-section {
+    fill: var(--blue-text);
 }
 
 #date-hour {
@@ -15,6 +44,7 @@
     border-radius: 10px;
     margin: 0 24px;
     width: 50%;
+    overflow: hidden;
 }
 
 #date,
@@ -50,6 +80,7 @@
     align-items: center;
     margin-bottom: 48px;
     width: 100%;
+    overflow: hidden;
 }
 
 .news-info {
@@ -111,7 +142,7 @@
     border-radius: 10px;
     border: 3px solid var(--blue);
     width: 95%;
-    
+    table-layout: fixed;
 }
 
 .table-section thead {
@@ -138,6 +169,7 @@
     min-width: 10%;
     height: 48px;
     text-align: center;
+    overflow: hidden;
 }
 
 .table-section button {
@@ -157,6 +189,20 @@
 
 .table-section path {
     fill: var(--beige);
+}
+
+.tr-message {
+    background-color: var(--green);
+    display: none;
+    transition: all 1s ease-in-out;
+}
+
+.td-message {
+    text-align: justify;
+}
+
+.td-message h5 {
+    width: 100%;
 }
 
 /* Création d'articles de blog */

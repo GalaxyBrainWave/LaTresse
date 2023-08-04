@@ -23,7 +23,7 @@
                 <div class="title-display">
 
                     <h3>Tableau de bord<br>Admin</h3>
-                    <a href="javascript:void(0)" id="closeBtn2" onclick="closeNav()">&times;</a>
+                    <a href="javascript:void(0)" id="closeBtn2">&times;</a>
 
                 </div>
 
@@ -64,7 +64,7 @@
             </nav>
 
             <div id="menu-burger2">
-                <button id="openBtn2" onclick="openNav()">&#9776;</button>   
+                <button id="openBtn2">&#9776;</button>   
             </div>
 
             <img src="./img/Logo La Tresse Offical.png" alt="Logo de La Tresse">

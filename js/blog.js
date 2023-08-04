@@ -2,13 +2,11 @@ let addButton = document.getElementById("section-more");
 let section2 = document.getElementById("section-plus");
 let counter = 0;
 
-
 addButton.addEventListener("click", () => {
     addBlogSection();  
 })
 
 function addBlogSection() {
-
     counter++;
     let newDiv1 = document.createElement("div");
     newDiv1.className = "title-img";
