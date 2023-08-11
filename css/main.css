@@ -208,6 +208,11 @@ p {
     text-transform: uppercase;
 }
 
+.picicon {
+    width: 16px;
+    height: 16px;
+}
+
 @media screen and (min-width: 850px) {
 
     h1 {
@@ -244,6 +249,11 @@ p {
     .long_edging_container {
         margin-top: 15px;
         display: block;
+    }
+    
+    .picicon {
+        width: 20px;
+        height: 20px;
     }
 }
 

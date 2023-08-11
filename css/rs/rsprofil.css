@@ -10,6 +10,9 @@
   height: 25vw;
   max-height: 200px;
   margin: 0 auto;
+  border-radius: 0 0 16px 16px;
+  border-bottom: solid 2px var(--blue-light);
+  object-fit: cover;
 }
 
 .rs_user_profile_pic {
@@ -22,7 +25,7 @@
   position: absolute;
   top: min(calc(15vw), 136px);
   left: max(calc(50% - 64px),calc(50% - 10vw));
-  border: solid 4px var(--ochre);
+  border: solid 2px var(--blue-light);
 }
 
 .rsprofil .rscontent h1 {
@@ -30,17 +33,17 @@
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  margin-top: min(80px, 12vw);
+  margin-top: min(70px, 12vw);
 }
 
 .update_profile_btn {
   display: flex;
-  padding: 8px 24px;
+  padding: 10px 24px 8px;
   align-items: center;
   justify-content: center;
   gap: 10px;
   background: #182E49;
-  box-shadow: 4px 4px 0px 0px var(--green);
+  box-shadow: 1px 1px 6px 0px var(--green);
   border-radius: 5px;
   width: 256px;
   margin: 16px auto 32px;
@@ -55,9 +58,13 @@
   border-radius: 5px;
   width: 256px;
   margin: auto;
-  padding: 16px;
-  box-shadow: 4px 4px 0px 0px var(--blue);
+  padding: 24px 16px;
+  box-shadow: 1px 1px 6px 0px var(--blue-medium);
   margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .activity_card_item {
@@ -91,8 +98,6 @@
 
 
 
-
-
 @media screen and (min-width: 580px) {
   .rsprofil .rscontent h1 {
     font-size: 26px;
@@ -105,4 +110,15 @@
     font-size: 32px;
   }
 
+  .rsprofil .maincontent .acrsmiddle .bmcard {
+    margin-bottom: 48px;
+  }
+
+  .mainrow-container {
+    display: flex;
+  }
+
+  .activity_card_container {
+
+  }
 }

@@ -65,7 +65,7 @@
 
 @media screen and (min-width:850px) {
   .rsform label[for="picinput"] {
-    width: 200px;
+    width: 250px;
   }
 
   .rsform {
@@ -80,5 +80,21 @@
   .rsform #title {
     margin-bottom: 16px;
     padding: 8px 12px 4px;
+  }
+
+  .rsform h2 {
+    margin-bottom: 16px;
+  }
+
+  .rsform #category {
+    margin: 14px 0 24px;
+  }
+  
+  .rsform #title {
+    margin-bottom: 24px;
+  }
+
+  .rsform #description {
+    margin: 32px 0;
   }
 }          

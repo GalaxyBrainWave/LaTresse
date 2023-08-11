@@ -1,15 +1,15 @@
 @import url(rsheader.css);
 @import url(rsform.css);
-@import url(rsaccueil/bjrmrc.css);
-@import url(rsaccueil/bmcard.css);
-@import url(rsaccueil/acrsasd.css);
-@import url(rscreerprojet/rscreerprojet.css);
-@import url(rsupdateprofile/rsupdateprofile.css);
-@import url(rsnotifications/rsnotifications.css);
-@import url(rsprojets/rsprojets.css);
-@import url(rsreseau/rsreseau.css);
-@import url(rsprofil/rsprofil.css);
-@import url(rspageprojet/rspageprojet.css);
+@import url(landing_bjrmrc.css);
+@import url(landing_bmcard.css);
+@import url(landing_acrsasd.css);
+@import url(rscreerprojet.css);
+@import url(rsupdateprofile.css);
+@import url(rsnotifications.css);
+@import url(rsprojets.css);
+@import url(rsreseau.css);
+@import url(rsprofil.css);
+@import url(rspageprojet.css);
 
 .rscontent {
     background-color: var(--darkblue);

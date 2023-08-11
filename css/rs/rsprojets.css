@@ -11,7 +11,7 @@
 
 .rs_card {
   position: relative;
-  box-shadow: 6px 6px 0px 0px var(--ochre);
+  box-shadow: 1px 1px 8px 0px var(--ochre);
   background-color: var(--blue-text);
   border-radius: 10px;
   width: 300px;

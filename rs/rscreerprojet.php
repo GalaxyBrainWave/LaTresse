@@ -1,55 +1,26 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php
+    require_once "phpinclude/rs_pagetop.php";
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    $accueil_active = '';
+    $projets_active = '';
+    $reseau_active = '';
+    $creer_active = 'navbar-active';
+    $profil_active = '';
+    $notifications_active = '';
 
-    <link rel="stylesheet" href="../css/main.css">
+?>
 
-    <title>La Tresse - Accueil</title>
+    <title>La Tresse - Créer un Projet</title>
 
 </head>
 
-<!-- we will need to fix this. Displaying the menu correctly currently depends on this id -->
-<body class="rslayout">
+<body class="rslayout rscreerprojet">
 
-  <header class="bg_rsblue">
-    <img class="header_logo" src="../img/logo/logo3.png" alt="Logo de la Tresse">
-    <nav>
-      <img id="nav_burger" class="pointer" src="../img/icons/burger3.png" alt="burger menu icon">
-      <div id="menu_container">
-        <ul>
-          <li class="rs_menu_active">
-            <img src="../img/icons/home2.svg" alt="icône accueil">
-            <a href="tierslieux.html">Accueil</a>
-          </li>
-          <li>
-            <img src="../img/icons/group.png" alt="icône projets">
-            <a href="tierslieux.html">Projets</a>
-          </li>
-          <li>
-            <img src="../img/icons/network.png" alt="icône réseau">
-            <a href="tierslieux.html">Réseau</a>
-          </li>
-          <li>
-            <img src="../img/icons/project.png" alt="icône créer un projet">
-            <a href="tierslieux.html">Créer un projet</a>
-          </li>
-          <li>
-            <img src="../img/icons/profile.png" alt="icône mon profil">
-            <a href="tierslieux.html">Mon profil</a>
-          </li>
-          <li>
-            <img src="../img/icons/bell.png" alt="icône notifications">
-            <a href="tierslieux.html">Notifications</a>
-          </li>
-        </ul>
-        <img id="close_button" class="pointer" src="../img/icons/close.png" alt="burger menu icon">
-      </div>
-    </nav>
-  </header>
+<?php
+    require_once "phpinclude/rs_header.php";
+?>
+
+
 
   <main class="rsform rscontent">
     <div class="rsform_container">
@@ -60,15 +31,16 @@
         <label for="category" class="cbeige">Catégorie</label>
         <br>
         <select name="category" id="category" required>
-          <option value="">Séléctionner</option>
+          <option value="">Sans catégorie (défaut)</option>
           <!-- Ici il faudra chercher la liste dans la BDD et l'afficher avec un foreach -->
         </select>
         <br>
         <input type="text" name="title" id="title" placeholder="Titre de votre projet" required>
         <label for="picinput" class="horiz_btn_w_icon yel_btn_white_border">
           <svg class="dblock fillbluetxt" width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.205 3h11.59c1.114 0 1.519.116 1.926.334.407.218.727.538.945.945.218.407.334.811.334 1.926v7.51l-4.391-4.053a1.5 1.5 0 0 0-2.265.27l-3.13 4.695-2.303-1.48a1.5 1.5 0 0 0-1.96.298L3.005 18.15A12.98 12.98 0 0 1 3 17.795V6.205c0-1.115.116-1.519.334-1.926.218-.407.538-.727.945-.945C4.686 3.116 5.09 3 6.205 3zm9.477 8.53L21 16.437v1.357c0 1.114-.116 1.519-.334 1.926a2.272 2.272 0 0 1-.945.945c-.407.218-.811.334-1.926.334H6.205c-1.115 0-1.519-.116-1.926-.334a2.305 2.305 0 0 1-.485-.345L8.2 15.067l2.346 1.508a1.5 1.5 0 0 0 2.059-.43l3.077-4.616zM7.988 6C6.878 6 6 6.832 6 7.988 6 9.145 6.879 10 7.988 10 9.121 10 10 9.145 10 7.988 10 6.832 9.121 6 7.988 6z"></path></g></svg>
-          <p class="cbluetxt">Ajouter une image</p>        
+          <p class="cbluetxt">Ajouter une bannière</p>        
         </label>
+        <p class="picinput-description"><span>&#9432;</span>&nbsp;&nbsp; La bannière s'affiche avec les dimensions 800 x 300 pixels</p>
         <input type="file" id="picinput" name="picinput">
         <textarea name="description" id="description" cols="30" rows="10" placeholder="Décrivez votre projet…"></textarea>
         <button class="horiz_btn_w_icon yel_btn_white_border" id="publish">

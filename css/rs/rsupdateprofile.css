@@ -29,8 +29,31 @@
 }
 
 #update-profile-form .tcenter {
-  margin-top: 32px;
+  margin-top: 48px;
+  font-size: 1.1em;
 }
+
+.picinput-description {
+  margin-bottom: 24px;
+}
+
+#update-profile-form span {
+  font-size: 24px;
+  color: var(--beige); 
+}
+
+#self-description {
+  margin-bottom: 24px;
+  height: 128px;
+}
+
+
+
+
+
+
+
+
 
 @media screen and (min-width:850px) {
   #update-profile-form input::placeholder {
@@ -38,6 +61,15 @@
   }
   .update_profile .rsform label[for="profilepicinput"],
   .update_profile .rsform label[for="bannerpicinput"] {
-  width: 300px;
-}
+    width: 300px;
+  }
+  #update-profile-form input {
+    margin: 24px 0;
+    padding: 10px 12px 8px;
+  }
+
+  .update_profile .rsform label[for="profilepicinput"],
+  .update_profile .rsform label[for="bannerpicinput"] {
+    width: 300px;
+  }
 }          

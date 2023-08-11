@@ -5,7 +5,7 @@ header
     position: relative;
     width: 100%;
     height: 64px;
-    padding: 16px 32px;
+    padding: 16px 32px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,6 +22,7 @@ nav
     position: relative;
 }
 
+
 nav ul
 {
     display: flex;
@@ -30,12 +31,18 @@ nav ul
 
 nav ul li
 {
-    padding: 16px 32px;
+    padding: 16px 32px 0 16px;
 }
 
 nav ul li ul 
 {
     margin-left: 16px;
+}
+
+nav ul li p
+{
+    color: var(--beige);
+    font-weight: bold;
 }
 
 #menu_container
@@ -75,6 +82,40 @@ nav ul li ul
     transform: translate(0,2px);
 }
 
+.narbar-icons {
+    width: 30px;
+    height: 30px;
+    fill: var(--beige);
+    stroke: var(--beige);
+}
+
+.narbar-icons path {
+    fill: var(--beige);
+    stroke: var(--beige);
+}
+
+nav #menu_container .navbar-active .narbar-icons,
+nav #menu_container .navbar-active .narbar-icons path {
+    fill: var(--ochre-medium);
+    stroke: var(--ochre-medium);
+}
+
+.navbar-active p {
+    color: var(--ochre-medium);
+}
+
+.navbar-link {
+    display: block;
+}
+
+.navbar-link:hover p {
+    color: var(--ochre);
+}
+.navbar-link:hover .narbar-icons,
+.navbar-link:hover .narbar-icons path {
+    fill: var(--ochre);
+    stroke: var(--ochre);
+}
 
 
 @media screen and (min-width:915px) {

@@ -17,12 +17,16 @@
 
 .acrsasd_card_container {
     padding: 20px 15px;
+    /* not sure which is best  */
+    /* background-color: var(--darkgreen); */
+    border-radius: 0 0 10px 10px;
 }
 
 .acrsasd_card {
     background-color: var(--darkblue);
     border-radius: 5px;
     margin-bottom: 25px;
+    box-shadow: 1px 1px 4px 0 var(--beige);
 }
 
 .acrsasd_card_head {
@@ -51,7 +55,7 @@
 @media screen and (min-width: 830px) {
     .acrscom {
         display: block;
-        box-shadow: 6px 6px 0px 0px var(--blue);
+        box-shadow: 1px 1px 6px 0 var(--blue-light);
     }
 }
 
@@ -59,6 +63,6 @@
     .acrsproj {
         display: block;
         order: 3;
-        box-shadow: 6px 6px 0px 0px var(--blue-light);
+        box-shadow: 1px 1px 6px 0 var(--blue-light);
     }
 }

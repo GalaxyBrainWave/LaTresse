@@ -1,11 +1,11 @@
 .bmcard {
-    box-shadow: 0px 3px 0px 0px var(--ochre);
+    box-shadow: 1px 1px 6px 0 var(--blue-light);
     background-color: var(--blue-text);
-    margin-bottom: 16px;
+    margin-bottom: 32px;
 }
 
 .bmcard_head {
-    padding: 11px 13px 15px;
+    padding: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -46,6 +46,17 @@
     .bmcard {
         width: 500px;
         border-radius: 10px;
-        box-shadow: 6px 6px 0px 0px var(--ochre);
+    }
+}
+
+
+@media screen and (min-width: 850px) {
+    .bmcard {
+        margin-bottom: 48px;
+    }
+
+    .bmcard_profile_pic {
+        width: 40px;
+        height: 40px;
     }
 }

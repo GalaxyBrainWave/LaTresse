@@ -1,67 +1,52 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php
+    require_once "phpinclude/rs_pagetop.php";
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    $accueil_active = '';
+    $projets_active = '';
+    $reseau_active = '';
+    $creer_active = '';
+    $profil_active = '';
+    $notifications_active = 'navbar-active';
 
-    <link rel="stylesheet" href="../css/main.css">
+?>
 
-    <title>La Tresse - Accueil</title>
+    <title>La Tresse - Notifications</title>
 
 </head>
 
-
 <body class="rslayout rsnotifications">
 
-  <header class="bg_rsblue">
-    <img class="header_logo" src="../img/logo/logo3.png" alt="Logo de la Tresse">
-    <nav>
-      <img id="nav_burger" class="pointer" src="../img/icons/burger3.png" alt="burger menu icon">
-      <div id="menu_container">
-        <ul>
-          <li class="rs_menu_active">
-            <img src="../img/icons/home2.svg" alt="icône accueil">
-            <a href="tierslieux.html">Accueil</a>
-          </li>
-          <li>
-            <img src="../img/icons/group.png" alt="icône projets">
-            <a href="tierslieux.html">Projets</a>
-          </li>
-          <li>
-            <img src="../img/icons/network.png" alt="icône réseau">
-            <a href="tierslieux.html">Réseau</a>
-          </li>
-          <li>
-            <img src="../img/icons/project.png" alt="icône créer un projet">
-            <a href="tierslieux.html">Créer un projet</a>
-          </li>
-          <li>
-            <img src="../img/icons/profile.png" alt="icône mon profil">
-            <a href="tierslieux.html">Mon profil</a>
-          </li>
-          <li>
-            <img src="../img/icons/bell.png" alt="icône notifications">
-            <a href="tierslieux.html">Notifications</a>
-          </li>
-        </ul>
-        <img id="close_button" class="pointer" src="../img/icons/close.png" alt="burger menu icon">
-      </div>
-    </nav>
-  </header>
+<?php
+    require_once "phpinclude/rs_header.php";
+?>
 
   <main class="rscontent">
     <div class="notifications_container">
       <h2>Notifications</h2>
-      <div class="notif_card">
+      <div class="notif_card notif_card_active">
         <div class="notif_card_top">
           <div class="notif_card_top_pic_container">
             <img src="../img/rs/alf.jpg" alt="photo de profil">
           </div>
           <div class="notif_card_top_txt_container">
             <p>
-              Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;: "Ah oui très bonne idée, c'est…"
+              <span>Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;:</span> "Ah oui très bonne idée, c'est…"
+            </p>
+          </div>
+        </div>
+        <div class="notif_card_bottom">
+          <p>Le 20/05/2023 à 21:45</p>
+        </div>
+      </div>
+      
+      <div class="notif_card notif_card_active">
+        <div class="notif_card_top">
+          <div class="notif_card_top_pic_container">
+            <img src="../img/rs/alf.jpg" alt="photo de profil">
+          </div>
+          <div class="notif_card_top_txt_container">
+            <p>
+              <span>Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;:</span> "Ah oui très bonne idée, c'est…"
             </p>
           </div>
         </div>
@@ -77,7 +62,7 @@
           </div>
           <div class="notif_card_top_txt_container">
             <p>
-              Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;: "Ah oui très bonne idée, c'est…"
+              <span>Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;:</span> "Ah oui très bonne idée, c'est…"
             </p>
           </div>
         </div>
@@ -93,7 +78,7 @@
           </div>
           <div class="notif_card_top_txt_container">
             <p>
-              Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;: "Ah oui très bonne idée, c'est…"
+              <span>Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;:</span> "Ah oui très bonne idée, c'est…"
             </p>
           </div>
         </div>
@@ -109,23 +94,7 @@
           </div>
           <div class="notif_card_top_txt_container">
             <p>
-              Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;: "Ah oui très bonne idée, c'est…"
-            </p>
-          </div>
-        </div>
-        <div class="notif_card_bottom">
-          <p>Le 20/05/2023 à 21:45</p>
-        </div>
-      </div>
-      
-      <div class="notif_card">
-        <div class="notif_card_top">
-          <div class="notif_card_top_pic_container">
-            <img src="../img/rs/alf.jpg" alt="photo de profil">
-          </div>
-          <div class="notif_card_top_txt_container">
-            <p>
-              Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;: "Ah oui très bonne idée, c'est…"
+              <span>Marie Dupond a commenté votre projet "Passerelle De Mémoire"&nbsp;:</span> "Ah oui très bonne idée, c'est…"
             </p>
           </div>
         </div>

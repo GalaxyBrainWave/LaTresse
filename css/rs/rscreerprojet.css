@@ -1,0 +1,29 @@
+.rsform_container {
+  max-width: 580px;
+  margin: auto;
+  min-height: 100vh;
+}
+
+#creer-projet-form span {
+  font-size: 24px;
+  color: var(--beige);
+}
+
+#creer-projet-form .picinput-description {
+  margin-top: 16px;
+}
+
+
+.rscreerprojet .rscontent label[for="picinput"] {
+  width: 200px;
+}
+
+.rslayout .rsform #category {
+  padding: 4px 8px;
+}
+
+@media screen and (min-width: 850px) {
+  .rscreerprojet .rscontent label[for="picinput"] {
+    width: 250px;
+  }
+}

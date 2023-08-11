@@ -1,0 +1,48 @@
+
+
+
+
+requêtage SQL
+
+commentaires d'aide aux utilisateurs > voir où ailleurs ils seront utiles
+créer la page d'inscription et connexion (html / css)
+
+page profil n'a pas d'auto description
+page profil repenser la mise en page
+
+réduire la taille du menu de navigation
+
+php ization > menu de nav avec liens et active state fonctionnels
+
+
+
+
+
+
+
+done
+
+textarea dans l'accueil
+menu active en jaune
+kb
+ > finir créer projet
+Ajuster box-shadow > liste projets, réseau, mon profil
+Modifier mon profil > auto description = textarea?
+lien vers modifier mon profil depuis la page profil
+classe active pour les notifications avec un box shadow
+
+
+
+
+
+
+Modifications pour la BDD
+messages > # user est-il vraiment utile ?
+projects > # pj_update est-il vraiment utile ?
+projects > # pj_create remplacer par pj_creator
+
+users > ajouter url bannière et avatar
+
+comments > ajouter la date
+
+
