@@ -104,11 +104,15 @@
     border-radius: 10px;
     box-shadow: 3px 3px 3px var(--ochre);
     font-size: 1rem;
+    margin-left: 8px;
     padding: 8px;
+    max-width: 50%;
 }
 
 #menu-admin a {
     color: var(--beige);
+    font-size: 0.6rem;
+    overflow: hidden;
 }
 
 #closeBtn2 {
@@ -173,6 +177,10 @@
     #menu-admin button {
         font-size: 1.5rem;
         padding: 16px;
+    }
+
+    #menu-admin a {
+        font-size: 1rem;
     }
 
 }

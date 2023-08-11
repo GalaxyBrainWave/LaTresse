@@ -2,10 +2,34 @@
     session_name("latresse-php");
     session_start();
 
-    // if (!isset($_SESSION["userid"])) {
-    //     header("Location: ./register.php");
-    //     exit;
-    // }
+    if ($_SESSION["admin"] !== true) { 
+        header("Location: ./index.php");
+        exit();
+
+        if (!isset($_SESSION["auth"]) || $_SESSION["auth"] !== true) {
+            header("Location: ./authenticate.php");
+            exit();
+        }
+    }
+
+    if (isset($_SESSION["auth"]) || $_SESSION["auth"] == true) {
+        if (isset($_POST["title"]) && $POST["text-edit"]) {
+            require_once "./Model/Article.php";
+            require_once "./Model/Media.php";
+            $articles = new Article();
+            $medias = new Media();
+            $articles->artTitle = trim($_POST["title"]);
+            $articles->artTextContent = $_POST["text-edit"];
+            $medias->mediaUrl = $_POST["img-container"];
+
+            if ($articles->save()) {
+                echo "<script>alert('Votre article a bien été publié.');</script>";
+            } else {
+                echo "<script>alert('Votre article n\'a pas été envoyé correctement.');</script>";
+            }
+        }
+        
+    }
     
     require_once "./includes/header-admin.php";
 ?>
@@ -44,7 +68,7 @@
                     <form action="" method="post" class="blog-section" enctype="multipart/form-data">
 
                         <div class="title-img">
-                            <input type="text" name="title" id="title1" placeholder="Titre de l'article">
+                            <input type="text" name="title" id="title" placeholder="Titre de l'article">
                             <input type="file" name="img-container" id="img-container" accept=".png, .jpg, .jpeg" placeholder="Choisir une image">
                         </div>
 

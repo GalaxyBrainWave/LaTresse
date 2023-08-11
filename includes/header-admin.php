@@ -1,3 +1,9 @@
+<?php
+    if (isset($_GET["logout"]) && $_GET["logout"] == 1) {
+        session_destroy();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -71,6 +77,9 @@
 
             <div id="menu-admin">
 
+                <?php if (isset($_SESSION["auth"])): ?> 
+                    <button><a href="./admin-dashboard.php?logout=1" id="end-session">Se déconnecter</a></button>
+                <?php endif; ?>
                 <button><a href="#">Réseau social</a></button>
 
             </div>

@@ -5,18 +5,19 @@
         private string $firstName;
         private string $email;
         private string $hashPass;
-        private ?int $isAdmin;
+        private ?bool $isAdmin;
         private ?int $nbReactions;
         private ?int $nbHelloThanks;
         private ?int $nbComments;
         private DateTime $accountCreationDate;
+        private array $users;
         private ?array $projects;
         private ?array $articles;
         private ?array $comments;
         private ?array $helloThanks;
         private ?array $medias;
 
-        public function __construct($userId = 0, $lastName = "", $firstName = "", $email = "", $hashPass = "", $isAdmin = 0, $nbReactions = 0, $nbHelloThanks = 0, $nbComments = 0) {
+        public function __construct($userId = 0, $lastName = "", $firstName = "", $email = "", $hashPass = "", $isAdmin = false, $nbReactions = 0, $nbHelloThanks = 0, $nbComments = 0) {
             $this->userId = $userId;
             $this->lastName = $lastName;
             $this->firstName = $firstName;
@@ -27,6 +28,7 @@
             $this->nbHelloThanks = $nbHelloThanks;
             $this->nbComments = $nbComments;
             $this->accountCreationDate = new DateTime();
+            $this->users = array();
             $this->projects = array();
             $this->articles = array();
             $this->comments = array();
@@ -51,6 +53,9 @@
                 case "accountCreationDate":
                     $this->$attribute = new DateTime($value);
                     break;
+                case "users":
+                    $this->$attribute = array($value);
+                    break;
                 case "projects":
                     $this->$attribute = array($value);
                     break;
@@ -69,6 +74,13 @@
                 default:
                     $this->$attribute = $value;
             }
+        }
+
+        public function getUsers() {
+            return $this->users;
+        }
+        public function setUsers($users) {
+            $this->users = array($users);
         }
 
         // Méthodes CRUD
@@ -171,7 +183,7 @@
             $db = new Database();
             $pdo = $db->connect();
 
-            $sql = "SELECT * FROM users ORDER BY id DESC";
+            $sql = "SELECT * FROM users ORDER BY user_id DESC";
 
             $query = $pdo->prepare($sql);
             $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "User");
@@ -179,6 +191,8 @@
             if ($query->execute()) {
                 $results = $query->fetchAll();
                 return $results;
+            } else {
+                return array();
             }
         }
 
@@ -189,13 +203,13 @@
             $db = new Database();
             $pdo = $db->connect();
 
-            $sql = "SELECT * FROM users WHERE id = :id;";
+            $sql = "SELECT * FROM users WHERE user_id = :user_id;";
             $query = $pdo->prepare($sql);
-            $query->bindParam(":id", $userId, PDO::PARAM_INT);
+            $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
             $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "User");
 
             if ($query->execute()) {
-                $results = $query->fetch();
+                $results = $query->fetchAll();
                 return $results;
             }
         }
@@ -234,7 +248,7 @@
                             $_SESSION["lastname"] = $user->lastName;
                             $_SESSION["email"] = $user->email;
                             $_SESSION["hashpass"] = $user->hashPass;
-                            $_SESSION["is_admin"] = $user->isAdmin;
+                            $_SESSION["admin"] = $user->isAdmin;
                             $_SESSION["user"] = serialize($user);
                             $_SESSION["auth"] = true;
     
@@ -250,6 +264,11 @@
             } catch (PDOException $e) {
                 echo "Erreur :" . $e->getMessage();
             }
+        }
+
+        public function loadAllUsers() {
+            require_once "User.php";
+            $this->users = User::findById($this->userId);
         }
 
         public function addNbReactions(int $nbReactions) {

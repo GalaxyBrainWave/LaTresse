@@ -2,40 +2,33 @@
     session_name("latresse-php");
     session_start();
 
-    if (!isset($_SESSION["auth"]) || $_SESSION["auth"] !== true) {
-        header("Location: ./authenticate.php");
+    if ($_SESSION["admin"] !== true) { 
+        header("Location: ./index.php");
         exit();
+
+        if (!isset($_SESSION["auth"]) || $_SESSION["auth"] !== true) {
+            header("Location: ./authenticate.php");
+            exit();
+        }
     }
 
     if (isset($_SESSION["user"])) {
         $loged_user = unserialize($_SESSION["user"]);
-        echo '<script>alert("Bienvenue, vous êtes connecté.");</script>';
     } else {
         echo '<script>alert("Les informations sont erronées.");</script>';
     }
-    
-    // if (!isset($_SESSION["userid"])) {
-    //     header("Location: ./register.php");
-    //     exit;
-    // }
 
-    // if (isset($_SESSION["userid"])) {
-        // require_once "./modules/config.php";
-        
-        // $sql = "SELECT * FROM users ORDER BY user_id DESC";
-
-        // $query = $pdo-> prepare($sql);
-        // $query-> setFetchMode(PDO::FETCH_ASSOC);
-
-        // if ($query-> execute()) {
-        //     $results = $query-> fetchAll();
-        // };
-    // }
+    if (isset($_SESSION["auth"]) || $_SESSION["auth"] == true) {
+        require_once "./Model/User.php";
+        $users = User::findAll();
+    }
 
     require_once "./includes/header-admin.php";
 ?>
 
         <main id="main-dash">
+
+            <h3>Tableau de bord de <strong><?= $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?></strong></h3>
 
             <!-- Date et heure -->
 
@@ -117,13 +110,12 @@
 
                             <tbody>
 
-                                <?php 
-                                        if (isset($results)) {
-                                            foreach ($results as $ligne) {
+                                <?php foreach ($users as $user) :
+                                        $user->loadAllUsers();
                                     ?>
                                         <tr>
                                             <td>
-                                                <?= $ligne["first_name"] . " " . $ligne["last_name"]; ?>
+                                                <?= $user->first_name . " " . $user->last_name; ?>
                                             </td>
                                             <td>
                                                 <button type="button" class="resetHash">
@@ -131,15 +123,14 @@
                                                 </button>
                                             </td>
                                             <td>
-                                                <?= $ligne["email"]; ?>
+                                                <?= $user->email; ?>
                                             </td>
                                             <td>
-                                                <?= $ligne["account_creation_date"]; ?>
+                                                <?= $user->account_creation_date; ?>
                                             </td>
                                         </tr>
 
-                                <?php      }
-                                    } ?>
+                                <?php endforeach; ?>
 
                             </tbody>
 

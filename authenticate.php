@@ -87,6 +87,9 @@
                         <input type="password" name="hash-login" id="hash-login" placeholder="Mot de passe" autocomplete="current-password">
                     </div>
                     <div>
+                        <a href="#">Mot de passe oublié</a>
+                    </div>
+                    <div>
                         <button type="submit" name="login">Se connecter</button>
                     </div>
                 </form>

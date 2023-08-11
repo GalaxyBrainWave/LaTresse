@@ -2,28 +2,27 @@
     session_name("latresse-php");
     session_start();
 
-    // if (!isset($_SESSION["userid"])) {
-    //     header("Location: ./register.php");
-    //     exit;
-    // }
+    if ($_SESSION["admin"] !== true) { 
+        header("Location: ./index.php");
+        exit();
 
-    // if (isset($_SESSION["userid"])) {
-        // require_once "./modules/config.php";
+        if (!isset($_SESSION["auth"]) || $_SESSION["auth"] !== true) {
+            header("Location: ./authenticate.php");
+            exit();
+        }
+    }
 
-        // $sql = "SELECT * FROM messages ORDER BY msg_id DESC";
-
-        // $query = $pdo-> prepare($sql);
-        // $query-> setFetchMode(PDO::FETCH_ASSOC);
-
-        // if ($query-> execute()) {
-        //     $results = $query-> fetchAll();
-        // };
-    // }
+    if (isset($_SESSION["auth"]) || $_SESSION["auth"] == true) {
+        require_once "./Model/Message.php";
+        $messages = Message::findAll();
+    }
 
     require_once "./includes/header-admin.php";
 ?>
 
     <main id="main-dash">
+
+        <h3>Tableau de bord de <strong><?= $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?></strong></h3>
 
         <!-- Date et heure -->
 
@@ -70,22 +69,23 @@
 
                         <tbody>
 
-                        <?php if (isset($results)) :
+                        <?php 
                             $i = 1;
-                            foreach ($results as $ligne) : ?>
+                            foreach ($messages as $message) : 
+                                $message->loadAllMessages(); ?>
 
                                 <tr>
                                     <td>
-                                        <?= $ligne["msg_first_name"]; ?>
+                                        <?= $message->msg_first_name; ?>
                                     </td>
                                     <td>
-                                        <?= $ligne["msg_email"]; ?>
+                                        <?= $message->msg_email; ?>
                                     </td>
                                     <td>
-                                        <?= $ligne["msg_object"]; ?>
+                                        <?= $message->msg_object; ?>
                                     </td>
                                     <td>
-                                        <?= $ligne["msg_creation_date"]; ?>
+                                        <?= $message->msg_creation_date; ?>
                                     </td>
                                     <td>
                                         <button type="button" class="see-message" data-target="#message-<?= $i; ?>">
@@ -95,7 +95,7 @@
                                 </tr>
                                 <tr class="tr-message" id="message-<?= $i; ?>">
                                     <td colspan="4" class="td-message">
-                                        <h5><?= "Message : " . $ligne["msg_content"] . ""; ?></h5>
+                                        <h5><?= "Message : " . $message->msg_content . ""; ?></h5>
                                     </td>
                                     <td class="td-message">
                                         <button type="button" class="close-message" data-target="#message-<?= $i; ?>">
@@ -104,10 +104,10 @@
                                     </td>
                                 </tr>
 
-                            <?php 
-                                $i++;
-                                endforeach;
-                        endif; ?>
+                        <?php 
+                            $i++;
+                            endforeach;
+                        ?>
 
                         </tbody>
 

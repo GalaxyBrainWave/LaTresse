@@ -4,17 +4,21 @@
         private string $pjTitle;
         private string $pjDescription;
         private DateTime $pjCreationDate;
-        private int $creator;
-        private int $media;
-        private array $categories;
+        private int $category;
+        private ?int $creator;
+        private ?int $media;
+        private array $projects;
+        private ?array $categories;
 
-        public function __construct($pjId = 0, $pjTitle = "", $pjDescription = "", $creator = 0, $media = 0) {
+        public function __construct($pjId = 0, $pjTitle = "", $pjDescription = "", $category = 0, $creator = 0, $media = 0) {
             $this->pjId = $pjId;
             $this->pjTitle = $pjTitle;
             $this->pjDescription = $pjDescription;
             $this->pjCreationDate = new DateTime();
+            $this->category = $category;
             $this->creator = $creator;
             $this->media = $media;
+            $this->projects = array();
             $this->categories = array();
         }
 
@@ -32,6 +36,9 @@
                     break;
                 case "pjCreationDate":
                     $this->$attribute = new DateTime($value);
+                    break;
+                case "projects":
+                    $this->$attribute = array($value);
                     break;
                 case "categories":
                     $this->$attribute = array($value);
@@ -170,11 +177,35 @@
 
             $query = $pdo->prepare($sql);
             $query->bindParam(":pj_title", $pjTitle, PDO::PARAM_STR);
-            $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE);
+            $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Project");
 
             if ($query->execute()) {
                 $results = $query->fetchAll();
                 return $results;
             }
+        }
+
+        public static function findByCategory(int $category) {
+            require_once "Database.php";
+
+            $db = new Database();
+            $pdo = $db->connect();
+
+            $sql = "SELECT * FROM projects INNER JOIN projects_categories ON pj_id = project INNER JOIN categories ON category = cat_id WHERE cat_id = :cat_id;";
+
+            $query = $pdo->prepare($sql);
+            $query->bindParam(":cat_id", $category, PDO::PARAM_INT);
+            $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Project");
+
+            if ($query->execute()) {
+                $results = $query->fetchAll();
+                return $results;
+            }
+        }
+
+        public function loadAllProjects() {
+            require_once "Project.php";
+
+            $this->projects = Project::findById($this->pjId);
         }
     }

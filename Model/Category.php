@@ -2,11 +2,13 @@
     class Category {
         private int $catId;
         private string $catName;
+        private array $projects;
         private array $categories;
 
         public function __construct($catId = 0, $catName = "") {
             $this->catId = $catId;
             $this->catName = $catName;
+            $this->projects = array();
             $this->categories = array();
         }
 
@@ -22,6 +24,9 @@
                     } else {
                         $this->$attribute = 0;
                     }
+                    break;
+                case "projects":
+                    $this->projects = array($value);
                     break;
                 case "categories":
                     $this->$attribute = array($value);
@@ -156,5 +161,11 @@
                 $results = $query->fetchAll();
                 return $results;
             }
+        }
+
+        public function loadAllProjects() {
+            require_once "Project.php";
+
+            $this->projects = Project::findByCategory($this->catId);
         }
     }

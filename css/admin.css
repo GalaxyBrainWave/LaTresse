@@ -54,6 +54,14 @@ h3 {
     color: var(--blue-text);
 }
 
+#main-dash > h3 {
+    margin: 16px;
+}
+
+strong {
+    color: var(--green);
+}
+
 h4 {
     font-weight: 400;
     font-size: 20px;
