@@ -2,7 +2,7 @@
 {
     background-color: var(--green);
     padding: 16px 5vw;
-    animation: colorCycle 20s infinite;
+    animation: colorCycle 5s infinite;
 }
 
 .nouveau_container

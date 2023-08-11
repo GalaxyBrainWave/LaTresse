@@ -12,24 +12,140 @@
 ?>
 
 <div class="main_content">
-    <h2>La Stigmergie</h2>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. 
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-    </p>
-    <p>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+    
+    <div class="stigmergie-p">
+            <h2>La Stigmergie</h2>
+            <h6>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </h6>
+    </div>
+
 </div>
 
-<?php
+    <?php
     include "phpinclude/nouveau.php";
-?>
-
+    ?>
+    
 <div class="main_content">
-    <!-- le code est à écrire ici -->
+    
+    <section id="communaute_commucards">
+        
+        <h2 class="upcase tcenter">
+                LA COMMUNAUTÉ
+        </h2>
+        <div class="communaute_commucards_container">
+                
+                <div class="commucards">
+                    
+                        <h3>Nom Prénom</h3>
+
+                        <img class="commucards_img" src="img/communaute/profil.png" alt="description">
+                    
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, seLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Lorem ipsum dolor. 
+                        </p>
+                </div>
+
+                <div class="commucards">
+                    
+                        <h3>Nom Prénom</h3>
+
+                        <img class="commucards_img" src="img/communaute/profil.png" alt="description">
+                    
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, seLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Lorem ipsum dolor. 
+                        </p>
+                </div>
+
+                <div class="commucards">
+                    
+                        <h3>Nom Prénom</h3>
+
+                        <img class="commucards_img" src="img/communaute/profil.png" alt="description">
+                    
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, seLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Lorem ipsum dolor. 
+                        </p>
+                </div>
+        </div>
+
+        <div class="communaute_commucards_container">
+                
+                <div class="commucards">
+                    
+                        <h3>Nom Prénom</h3>
+
+                        <img class="commucards_img" src="img/communaute/profil.png" alt="description">
+                    
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, seLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Lorem ipsum dolor. 
+                        </p>
+                </div>
+
+                <div class="commucards">
+                    
+                        <h3>Nom Prénom</h3>
+
+                        <img class="commucards_img" src="img/communaute/profil.png" alt="description">
+                    
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, seLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Lorem ipsum dolor. 
+                        </p>
+                </div>
+
+                <div class="commucards">
+                    
+                        <h3>Nom Prénom</h3>
+
+                        <img class="commucards_img" src="img/communaute/profil.png" alt="description">
+                    
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, seLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Lorem ipsum dolor. 
+                        </p>
+                </div>
+        </div>
+
+       
+        <div class="communaute_commucards_container">
+                
+                <div class="commucards">
+                    
+                        <h3>Nom Prénom</h3>
+                                
+                        <img class="commucards_img" src="img/communaute/profil.png" alt="description">
+                    
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, seLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Lorem ipsum dolor. 
+                        </p>
+                    
+                </div>
+
+                <div class="commucards">
+                    
+                        <h3>Nom Prénom</h3>
+
+                        <img class="commucards_img" src="img/communaute/profil.png" alt="description">
+                    
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, seLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Lorem ipsum dolor. 
+                        </p>
+
+                </div>
+
+                <div class="commucards">
+                    
+                        <h3>Nom Prénom</h3>
+
+                        <img class="commucards_img" src="img/communaute/profil.png" alt="description">
+
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, seLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  Lorem ipsum dolor. 
+                        </p>
+
+                </div>
+        </div>
+    </section>
 </div>
 
 <?php

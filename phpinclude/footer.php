@@ -30,7 +30,7 @@
 
     <section class="footer_blue_part">
         <div class="footer_main">
-            <img src="img/logo/logo_footer.png" alt="logo" class="footer_logo">
+            <img src="img/logo/logo2.png" alt="logo" class="footer_logo">
 
             <ul>
                 <div>

@@ -1,0 +1,157 @@
+#carto_cards {
+    width: 100%;
+    margin: 30px auto;
+}
+
+#carto_cards h2 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.carto_cards_container1,
+.carto_cards_container2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cartocard
+ {
+    
+    border: solid 2px var(--green);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 6px 6px 0 0 var(--ochre);
+    margin-bottom: 18px;
+}
+
+
+.cartocard_img {
+    width: 100%;
+}
+
+.cartocard h4,
+.cartocard h3 {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.cartocard p,
+.cartocard_img {
+    margin-bottom: 10px;
+}
+
+.cartocard_left {
+    display: flex;
+    flex-direction: column;
+}
+
+.cartocard_left h3 {
+    justify-self: center;
+}
+
+.cartocard_left p {
+    text-align: justify;
+}
+
+@media screen and (min-width:500px) {
+
+    #carto_cards {
+        max-width: 450px;
+        align-items: center;
+        justify-self: center;
+    }
+
+}
+
+
+@media screen and (min-width:880px) {
+
+    #carto_cards {
+        max-width: 100%;
+        margin: 30px auto;
+        justify-self:flex-start;
+    }
+    .carto_cards_container1 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .cartocard {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .cartocard_left {
+        flex: 1;
+        padding: 10px;
+    }
+    
+    .center {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    
+    .cartocard_img {
+        width: 100%;
+        /* Si vous voulez un espace entre les images */
+        margin-bottom: 10px;
+    }
+    
+}
+
+@media screen and (min-width:1000px) {
+
+    .carto_cards_container1
+    {
+        width: 100%;
+        display:flex ;
+        flex-direction: row;
+        
+    }
+
+    .carto_cards_container2
+    {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        margin-left: auto;
+    }
+
+    .cartocard {
+        width: 100%;
+        flex-direction: row;
+        gap: 20px;
+        padding: 20px;
+        justify-content: space-between;
+        margin-bottom: 35px;
+        
+    }
+
+    .cartocard p {
+        max-width: 410px;
+        text-align: justify;
+    }
+
+    .cartocard h4,
+    .cartocard h3 {
+        text-align: left;
+    }
+
+    .cartocard_img {
+        width: 100%;
+        margin: 0;
+    }
+
+    #carto_cards > h2 {
+        margin-bottom: 35px;
+    }
+
+}

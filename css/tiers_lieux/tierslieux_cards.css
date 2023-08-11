@@ -1,0 +1,98 @@
+#tiers_lieux_cards {
+    width: 100%;
+    margin: 30px auto;
+}
+
+#tiers_lieux_cards h2 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.tiers_lieux_cards_container1,
+.tiers_lieux_cards_container2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tierslieuxcard_full {
+    max-width: 345px;
+    border: solid 2px var(--blue);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 6px 6px 0 0 var(--green);
+    margin-bottom: 18px;
+}
+
+.tierslieuxcard_full {
+    order: 2;
+}
+
+.tierslieuxcard_full h4,
+.tierslieuxcard_full h3 {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.tierslieuxcard_full p {
+    margin-bottom: 10px;
+}
+
+.tierslieuxcard_left {
+    display: flex;
+    flex-direction: column;
+}
+
+.tierslieuxcard_left h3 {
+    justify-self: center;
+}
+
+@media screen and (min-width:880px) {
+
+    .tiers_lieux_cards_container1
+    {
+        width: 90%;
+        display:flex ;
+        flex-direction: row;
+        
+    }
+
+    .tiers_lieux_cards_container2
+    {
+        width: 90%;
+        display: flex;
+        flex-direction: row-reverse;
+        margin-left: auto;
+    }
+
+    .tierslieuxcard_full {
+        width: 100%;
+        max-width: 750px;
+        max-height: 350px;
+        flex-direction: row;
+        gap: 20px;
+        padding: 20px;
+        justify-content: space-between;
+        margin-bottom: 35px;
+        
+    }
+    
+
+    .tierslieuxcard_full p {
+        max-width: 700px;
+        text-align: justify;
+    }
+
+    .tierslieuxcard_full h4,
+    .tierslieuxcard_full h3 {
+        text-align: left;
+    }
+
+
+    #tiers_lieux_cards > h2 {
+        margin-bottom: 35px;
+    }
+
+}

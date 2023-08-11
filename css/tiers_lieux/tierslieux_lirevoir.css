@@ -1,0 +1,146 @@
+#lirevoir
+{
+    padding: 50px;
+    background-color: var(--ochre);
+}
+
+#lirevoir h2 {
+    color: var(--blue);
+    padding-bottom: 30px;
+}
+
+.lirevoir_container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.lirevoir_card
+{
+    display: flex;
+    /* margin: 0 5%;
+    width: 90%; */
+    background-color: var(--beige);
+    border-radius: 15px;
+}
+
+.lirevoir_card_left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
+}
+
+.lirevoir_card_left img
+{
+    width: 20%;
+    min-width: 50px;
+    object-fit: fill;
+    object-position: center;
+    border-radius: 15px;
+}
+
+.lirevoir_card_right
+{
+    padding: 16px 16px 20px;
+}
+
+.lirevoir_card_right p 
+{
+    margin-bottom: 10px;
+}
+
+.button_lirevoir_card_container 
+{
+    padding-top: 10px;
+}
+.button_lirevoir_card
+{
+    width: 80px;
+    background-color: var(--blue);
+    color: var(--beige);
+    padding: 5px 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    border: solid 2px var(--blue);
+    border-radius: 50px;
+}
+
+.button_lirevoir_card:hover
+{
+    background-color: var(--beige);
+    color: var(--blue);
+}
+
+
+@media screen and (min-width: 780px) {
+   
+    .lirevoir_container {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1000px;
+        align-items: center;
+        margin: auto;
+    }
+
+    .lirevoir_card_left img {
+        min-width: 100px;
+    }
+
+    .lirevoir_card {
+        flex-basis: calc(50% - 10px);  /* Pour deux articles par ligne, chaque article prend 50% de la largeur du conteneur moins la moitié de l'espacement entre les articles */
+    }
+
+    
+   
+   /* code la partie article en page index : 
+
+    #lirevoir
+    {
+        padding: 6px 50px 20px;
+    }
+
+    .lirevoir_container
+    {
+        margin: 0 auto 20px;
+        max-width: 750px;
+    }
+
+    .lirevoir_card
+    {
+        padding: 37px;
+    }
+
+    .lirevoir_card_left
+    {
+        border-radius: 0;
+        width: 100%;
+        max-width: 230px;
+        height: 177px;
+    }
+
+    .lirevoir_card h4
+    {
+        font-size: 14px;
+    }
+
+    .button_lirevoir_card_container
+    {
+        display: flex;
+        justify-content: flex-end;
+    }
+    */
+}
+
+@media screen and (min-width: 1200px)
+{
+    /*
+    .lirevoir_container
+    {
+        max-width: 1000px;
+
+    }
+    */
+}

@@ -1,6 +1,9 @@
-#engagements {
-    padding: 30px 30px;
+#engagements-container {
     background-color: var(--blue-text);
+}
+
+#engagements {
+    padding: 30px;
     color: var(--beige);
 }
 
@@ -18,4 +21,26 @@
 
 #engagements li {
     color: var(--beige);
+}
+
+@media screen and (min-width: 850px) {
+    #engagements {
+        padding: 0, 40;
+        max-width: 750px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 950px) {
+    #engagements {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #engagements {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
 }

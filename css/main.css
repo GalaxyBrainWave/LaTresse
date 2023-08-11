@@ -12,6 +12,14 @@
 @import url(historique/historique_historicards.css);
 @import url(historique/historique_engagements.css);
 @import url(historique/historique_documents.css);
+@import url(services/services_servicescards.css);
+@import url(communaute/communaute_commucards.css);
+@import url(cartographie/cartographie_carte.css);
+@import url(cartographie/carto_cards.css);
+@import url(tiers_lieux/tierslieux_cards.css);
+@import url(tiers_lieux/tierslieux_plusloin.css);
+@import url(tiers_lieux/tierslieux_lirevoir.css);
+@import url(projets/projets_procards.css);
 
 
 /* Fonts - police */
