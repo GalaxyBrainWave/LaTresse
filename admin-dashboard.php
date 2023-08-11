@@ -1,5 +1,18 @@
 <?php
+    session_name("latresse-php");
     session_start();
+
+    if (!isset($_SESSION["auth"]) || $_SESSION["auth"] !== true) {
+        header("Location: ./authenticate.php");
+        exit();
+    }
+
+    if (isset($_SESSION["user"])) {
+        $loged_user = unserialize($_SESSION["user"]);
+        echo '<script>alert("Bienvenue, vous êtes connecté.");</script>';
+    } else {
+        echo '<script>alert("Les informations sont erronées.");</script>';
+    }
     
     // if (!isset($_SESSION["userid"])) {
     //     header("Location: ./register.php");
@@ -7,16 +20,16 @@
     // }
 
     // if (isset($_SESSION["userid"])) {
-        require_once "./modules/config.php";
+        // require_once "./modules/config.php";
         
-        $sql = "SELECT * FROM users ORDER BY user_id DESC";
+        // $sql = "SELECT * FROM users ORDER BY user_id DESC";
 
-        $query = $pdo-> prepare($sql);
-        $query-> setFetchMode(PDO::FETCH_ASSOC);
+        // $query = $pdo-> prepare($sql);
+        // $query-> setFetchMode(PDO::FETCH_ASSOC);
 
-        if ($query-> execute()) {
-            $results = $query-> fetchAll();
-        };
+        // if ($query-> execute()) {
+        //     $results = $query-> fetchAll();
+        // };
     // }
 
     require_once "./includes/header-admin.php";

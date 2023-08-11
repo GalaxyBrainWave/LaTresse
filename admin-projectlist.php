@@ -1,4 +1,5 @@
 <?php
+    session_name("latresse-php");
     session_start();
 
     // if (!isset($_SESSION["userid"])) {
@@ -7,16 +8,16 @@
     // }
 
     // if (isset($_SESSION["userid"])) {
-        require_once "./modules/config.php";
+        // require_once "./modules/config.php";
 
-        $sql = "SELECT * FROM projects ORDER BY pj_id DESC";
+        // $sql = "SELECT * FROM projects ORDER BY pj_id DESC";
 
-        $query = $pdo-> prepare($sql);
-        $query-> setFetchMode(PDO::FETCH_ASSOC);
+        // $query = $pdo-> prepare($sql);
+        // $query-> setFetchMode(PDO::FETCH_ASSOC);
 
-        if ($query-> execute()) {
-            $results = $query-> fetchAll();
-        };
+        // if ($query-> execute()) {
+        //     $results = $query-> fetchAll();
+        // };
     // }
 
     require_once "./includes/header-admin.php";

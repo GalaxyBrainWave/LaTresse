@@ -6,6 +6,3 @@
 
         const DBUSER = "root";
         const DBPASS = "";
-
-        $dsn = "mysql:host=" . HOST . ";port=" . PORT . ";dbname=" . DBNAME . ";charset=" . CHARSET . "";
-        $pdo = new PDO($dsn, DBUSER, DBPASS);
