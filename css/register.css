@@ -1,0 +1,152 @@
+#register-page {
+  width: 100%;
+  gap: 48px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-left,
+.register-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-right h2 {
+  font-size: 1.2em;
+  margin-bottom: 16px;
+}
+
+#register-page h1 {
+  text-align: center;
+  font-size: 2em;
+}
+
+#register-page .register-left img {
+  height: 96px;
+  width: auto;
+}
+
+#register-left-tagline {
+  margin-bottom: 32px;
+}
+
+#sidentifier {
+  margin-bottom: 32px;
+}
+#sinon {
+  margin-bottom: 32px;
+  font-size: 0.8em;
+}
+
+.yel-btn {
+  display: block;
+  padding: 8px 16px;
+  background-color: var(--ochre);
+  border-radius: 8px;
+  font-weight: 500;
+  color: var(--blue);
+}
+
+.green-border-btn {
+  border: solid 3px var(--green);
+}
+
+.blue-border-btn {
+  border: solid 3px var(--blue-medium);
+}
+
+.register-form-container {
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-form {
+ width: 100%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding-bottom: 32px;
+}
+
+.register-form input {
+  display: block;
+  width: 100%;
+  max-width: 256px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+  padding: 4px 8px;
+  font-size: 0.9em;
+}
+
+#mdpoublie-container {
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#mdpoublie-btn {
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+#mdpoublie-link {
+  display: none;
+  font-size: 0.8em;
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+#pasdecompte {
+  margin-bottom: 16px;
+}
+
+#login-retour {
+  margin-bottom: 32px;
+}
+
+/* #retour-chevron {
+  display: inline-block;
+  font-size: 1.2em;
+} */
+
+
+/* @media screen and (min-width: 900px) {
+  #register-page {
+    margin-top: 32px;
+  } >> inutile
+} */
+
+@media screen and (min-width: 1000px) {
+  /* In this section all change goes along with the flex-direction  */
+  #register-page {
+    margin-top: 64px;
+    flex-direction: row;
+    gap: 64px;
+  }
+  .register-left,
+  .register-right {
+    width: 50%;
+  }
+  .register-form {
+    padding-bottom: 96px;
+  }
+  #register-page h1 {
+    font-size: 2.5em;
+  }
+  #register-page .register-left img {
+    height: 256px;
+  }
+  #login-form-container {
+    padding-top: 32px;
+  }
+  /* #sidentifier {
+    margin-bottom: 64px;
+  } */
+  .register-right {
+    min-height: 520px;
+  }
+}

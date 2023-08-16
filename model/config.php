@@ -1,11 +1,15 @@
 <?php 
 
-const HOST = "localhost";
-const PORT = "3306";
-const DBNAME = "la_tresse";
-const CHARSET = "utf8";
 
-const DBUSER = "root";
-const DBPASS = "";
+// const HOST = "localhost";
+// const PORT = "3306";
+// const DBNAME = "la_tresse";
+// const CHARSET = "utf8";
 
-$dsn = "mysql:host=" . HOST . ";port=" . PORT . ";dbname=" . DBNAME . ";charset=" . CHARSET . "";
+// const DBUSER = "root";
+// const DBPASS = "";
+
+// $dsn = "mysql:host=" . HOST . ";port=" . PORT . ";dbname=" . DBNAME . ";charset=" . CHARSET . "";
+
+
+
