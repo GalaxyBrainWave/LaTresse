@@ -1,52 +1,50 @@
 <?php
-    class User {
-        private int $userId;
-        private string $lastName;
-        private string $firstName;
-        private string $email;
-        private string $hashPass;
-        private string $colorMode;
-        private ?bool $isAdmin;
-        private ?int $nbReactions;
-        private ?int $nbHelloThanks;
-        private ?int $nbComments;
-        private DateTime $accountCreationDate;
-        // private array $users;
-        private ?array $projects;
-        private ?array $articles;
-        private ?array $comments;
-        private ?array $helloThanks;
-        private ?array $medias;
+  class User {
+    private int $userId;
+    private string $firstName;
+    private string $email;
+    private string $hashPass;
+    private string $colorMode;
+    private ?bool $isAdmin;
+    private ?int $nbReactions;
+    private ?int $nbHelloThanks;
+    private ?int $nbComments;
+    private DateTime $accountCreationDate;
+    // private array $users;
+    private ?array $projects;
+    private ?array $articles;
+    private ?array $comments;
+    private ?array $helloThanks;
+    private ?array $medias;
 
-        public function __construct($userId = 0, $lastName = "", $firstName = "", $email = "", $hashPass = "", $isAdmin = false, $colorMode, $nbReactions = 0, $nbHelloThanks = 0, $nbComments = 0) {
-            $this->userId = $userId;
-            $this->lastName = $lastName;
-            $this->firstName = $firstName;
-            $this->email = $email;
-            $this->hashPass = $hashPass;
-            $this->isAdmin = $isAdmin;
-            $this-> colorMode 
-            $this->nbReactions = $nbReactions;
-            $this->nbHelloThanks = $nbHelloThanks;
-            $this->nbComments = $nbComments;
-            $this->accountCreationDate = new DateTime();
-            // $this->users = array();
-            $this->projects = array();
-            $this->articles = array();
-            $this->comments = array();
-            $this->helloThanks = array();
-            // medias contains:
-            // medias['banner_url']
-            // medias['avatar_url']
-            // medias['autodescription']
-            // medias['location']
-            $this->medias = array();
-        }
+    public function __construct($userId = 0, $firstName = "", $email = "", $hashPass = "", $isAdmin = false, $colorMode = 'day', $nbReactions = 0, $nbHelloThanks = 0, $nbComments = 0) {
+      $this->userId = $userId;
+      $this->firstName = $firstName;
+      $this->email = $email;
+      $this->hashPass = $hashPass;
+      $this->isAdmin = $isAdmin;
+      $this-> colorMode = $colorMode;
+      $this->nbReactions = $nbReactions;
+      $this->nbHelloThanks = $nbHelloThanks;
+      $this->nbComments = $nbComments;
+      $this->accountCreationDate = new DateTime();
+      // $this->users = array();
+      $this->projects = array();
+      $this->articles = array();
+      $this->comments = array();
+      $this->helloThanks = array();
+      // medias contains: (?)
+      // medias['banner_url']
+      // medias['avatar_url']
+      // medias['autodescription']
+      // medias['location']
+      $this->medias = array();
+    }
 
-        // Accesseur magique
-        public function __get($attribute) {
-            return $this->$attribute;
-        }
+  // Accesseur magique
+  public function __get($attribute) {
+      return $this->$attribute;
+  }
 
         public function __set($attribute, $value) {
             switch ($attribute) {
@@ -92,54 +90,149 @@
 
         // Méthodes CRUD
         // Inscrire ou modifier un utilisateur : save = create || update
-        public function save() {
-            try {
-                if ($this->userId > 0) {
-                    require_once "Database.php";
+        // public function save() {
+        //     try {
+        //         if ($this->userId > 0) {
+        //             require_once "Database.php";
     
-                    $db = new Database();
-                    $pdo = $db->connect();
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //             $db = new Database();
+        //             $pdo = $db->connect();
+        //             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-                    $sql = "UPDATE users SET last_name = :last_name, first_name = :first_name, email = :email, hash_pass = :hash_pass WHERE user_id = :user_id;";
+        //             $sql = "UPDATE users SET last_name = :last_name, first_name = :first_name, email = :email, hash_pass = :hash_pass WHERE user_id = :user_id;";
     
-                    $pdo = $query->prepare($sql);
-                    $query->bindParam(":user_id", $this->userId, PDO::PARAM_INT);
-                    $query->bindParam(":last_name", $this->lastName, PDO::PARAM_STR);
-                    $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
-                    $query->bindParam(":email", $this->email, PDO::PARAM_STR);
-                    $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
+        //             $pdo = $query->prepare($sql);
+        //             $query->bindParam(":user_id", $this->userId, PDO::PARAM_INT);
+        //             $query->bindParam(":last_name", $this->lastName, PDO::PARAM_STR);
+        //             $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
+        //             $query->bindParam(":email", $this->email, PDO::PARAM_STR);
+        //             $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
     
-                    if ($query->execute()) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    require_once "Database.php";
+        //             if ($query->execute()) {
+        //                 return true;
+        //             } else {
+        //                 return false;
+        //             }
+        //         } else {
+        //             require_once "Database.php";
     
-                    $db = new Database();
-                    $pdo = $db->connect();
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //             $db = new Database();
+        //             $pdo = $db->connect();
+        //             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-                    $sql = "INSERT INTO users (last_name, first_name, email, hash_pass) VALUES (:last_name, :first_name, :email, :hash_pass);";
+        //             $sql = "INSERT INTO users (last_name, first_name, email, hash_pass) VALUES (:last_name, :first_name, :email, :hash_pass);";
     
-                    $query = $pdo->prepare($sql);
-                    $query->bindParam(":last_name", $this->lastName, PDO::PARAM_STR);
-                    $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
-                    $query->bindParam(":email", $this->email, PDO::PARAM_STR);
-                    $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
+        //             $query = $pdo->prepare($sql);
+        //             $query->bindParam(":last_name", $this->lastName, PDO::PARAM_STR);
+        //             $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
+        //             $query->bindParam(":email", $this->email, PDO::PARAM_STR);
+        //             $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
     
-                    if ($query->execute()) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            } catch (PDOException $e) {
-                echo "Erreur :" . $e->getMessage();
-            }
+        //             if ($query->execute()) {
+        //                 return true;
+        //             } else {
+        //                 return false;
+        //             }
+        //         }
+        //     } catch (PDOException $e) {
+        //         echo "Erreur :" . $e->getMessage();
+        //     }
+        // }
+
+
+
+
+  /**
+  * Inscrire ou modifier un utilisateur : save = create || update
+  * @param none
+  * @return bool true if the query was executed correctly, false otherwise
+  */
+  public function save() {
+    try {
+      if ($this->userId > 0) {
+        require_once "Database.php";
+        $db = new Database();
+        $pdo = $db->connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "UPDATE users SET last_name = :last_name, first_name = :first_name, user_email = :email, hash_pass = :hash_pass WHERE user_id = :user_id;";
+
+        $pdo = $query->prepare($sql);
+        $query->bindParam(":user_id", $this->userId, PDO::PARAM_INT);
+        $query->bindParam(":last_name", $this->lastName, PDO::PARAM_STR);
+        $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
+        $query->bindParam(":email", $this->email, PDO::PARAM_STR);
+        $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
+
+        if ($query->execute()) {
+          return true;
+        } else {
+          return false;
         }
+      } else if($this->userId === 0) {
+        require_once "Database.php";
+
+        $db = new Database();
+        $pdo = $db->connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "INSERT INTO users (first_name, user_email, hash_pass) VALUES (:first_name, :email, :hash_pass);";
+
+        $query = $pdo->prepare($sql);
+        $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
+        $query->bindParam(":email", $this->email, PDO::PARAM_STR);
+        $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
+
+        if ($query->execute()) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } catch (PDOException $e) { // should we keep this?
+        echo "Erreur :" . $e->getMessage();
+    }
+  }
+
+
+  /**
+  * Vérifier que l'adresse email fournie n'existe pas encore dans la BDD
+  * @param string $email
+  * @return bool true if the email isn't used, false otherwise
+  */
+  public static function checkEmailUnicity($email) {
+    require_once "Database.php";
+    $db = new Database();
+    $pdo = $db->connect();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = "SELECT user_email FROM users WHERE user_email = :user_email;";
+    $query = $pdo-> prepare($stmt);
+    $query-> bindParam(':user_email', $email, PDO::PARAM_STR);
+    if ($query-> execute()) {
+      $count = $query->fetchColumn();
+      switch ($count) {
+        case 0:
+          return true;
+        case 1:
+          return false;
+        default:
+          // handle error report to the admin (see creation of admin interface for this)
+          return false;
+      }
+    } // else error = "une erreur s'est produite. 
+    // Si l'erreur persiste, veuillez contacter l'administrateur
+  }
+
+
+
+
+
+
+
+
+
+
+
 
         // Editer un profil utilisateur
         public function edit() {
@@ -239,135 +332,139 @@
          * @param string $email Représente l'id de l'utilisateur
          * @return User retrouve l'utilisateur attendu
          */
-        public function connectUser(string $email) {
+        // public function connectUser(string $email) {
 
-            try {
-                require_once "Database.php";
+        //     try {
+        //         require_once "Database.php";
                 
-                $db = new Database();
-                $pdo = $db->connect();
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //         $db = new Database();
+        //         $pdo = $db->connect();
+        //         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-                $sql = "SELECT * FROM users WHERE email = :email;";
-                $query = $pdo->prepare($sql);
-                $query->bindParam(":email", $email, PDO::PARAM_STR);
+        //         $sql = "SELECT * FROM users WHERE email = :email;";
+        //         $query = $pdo->prepare($sql);
+        //         $query->bindParam(":email", $email, PDO::PARAM_STR);
     
-                if ($query->execute()) {
-                    $results = $query->fetchAll();
+        //         if ($query->execute()) {
+        //             $results = $query->fetchAll();
                     
-                    if (count($results) == 1) {
-                        if (password_verify($_POST["hash-login"], $results[0]["hash_pass"])) {
-                            session_name("latresse-php");
-                            session_start();
+        //             if (count($results) == 1) {
+        //                 if (password_verify($_POST["hash-login"], $results[0]["hash_pass"])) {
+        //                     session_name("latresse-php");
+        //                     session_start();
     
-                            $user = new User($results[0]["user_id"], $results[0]["last_name"], $results[0]["first_name"], $results[0]["email"], $results[0]["hash_pass"], $results[0]["is_admin"]);
+        //                     $user = new User($results[0]["user_id"], $results[0]["last_name"], $results[0]["first_name"], $results[0]["email"], $results[0]["hash_pass"], $results[0]["is_admin"]);
     
-                            $_SESSION["userid"] = $user->userId;
-                            $_SESSION["firstname"] = $user->firstName;
-                            $_SESSION["lastname"] = $user->lastName;
-                            $_SESSION["email"] = $user->email;
-                            $_SESSION["hashpass"] = $user->hashPass;
-                            $_SESSION["admin"] = $user->isAdmin;
-                            $_SESSION["user"] = serialize($user);
-                            $_SESSION["auth"] = true;
+        //                     $_SESSION["userid"] = $user->userId;
+        //                     $_SESSION["firstname"] = $user->firstName;
+        //                     $_SESSION["lastname"] = $user->lastName;
+        //                     $_SESSION["email"] = $user->email;
+        //                     $_SESSION["hashpass"] = $user->hashPass;
+        //                     $_SESSION["admin"] = $user->isAdmin;
+        //                     $_SESSION["user"] = serialize($user);
+        //                     $_SESSION["auth"] = true;
     
-                            header("Location: ./admin-dashboard.php");
-                            exit();
-                        } else {
-                            echo "<script>alert('Les informations saisies sont erronées');</script>";
-                        }
-                    } else {
-                        echo "<script>alert('L\'utilisateur n\'existe pas.');</script>";
-                    }
-                }
-            } catch (PDOException $e) {
-                echo "Erreur :" . $e->getMessage();
-            }
-        }
+        //                     header("Location: ./admin-dashboard.php");
+        //                     exit();
+        //                 } else {
+        //                     echo "<script>alert('Les informations saisies sont erronées');</script>";
+        //                 }
+        //             } else {
+        //                 echo "<script>alert('L\'utilisateur n\'existe pas.');</script>";
+        //             }
+        //         }
+        //     } catch (PDOException $e) {
+        //         echo "Erreur :" . $e->getMessage();
+        //     }
+        // }
 
 
 
 
-  /**
+   /**
    * Méthode de connexion
    * @param string $email Représente l'email de l'utilisateur
-   * @return User retrouve l'utilisateur attendu
+   * @param string $hash Représente le hash du mot de passe
+   * @param bool $firstLogin Permet de savoir si c'est le premier login de l'utilisateur (auquel cas on le renvoie vers une page de bienvenue qui contient un mini tuto pour l'utilisation de l'appli)
    */
-  public function login(string $email, string $hash) {
-
-    try {
-      require_once "Database.php";
-      
-      $db = new Database();
-      $pdo = $db->connect();
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-      $sql = "SELECT * FROM users WHERE email = :email;";
-      $query = $pdo->prepare($sql);
-      $query->bindParam(":email", $email, PDO::PARAM_STR);
-
-      if ($query->execute()) {
-        $results = $query->fetchAll();
+    public static function login(string $email, string $pwd, bool $firstLogin = false) {
+      try {
+        require_once "Database.php";
         
-        if (count($results) === 1) {
-          if ($hash === $results[0]["hash_pass"])) {
+        $db = new Database();
+        $pdo = $db->connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT user_id, hash_pass FROM users WHERE user_email = :email;";
+        $query = $pdo->prepare($sql);
+        $query->bindParam(":email", $email, PDO::PARAM_STR);
+
+        if ($query->execute()) {
+          $results = $query->fetchAll();
+          
+          if (count($results) === 1) {
+            if (password_verify($pwd, $results[0]["hash_pass"])) {
+              session_unset();
+              $_SESSION['user_id'] = $results[0]["user_id"];
+              unset($_SESSION['connectionError'] );
+              if ($firstLogin === false) {
+                header("Location: rsaccueil.php");
+                exit();
+              } else if ($firstLogin === true) {
+                header("Location: welcome.php");
+                exit();
+              }
+            } else {
+              $connectionError = "Mot de passe erroné";
+              session_unset();
+              $_SESSION['loginError'] = $connectionError;
+              $_SESSION['loginEmail'] = $email;
+              $_SESSION['display_login_form'] = true;
+              header("Location: ../connexion.php");
+              exit();
+            }
+          } else if (count($results) === 0) {
+            $connectionError = "Il n'y a pas de compte associé à cette adresse email";
+            session_unset();
+            $_SESSION['loginError'] = $connectionError;
             $_SESSION['loginEmail'] = $email;
-            unset($_SESSION['connectionError'] );
-            header("Location: rsaccueil.php");
+            $_SESSION['display_login_form'] = true;
+            header("Location: ../connexion.php");
             exit();
-          } else {
-            $connectionError = "Mot de passe erroné";
-            $_SESSION['connectionError'] = $connectionError;
-            $_SESSION['loginEmail'] = $email;
-            header("Location: connexion.php");
+          } else if (count($results) > 1) {
+            session_unset();
+            $connectionError = "Une erreur est survenue avec votre compte. Veuillez contacter l'administrateur via le <a href='../contact.php'>formulaire de contact</a>.";
+            logError($email, "Plusieurs comptes pour la même adresse email"); // function to be coded in order to create a page where all such errors are logged for the admin to take a look at
+            $_SESSION['loginError'] = $connectionError;
+            header("Location: ../connexion.php");
+            exit();
           }
-        } else if (count($results) === 0) {
-          $connectionError = "Il n'y a pas de compte associé à cette adresse email";
-          $_SESSION['connectionError'] = $connectionError;
-          header("Location: connexion.php");
-        } else if (count($results) > 1) {
-          $connectionError = 'Une erreur est survenue avec votre compte. Veuillez contacter l\'administrateur via le <a href="../contact.php">formulaire de contact</a>.';
-          logError($email, "Plusieurs comptes pour la même adresse email"); // function to be coded in order to create a page where all such errors are logged for the admin to take a look at
-          $_SESSION['connectionError'] = $connectionError;
-          header("Location: connexion.php");
-        }
+        } // une erreur s'est produite (à coder)
+      } catch (PDOException $e) {
+        $connectionError = $e->getMessage();
+        $_SESSION['loginError'] = $connectionError; // should we display these technical details? A more user-friendly approach may be better
+        header("Location: ../connexion.php");
+        exit();
       }
-    } catch (PDOException $e) {
-      $connectionError = $e->getMessage();
-      header("Location: connexion.php");
-      $_SESSION['connectionError'] = $connectionError; // should we display these technical details? A more user-friendly approach may be better
+    }
+
+
+
+        
+    public function loadAllUsers() {
+      require_once "User.php";
+      $this->users = User::findById($this->userId);
+    }
+
+    public function addNbReactions(int $nbReactions) {
+
+    }
+
+    public function addNbHelloThanks(int $nbHelloThanks) {
+
+    }
+
+    public function addNbComments(int $nbComments) {
+
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        public function loadAllUsers() {
-            require_once "User.php";
-            $this->users = User::findById($this->userId);
-        }
-
-        public function addNbReactions(int $nbReactions) {
-
-        }
-
-        public function addNbHelloThanks(int $nbHelloThanks) {
-
-        }
-
-        public function addNbComments(int $nbComments) {
-
-        }
-    }

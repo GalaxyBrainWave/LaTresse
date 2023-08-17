@@ -11,8 +11,7 @@
     // remove trailing whitespace and html tags
     $loginEmail = sanitize($_POST['login-email']);
     $loginPwd = trim($_POST['login-pwd']);
-    require_once "tools/config.php";
-    $loginHash = password_hash($loginPwd, PASSWORD_DEFAULT, $hash_options);
-    $user = new User();
-    $user->login($loginEmail, $loginHash);   
+    require_once "../tools/config.php";
+    require_once "../Model/User.php";
+    User::login($loginEmail, $loginPwd);
   }

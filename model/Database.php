@@ -1,12 +1,10 @@
 <?php
-
-  // nouvelle classe Database
   class Database {
-    public PDO $pdo;
-
+    // private PDO $pdo;
     public function connect(): PDO {
-      require_once "./modules/config.php";
-      $pdo = new PDO($dsn, DBUSER, DBPASS);
-      return $this->pdo;
+      // require_once "./modules/config.php";
+      require_once "../tools/config.php";
+      $pdo = new PDO(DSN, DBUSER, DBPASS);
+      return $pdo;
     }
   }

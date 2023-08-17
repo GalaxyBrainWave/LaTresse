@@ -6,5 +6,6 @@ function sanitize(string $input): string {
   $output = trim($input);
   $output = strip_tags($output);
   // $output = htmlspecialchars($output);
+  // characters affected by htmlspecialchars: <, >, ", ', &
   return $output;
 }

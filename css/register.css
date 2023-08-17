@@ -4,6 +4,7 @@
   margin-top: 16px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .register-left,
@@ -74,7 +75,7 @@
 .register-form input {
   display: block;
   width: 100%;
-  max-width: 256px;
+  max-width: 300px;
   margin: 0 auto;
   margin-bottom: 16px;
   padding: 4px 8px;
@@ -108,6 +109,21 @@
   margin-bottom: 32px;
 }
 
+.connection-error {
+  font-size: 0.8em;
+  color: red;
+  margin-bottom: 8px;
+}
+
+.login-error-container{
+  height: 32px;
+}
+
+
+#btn-sinscrire {
+  margin-top: 8px;
+}
+
 /* #retour-chevron {
   display: inline-block;
   font-size: 1.2em;
@@ -123,7 +139,7 @@
 @media screen and (min-width: 1000px) {
   /* In this section all change goes along with the flex-direction  */
   #register-page {
-    margin-top: 64px;
+    margin-top: 32px;
     flex-direction: row;
     gap: 64px;
   }
