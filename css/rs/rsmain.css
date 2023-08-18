@@ -12,6 +12,7 @@
 @import url(rspageprojet.css);
 @import url(rsvariables.css);
 @import url(../register.css);
+@import url(welcome.css);
 
 .rscontent {
     background-color: var(--darkblue);

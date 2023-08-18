@@ -1,5 +1,5 @@
 <?php
-  session_name('Tresseaux');
+  session_name('La_Tresse');
   session_start();
   // Check if the user is logged in
   if (isset($_SESSION['user_id'])) {
@@ -76,8 +76,8 @@
 
 <div id="register-page">
   <div class="register-left">
-    <h1>Tresseaux</h1>
-    <img src="img/logo/tresseaux.png" alt="Logo de Tresseaux">
+    <h1>La Tresse</h1>
+    <img src="img/logo/tresseaux.png" alt="Logo de La Tresse">
     <p id="register-left-tagline">Le réseau social de la Tresse<br>(slide show)</p>
   </div>
   <div class="register-right">

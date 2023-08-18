@@ -15,7 +15,7 @@
   display: none;
 }
 
-.update_profile .rsform label[for="profilepicinput"],
+.update_profile .rsform label[for="avatarinput"],
 .update_profile .rsform label[for="bannerpicinput"] {
   width: 250px;
   margin-bottom: 16px;
@@ -59,7 +59,7 @@
   #update-profile-form input::placeholder {
     font-size: 16px;
   }
-  .update_profile .rsform label[for="profilepicinput"],
+  .update_profile .rsform label[for="avatarinput"],
   .update_profile .rsform label[for="bannerpicinput"] {
     width: 300px;
   }
@@ -68,8 +68,4 @@
     padding: 10px 12px 8px;
   }
 
-  .update_profile .rsform label[for="profilepicinput"],
-  .update_profile .rsform label[for="bannerpicinput"] {
-    width: 300px;
-  }
 }          

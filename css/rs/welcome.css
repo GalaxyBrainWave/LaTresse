@@ -1,0 +1,95 @@
+#welcome {
+  width: 100%;
+  max-width: 1000px;
+  margin: 32px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+#welcome h1 {
+  text-align: center;
+}
+
+#welcome img {
+  display: block;
+  margin: 8px auto 0;
+  height: 256px;
+  width: auto;
+}
+
+#welcome p {
+  text-align: center;
+}
+
+#welcome-info {
+  margin-bottom: 48px;
+}
+
+#welcome-question {
+  font-size: 1.1em;
+  margin-bottom: 32px;
+}
+
+#welcome #welcome-question-info {
+  font-size: 0.8em;
+  margin: 16px 0;
+  text-align: center;
+  /* margin-top: 16px; */
+}
+
+#welcome-choice {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.complete-profile {
+  width: 100%;
+}
+
+.complete-profile label[for="avatarinput"],
+.complete-profile label[for="bannerpicinput"] {
+  width: 256px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  padding: 6px 10px 4px;
+}
+
+/* bouton valider pour le formulaire */
+.complete-profile #valider {
+  padding: 8px 16px;
+  border-radius: 16px;
+}
+
+#complete-profile-form-container {
+  display: none;
+}
+
+
+@media screen and (min-width: 800px) {
+  #welcome {
+    margin: 32px auto;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #welcome {
+    flex-direction: row;
+    gap: 64px;
+  }
+
+  #welcome-right-first-display {
+    min-height: 459px;
+  }
+
+  #welcome-left,
+  #welcome-right {
+    width: 50%;
+  }
+}

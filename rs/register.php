@@ -1,5 +1,5 @@
 <?php
-  session_name('Tresseaux');
+  session_name('La_Tresse');
   session_start();
 
   // to make sure that the sanitize() function is available
@@ -24,6 +24,9 @@
           if ($_POST["register-pwd"] === $_POST["register-pwd2"]) { // if the passwords match
             $newUser = new User(0, $firstName, $registerEmail, $registerPwdHash, false);
             if ($newUser->save()) {
+              // create the directory to store avatar and banner in img folder
+              // I don't know why the following line doesn't work. Chatgpt also doesn't
+              // mkdir("../img/users/" . $_SESSION['user_id'], 0777, true); 
               User::login($registerEmail, $registerPwd, true);
             } else { // une erreur est survenue
               registrationError($genericErrorMessage, $firstName, $registerEmail);
