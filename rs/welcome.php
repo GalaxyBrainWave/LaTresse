@@ -1,10 +1,11 @@
 <?php
   require_once "phpinclude/rs_pagetop.php";
-  // error_reporting(E_ALL); ini_set('display_errors', 1);
+  // create the user's directory in img/users/ if it doesn't already exist
   if (!file_exists("../img/users/" . $_SESSION['user_id'])) {
     mkdir("../img/users/" . $_SESSION['user_id'], 0777, true);
   }
   require_once "../Model/User.php";
+  // get the user's details to display their first name
   $user = User::getUserDetails($_SESSION['user_id']);
 ?>
   <title>Bienvenue sur La Tresse</title>

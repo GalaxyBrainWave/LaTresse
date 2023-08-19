@@ -1,16 +1,19 @@
 <?php
-    require_once "phpinclude/rs_pagetop.php";
+  require_once "phpinclude/rs_pagetop.php";
 
-    $accueil_active = '';
-    $projets_active = '';
-    $reseau_active = '';
-    $creer_active = '';
-    $profil_active = 'navbar-active';
-    $notifications_active = '';
+  $accueil_active = '';
+  $projets_active = '';
+  $reseau_active = '';
+  $creer_active = '';
+  $profil_active = 'navbar-active';
+  $notifications_active = '';
+
+  require_once "../Model/User.php";
+  $user = User::getUserDetails($_SESSION['user_id']);
 
 ?>
 
-    <title>La Tresse - <?= $userName ?></title>
+    <title>La Tresse - Mon profil</title>
 
 </head>
 
@@ -25,9 +28,9 @@
 
 
   <main class="rscontent">
-    <img src="../img/rs/banner.png" alt="bannière de l'utilisateur" class="rs_user_banner">
-    <img src="../img/rs/alf.jpg" alt="photo de profil" class="rs_user_profile_pic">
-    <h1>John Doe</h1>
+    <img src="<?= $user-> bannerURL ?>" alt="bannière de l'utilisateur" class="rs_user_banner">
+    <img src="<?= $user-> avatarURL ?>" alt="photo de profil" class="rs_user_profile_pic">
+    <h1><?= $user-> firstName ?></h1>
     <a href="rsupdateprofile.php">
       <div class="update_profile_btn">
         <svg fill="#fffced" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="update_icon" viewBox="0 0 94 94" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M94,47C94,21.043,72.958,0,47,0S0,21.043,0,47s21.042,47,47,47S94,72.957,94,47z M69.273,67.466 c-5.67,5.67-13.221,8.792-21.26,8.792c-8.038,0-15.587-3.122-21.256-8.792C15.873,56.58,15.001,39.54,24.358,27.66l-8.424-8.424 h24.397l0.001,24.397l-8.017-8.017c-5.015,7.4-4.192,17.475,2.311,23.979c3.57,3.568,8.324,5.534,13.39,5.534 c5.063,0,9.818-1.966,13.389-5.537c3.568-3.567,5.535-8.323,5.535-13.389c0-5.062-1.965-9.817-5.535-13.389 c-1.637-1.634-3.521-2.938-5.604-3.876l-2.33-1.049l4.568-10.15l2.33,1.052c3.316,1.491,6.312,3.564,8.904,6.157 C80.996,36.672,80.995,55.744,69.273,67.466z"></path> </g> </g></svg>

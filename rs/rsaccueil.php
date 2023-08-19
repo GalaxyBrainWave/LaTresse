@@ -21,7 +21,7 @@
 	require_once "phpinclude/rs_header.php";
 ?>
 
-	<main class="rscontent accueilrs">
+<main class="rscontent accueilrs">
 	<aside class="acrsasd acrscom">
 		<div class="acrsasd_head">
 			<h3 class="tcenter">Derniers commentaires</h3>
@@ -50,59 +50,59 @@
 				</div>
 			</div>
 			<div class="acrsasd_card">
-			<div class="acrsasd_card_head">
-				<img src="../img/rs/alf.jpg" alt="Photo de profil" class="bmcard_profile_pic">
-				<h5>Jean Durand</h5>
-			</div>
-			<div class="acrsasd_card_body">
-				<p class="acrsasd_projet">Projet&nbsp;: <br> Passerelle de mémoire</p>
-				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit amet consectetur adipisicing elit ...</p>
-				<p class="acrsasd_date">Le 20/05/2023 à 22:43</p>
-			</div>
+				<div class="acrsasd_card_head">
+					<img src="../img/rs/alf.jpg" alt="Photo de profil" class="bmcard_profile_pic">
+					<h5>Jean Durand</h5>
+				</div>
+				<div class="acrsasd_card_body">
+					<p class="acrsasd_projet">Projet&nbsp;: <br> Passerelle de mémoire</p>
+					<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit amet consectetur adipisicing elit ...</p>
+					<p class="acrsasd_date">Le 20/05/2023 à 22:43</p>
+				</div>
 			</div>
 		</div>
 	</aside>
 
-		<aside class="acrsasd acrsproj">
-			<div class="acrsasd_head">
-				<h3 class="tcenter">Derniers projets</h3>
-			</div>
-			<div class="acrsasd_card_container">
-				<div class="acrsasd_card">
-					<div class="acrsasd_card_head">
-						<h5>Passerelle de mémoire</h5>
-					</div>
-					<div class="acrsasd_card_body">
-						<p class="acrsasd_projet">Auteur&nbsp;: <br> Jean Durand</p>
-						<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit amet consectetur adipisicing elit ...</p>
-						<p class="acrsasd_date">Le 20/05/2023 à 22:43</p>
-					</div>
+	<aside class="acrsasd acrsproj">
+		<div class="acrsasd_head">
+			<h3 class="tcenter">Derniers projets</h3>
+		</div>
+		<div class="acrsasd_card_container">
+			<div class="acrsasd_card">
+				<div class="acrsasd_card_head">
+					<h5>Passerelle de mémoire</h5>
 				</div>
-				<div class="acrsasd_card">
-					<div class="acrsasd_card_head">
-						<h5>Passerelle de mémoire</h5>
-					</div>
-					<div class="acrsasd_card_body">
-						<p class="acrsasd_projet">Auteur&nbsp;: <br> Jean Durand</p>
-						<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit amet consectetur adipisicing elit ...</p>
-						<p class="acrsasd_date">Le 20/05/2023 à 22:43</p>
-					</div>
-				</div>
-				<div class="acrsasd_card">
-					<div class="acrsasd_card_head">
-						<h5>Passerelle de mémoire</h5>
-					</div>
-					<div class="acrsasd_card_body">
-						<p class="acrsasd_projet">Auteur&nbsp;: <br> Jean Durand</p>
-						<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit amet consectetur adipisicing elit ...</p>
-						<p class="acrsasd_date">Le 20/05/2023 à 22:43</p>
-					</div>
+				<div class="acrsasd_card_body">
+					<p class="acrsasd_projet">Auteur&nbsp;: <br> Jean Durand</p>
+					<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit amet consectetur adipisicing elit ...</p>
+					<p class="acrsasd_date">Le 20/05/2023 à 22:43</p>
 				</div>
 			</div>
-		</aside>
+			<div class="acrsasd_card">
+				<div class="acrsasd_card_head">
+					<h5>Passerelle de mémoire</h5>
+				</div>
+				<div class="acrsasd_card_body">
+					<p class="acrsasd_projet">Auteur&nbsp;: <br> Jean Durand</p>
+					<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit amet consectetur adipisicing elit ...</p>
+					<p class="acrsasd_date">Le 20/05/2023 à 22:43</p>
+				</div>
+			</div>
+			<div class="acrsasd_card">
+				<div class="acrsasd_card_head">
+					<h5>Passerelle de mémoire</h5>
+				</div>
+				<div class="acrsasd_card_body">
+					<p class="acrsasd_projet">Auteur&nbsp;: <br> Jean Durand</p>
+					<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit amet consectetur adipisicing elit ...</p>
+					<p class="acrsasd_date">Le 20/05/2023 à 22:43</p>
+				</div>
+			</div>
+		</div>
+	</aside>
 
 		<div class="acrsmiddle">
-			<form action="post.php" method="post" class="bjrmrc">
+			<form action="hello_thx.php" method="post" enctype="multipart/form-data" class="bjrmrc">
 				<textarea name="bjrtxt" id="bjrtxt" class="comment_input" placeholder="Dire bonjour ou merci…"></textarea>
 				<div class="bmbuttons">
 					<input type="file" name="illustration" id="picinput">
@@ -153,7 +153,7 @@
 		</div>
 		
 
-	</main>
+</main>
 
 	
 

@@ -7,33 +7,15 @@
     header("Location: rs/rsaccueil.php");
     exit();
   }
-  // var_dump($_SESSION['registerError']);
-  // var_dump(isset($_SESSION['display_login_form']));
-  // var_dump(loginFormDisplay());
-  function inputValueDisplay(string $string) {
-    if (isset($_SESSION[$string])) {
-      $output = $_SESSION[$string];
-      unset($_SESSION[$string]);
+  // this function serves to display the values previously entered by the user in case we need to display an error message
+  function inputValueDisplay(string $value) {
+    if (isset($_SESSION[$value])) {
+      $output = $_SESSION[$value];
+      unset($_SESSION[$value]);
       return $output;
     }
   }
-
-  // function registerEmailDisplay(string $string) {
-  //   if (isset($_SESSION[$string])) {
-  //     $output = $_SESSION[$string];
-  //     unset($_SESSION[$string]);
-  //     return $output;
-  //   }
-  // }
-
-  // function registerFirstNameDisplay(string $string) {
-  //   if (isset($_SESSION[$string])) {
-  //     $output = $_SESSION[$string];
-  //     unset($_SESSION[$string]);
-  //     return $output;
-  //   }
-  // }
-
+  // show the login form if the user is trying to log in and has to come back here
   function loginFormDisplay() {
     if (isset($_SESSION['display_login_form'])) {
       return "dispflex";
@@ -41,7 +23,7 @@
       return "dispnone";
     }
   }
-
+  // show the register form if the user is trying to register and has to come back here
   function registerFormDisplay() {
     if (isset($_SESSION['display_login_form'])) {
       return "dispnone";
@@ -49,7 +31,7 @@
       return "dispflex";
     }
   }
-
+  // show the login error if there is one
   function loginErrorDisplay() {
     if (isset($_SESSION['loginError'])) {
       $output = $_SESSION['loginError'];
@@ -59,7 +41,7 @@
       return '&nbsp;';
     }
   }
-
+  // show the registration process error if there is one
   function registerErrorDisplay() {
     if (isset($_SESSION['registerError'])) {
       $output = $_SESSION['registerError'];
@@ -81,12 +63,14 @@
     <p id="register-left-tagline">Le réseau social de la Tresse<br>(slide show)</p>
   </div>
   <div class="register-right">
+    // show the register form if the user is trying to register and has to come back here
     <div id="register-form-container" class="register-form-container <?= registerFormDisplay() ?>">
       <h2>Vous avez déjà un compte&nbsp;?</h2>
       <button id="sidentifier" class="yel-btn green-border-btn">S'identifier</button>
       <p id="sinon">sinon</p>
       <h2>Inscrivez-vous pour participer</h2>
       <div class="register-error-container">
+        // show the registration process error if there is one
         <?= registerErrorDisplay() ?>
       </div>  
       <form action="rs/register.php" method="post" class="register-form">
@@ -97,8 +81,10 @@
         <button id="btn-sinscrire" class="yel-btn blue-border-btn">S'inscrire</button>
       </form>
     </div>
+    // show the login form if the user is trying to log in and has to come back here
     <div id="login-form-container" class="register-form-container <?= loginFormDisplay() ?> w100">
       <div class="login-error-container">
+        // show the login error if there is one
         <?= loginErrorDisplay() ?>
       </div>      
       <form action="rs/login.php" method="post" class="register-form">

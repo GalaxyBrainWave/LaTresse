@@ -1,26 +1,29 @@
 <?php 
+
+  require_once "../rs/utils.php";
+
   class Hello_Thanks {
 
     private int $htId;
     private string $htTextContent;
     private DateTime $htMomentCreation;
-    private int $htMedia;
+    private int $htImgURL;
     private ?int $htAuthor;
 
 
 
-    public function __construct($htId = 0, $htTextContent, $htMedia, $htAuthor)
+    public function __construct($htId = 0, $htTextContent, $htImgURL, $htAuthor)
     {
       $this-> htId = $htId;
       $this-> htTextContent = $htTextContent;
       $this-> htMomentCreation = new DateTime();
-      $this-> htMedia = $htMedia;
+      $this-> htImgURL = $htImgURL;
       $this-> htAuthor = $htAuthor;
     }
 
 
 
-    private static $attributeList = ["htId", "htTextContent", "htMedia", "htAuthor"];
+    private static $attributeList = ["htId", "htTextContent", "htImgURL", "htAuthor"];
     
     public function __get(string $attribute) {
       if (in_array($attribute, self::$attributeList)) {
@@ -69,6 +72,23 @@
       } else {
         return false;
       }
+    }
+
+
+    
+    // $attributesToUpdate is built on this model: ['dbKey'=>$value] 
+    // ex: |$attributesToUpdate = [];
+    //     |...
+    //     |$attributesToUpdate["banner_url"] = $bannerPath;
+    // dbKey is the name of the attribute in the DB, and it should be provided from the files that
+    // handle the html forms' output. Not in the html, we don't want that public
+    /**
+    * @param $attributesToUpdate is an associative array whose keys are the DB's attributes to be updated 
+    * and values the ones to be added to the DB
+    * @return bool true if the DB entry was executed correctly, false otherwise
+    */
+    public function fineSave($attributesToUpdate) {
+      return fineSaver('users', $attributesToUpdate);
     }
 
 

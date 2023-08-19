@@ -1,4 +1,7 @@
 <?php
+
+  require_once "../rs/utils.php";
+
   class User {
     private int $userId;
     private string $firstName;
@@ -48,7 +51,8 @@
 
     
 
-
+    // this method serves to set the properties of a new empty User object
+    // with values retieved from the database with keys from the database
     public function populateProperties($assocArray) {
       $this->userId = $assocArray['user_id'];
       $this->firstName = $assocArray['first_name'];
@@ -114,8 +118,10 @@
     //   }
     // }
 
+    // list of the authorized attributes to be altered by the magic accessors
     private static $attributeList = ["userId", "firstName", "email", "hashPass", "colorMode", "autoDescription", "avatarURL", "bannerURL", "nbReactions", "nbHelloThanks", "nbComments", "accountCreationDate", "projects", "comments", "helloThanks", "medias"];
 
+    // associates database keys to object keys for saving the data into the DB
     private static $dbAttributes = [
       "userId" => "user_id",
       "firstName" => "firstName",
@@ -128,6 +134,7 @@
       "nbReactions" => "nb_reactions"
     ];
     
+    // magic accessors that work only on authorized properties
     public function __get(string $attribute) {
       if (in_array($attribute, self::$attributeList)) {
         return $this->$attribute;
@@ -140,17 +147,18 @@
       }
     }
 
+      // this function is actually useless
     // this function creates an associative array whose keys are 
     // User's attributes and values are all set to null
-    // this array will then be used as input for the save() method
-    // after being 
-    public static function generateAttributesList() {
-      $ouput = array();
-      foreach(self::$attributeList as $attribute) {
-        $ouput[$attribute] = null;
-      }
-      return $ouput;
-    }
+    // this array will then be used as input for the fineSave() method
+    // after being set up properly before the fineSave() call
+    // public static function generateAttributesList() {
+    //   $ouput = array();
+    //   foreach(self::$attributeList as $attribute) {
+    //     $ouput[$attribute] = null;
+    //   }
+    //   return $ouput;
+    // }
 
     public function getUsers() {
         return $this->users;
@@ -267,50 +275,70 @@
 
 
 
-
+    // I keep this here just in case...
     /**
-    * @param $attributesToUpdate is an associative array whose keys are User's attributes and values are all set to null, except for the ones to be updated, which old the value to be inserted in the database for the relevant property
+    * @param $attributesToUpdate is an associative array whose keys are the DB's attributes to be updated and values the ones to be added to the DB
     * @return bool true if the query was executed correctly, false otherwise
     */
+    // public function fineSave($attributesToUpdate) {
+    //   // this is the part that comes after "SET" in the subsequent sql query:
+    //   $sqlSET = '';
+    //   // iterate over the input array
+    //   foreach ($attributesToUpdate as $dbKey=>$value) {
+    //     // ignore empty strings
+    //     if ($value != '') {
+    //       // expand the SET part of the sql statement as needed
+    //       $sqlSET .= $dbKey . " = :" . $dbKey . ", "; 
+    //     }       
+    //   }
+    //   // remove the last ", "
+    //   $sqlSET = substr($sqlSET, 0, -2);
+    //   // set up the connection to the DB
+    //   require_once "Database.php";
+    //   $db = new Database();
+    //   $pdo = $db->connect();
+    //   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //   // generate the sql statement
+    //   $stmt = "UPDATE users SET " . $sqlSET . " WHERE user_id = :user_id;";
+    //   $query = $pdo->prepare($stmt);
+    //   // bind the values as needed, while iterating over the short list
+    //   foreach($attributesToUpdate as $dbKey=>$value) {
+    //     if ($value != '') {
+    //       // there are only two data types: int or string
+    //       $dataType = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+    //       // it is important here to use bindValue as it takes a snapshot of the value of
+    //       // the variable, while with bindParam, the parameter is updated along with the value
+    //       // here the value $value gets updated at each iteration, so with bindParam, all
+    //       // values would be equal to the last value of $value
+    //       $query->bindValue(":" . $dbKey, $value, $dataType);
+    //     }        
+    //   }
+    //   // this is one is on its own, needs to be done no matter what
+    //   $query->bindValue(":user_id", $this->userId, PDO::PARAM_INT);
+    //   if ($query->execute()) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // }
+
+
+    
+
+
+    // $attributesToUpdate is built on this model: ['dbKey'=>$value] 
+    // ex: |$attributesToUpdate = [];
+    //     |...
+    //     |$attributesToUpdate["banner_url"] = $bannerPath;
+    // dbKey is the name of the attribute in the DB, and it should be provided from the files that
+    // handle the html forms' output. Not in the html, we don't want that public
+    /**
+    * @param $attributesToUpdate is an associative array whose keys are the DB's attributes to be updated and values the ones to be added to the DB
+    * @return bool true if the DB entry was executed correctly, false otherwise
+    */
     public function fineSave($attributesToUpdate) {
-      $attributesShortList = array();
-      // this is the part that comes after "SET" in the subsequent sql query:
-      $sqlSET = '';
-      foreach ($attributesToUpdate as $key=>$value) {
-        if ($value != null) {
-          // replace the key from the class properties with the key from the database
-          $dbKey = self::$dbAttributes[$key];
-          $attributesShortList[$dbKey] = $value;
-          $sqlSET .= $dbKey . " = :" . $dbKey . ", ";
-        }
-      }
-      // remove the last ", "
-      $sqlSET = substr($sqlSET, 0, -2);
-      require_once "Database.php";
-      $db = new Database();
-      $pdo = $db->connect();
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-      $sql = "UPDATE users SET " . $sqlSET . " WHERE user_id = :user_id;";
-      $query = $pdo->prepare($sql);
-      foreach($attributesShortList as $dbKey=>$value) {
-        $dataType = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
-        $query->bindValue(":" . $dbKey, $value, $dataType);
-
-      }
-      $query->bindValue(":user_id", $this->userId, PDO::PARAM_INT);
-      if ($query->execute()) {
-        return true;
-      } else {
-        return false;
-      }
+      return fineSaver('users', $attributesToUpdate);
     }
-
-
-
-
-
-
 
 
 
@@ -335,16 +363,21 @@
       $db = new Database();
       $pdo = $db->connect();
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      // find out if this email address already exists in the DB
       $stmt = "SELECT user_email FROM users WHERE user_email = :user_email;";
       $query = $pdo-> prepare($stmt);
       $query-> bindParam(':user_email', $email, PDO::PARAM_STR);
       if ($query-> execute()) {
+        // count how many results we get
         $count = $query->fetchColumn();
         switch ($count) {
+          // empty results: the email doesn't exist yet in the DB
           case 0:
             return true;
+            // there is one email, an account already exists
           case 1:
             return false;
+            // if there is more than 1 result, there is a structural problem in the DB
           default:
             // handle error report to the admin (see creation of admin interface for this)
             return false;
@@ -435,18 +468,22 @@
 
 
 
-
+    // retrieve user details from the ID (used on most pages)
     public static function getUserDetails(int $userId) {
       require_once "Database.php";
       $db = new Database();
       $pdo = $db->connect();
+      // get all there is about the user
       $stmt = "SELECT * FROM users WHERE user_id = :user_id;";
       $query = $pdo->prepare($stmt);
       $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
       if ($query->execute()) {
+        // get the results
         $results = $query->fetch(PDO::FETCH_ASSOC);
         if ($results) {
+          // create a new User object
           $user = new User();
+          // fill the object's property values
           $user-> populateProperties($results);
           return $user;
         } // else une erreur s'est produite
@@ -536,21 +573,28 @@
         require_once "Database.php";      
         $db = new Database();
         $pdo = $db->connect();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // from the email, find the user's ID and password hash
         $sql = "SELECT user_id, hash_pass FROM users WHERE user_email = :email;";
         $query = $pdo->prepare($sql);
         $query->bindParam(":email", $email, PDO::PARAM_STR);
         if ($query->execute()) {
-          $results = $query->fetchAll();        
+          // get all the results
+          $results = $query->fetchAll();
+          // if there is only one result        
           if (count($results) === 1) {
+            // if the password hashs match, open sesame
             if (password_verify($pwd, $results[0]["hash_pass"])) {
               session_unset();
+              // get the user ID and store it in $_SESSION
               $_SESSION['user_id'] = (int) $results[0]["user_id"];
               unset($_SESSION['connectionError'] );
               if ($firstLogin === false) {
+                // go to the main page
                 header("Location: rsaccueil.php");
                 exit();
               } else if ($firstLogin === true) {
+                // go to the welcome page to finalize the registration (or not)
                 header("Location: welcome.php");
                 exit();
               }

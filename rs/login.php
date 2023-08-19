@@ -3,7 +3,7 @@
   session_start();
 
   // to make sure that the sanitize() function is available
-  require_once "../tools/sanitize.php";
+  require_once "utils.php";
 
   // only execute the following code if the form has been filled,  
   // which means the user has submitted either the login or the register form
@@ -14,6 +14,7 @@
     $loginPwd = trim($_POST['login-pwd']);
     require_once "../tools/config.php";
     require_once "../Model/User.php";
+    // call the login method of the User class
     User::login($loginEmail, $loginPwd);
     } // error handling needed here
   }
