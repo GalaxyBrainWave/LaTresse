@@ -1,7 +1,11 @@
 <?php
 	
 	require_once "phpinclude/rs_pagetop.php";
+	require_once "../Model/Hello_Thanks.php";
 
+	$first15Cards = Hello_Thanks::get15(0);
+
+	// show accueil as active on the navbar
 	$accueil_active = 'navbar-active';
 	$projets_active = '';
 	$reseau_active = '';
@@ -20,6 +24,13 @@
 <?php
 	require_once "phpinclude/rs_header.php";
 ?>
+
+<div id="modal">
+	<!-- <div id="modal-content"> -->
+    <span id="modal-close-btn">&times;</span>
+		<img src="" alt="photo associée à la publication" id="big-img">
+  <!-- </div> -->
+</div>
 
 <main class="rscontent accueilrs">
 	<aside class="acrsasd acrscom">
@@ -117,39 +128,64 @@
 				</div>
 			</form>
 			
-			<div class="bmcard">
-				<div class="bmcard_head">
-					<img src="../img/rs/alf.jpg" alt="Photo de profil" class="bmcard_profile_pic">
-					<h3>John Doe</h3>
-				</div>
-				<div class="bmcard_txt">
-					<p>
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in... (<a href="">voir la suite</a>)
-					</p>
-				</div>
-				<img src="../img/rs/img1.jpg" alt="photo associée à la publication" class="bmcard_img dblock">
-				<div class="bmcard_foot">
-					<img src="../img/icons/like.png" alt="icône j'aime">
-					<p>15</p>
-				</div>
+			<div id="bmcards-container">
+				<?php foreach($first15Cards as $card) { ?>
+					<div class="bmcard">
+						<div class="bmcard_head">
+								<img src="<?= $card['avatar_url'] ?>" alt="Photo de profil" class="bmcard_profile_pic">
+							<h3><?= $card['first_name'] ?></h3>
+						</div>
+						<div class="bmcard_txt">
+							<p>
+								<?= $card['ht_text_content'] ?>
+							</p>
+						</div>
+						<?php if ($card['ht_image_url'] != '') { ?>
+							<img src="<?= $card['ht_image_url'] ?>" alt="photo associée à la publication" class="bmcard_img dblock">
+						<?php } ?>
+						<div class="bmcard_foot">
+							<img src="../img/icons/like.png" alt="icône j'aime">
+							<p>15</p>
+						</div>
+					</div>
+				<?php } ?>
 			</div>
-	
-			<div class="bmcard">
-				<div class="bmcard_head">
-					<img src="../img/rs/alf.jpg" alt="Photo de profil" class="bmcard_profile_pic">
-					<h3>John Doe</h3>
+
+			<button id="load-button">Voir plus</button>
+
+				<!-- <div class="bmcard">
+					<div class="bmcard_head">
+						<img src="../img/rs/alf.jpg" alt="Photo de profil" class="bmcard_profile_pic">
+						<h3>John Doe</h3>
+					</div>
+					<div class="bmcard_txt">
+						<p>
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in... (<a href="">voir la suite</a>)
+						</p>
+					</div>
+					<img src="../img/rs/img1.jpg" alt="photo associée à la publication" class="bmcard_img dblock">
+					<div class="bmcard_foot">
+						<img src="../img/icons/like.png" alt="icône j'aime">
+						<p>15</p>
+					</div>
 				</div>
-				<div class="bmcard_txt">
-					<p>
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in... (<a href="">voir la suite</a>)
-					</p>
-				</div>
-				<img src="../img/rs/img1.jpg" alt="" class="bmcard_img dblock">
-				<div class="bmcard_foot">
-					<svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#fbd629"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="none" d="M0 0h24v24H0z"></path> <path d="M9.33 11.5h2.17A4.5 4.5 0 0 1 16 16H8.999L9 17h8v-1a5.578 5.578 0 0 0-.886-3H19a5 5 0 0 1 4.516 2.851C21.151 18.972 17.322 21 13 21c-2.761 0-5.1-.59-7-1.625L6 10.071A6.967 6.967 0 0 1 9.33 11.5zM4 9a1 1 0 0 1 .993.883L5 10V19a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2zm9.646-5.425L14 3.93l.354-.354a2.5 2.5 0 1 1 3.535 3.536L14 11l-3.89-3.89a2.5 2.5 0 1 1 3.536-3.535z"></path> </g> </g></svg>
-					<p>15</p>
-				</div>
-			</div>
+		
+				<div class="bmcard">
+					<div class="bmcard_head">
+						<img src="../img/rs/alf.jpg" alt="Photo de profil" class="bmcard_profile_pic">
+						<h3>John Doe</h3>
+					</div>
+					<div class="bmcard_txt">
+						<p>
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in... (<a href="">voir la suite</a>)
+						</p>
+					</div>
+					<img src="../img/rs/img1.jpg" alt="" class="bmcard_img dblock">
+					<div class="bmcard_foot">
+						<svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#fbd629"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="none" d="M0 0h24v24H0z"></path> <path d="M9.33 11.5h2.17A4.5 4.5 0 0 1 16 16H8.999L9 17h8v-1a5.578 5.578 0 0 0-.886-3H19a5 5 0 0 1 4.516 2.851C21.151 18.972 17.322 21 13 21c-2.761 0-5.1-.59-7-1.625L6 10.071A6.967 6.967 0 0 1 9.33 11.5zM4 9a1 1 0 0 1 .993.883L5 10V19a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2zm9.646-5.425L14 3.93l.354-.354a2.5 2.5 0 1 1 3.535 3.536L14 11l-3.89-3.89a2.5 2.5 0 1 1 3.536-3.535z"></path> </g> </g></svg>
+						<p>15</p>
+					</div>
+				</div> -->
 		</div>
 		
 
@@ -159,5 +195,7 @@
 
 	<script src="../js/resizing_textarea_bjr.js"></script>
 	<script src="../js/burger.js"></script>
+	<script src="../js/load_htcards.js"></script>
+	<script src="../js/modal_img.js"></script>
 </body>
 </html>

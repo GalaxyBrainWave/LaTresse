@@ -1,6 +1,8 @@
 <?php
 
   require_once "../rs/utils.php";
+  require_once "Database.php";
+  
 
   class User {
     private int $userId;
@@ -150,8 +152,8 @@
       // this function is actually useless
     // this function creates an associative array whose keys are 
     // User's attributes and values are all set to null
-    // this array will then be used as input for the fineSave() method
-    // after being set up properly before the fineSave() call
+    // this array will then be used as input for the update() method
+    // after being set up properly before the update() call
     // public static function generateAttributesList() {
     //   $ouput = array();
     //   foreach(self::$attributeList as $attribute) {
@@ -172,7 +174,7 @@
     // public function save() {
     //     try {
     //         if ($this->userId > 0) {
-    //             require_once "Database.php";
+    //             
 
     //             $db = new Database();
     //             $pdo = $db->connect();
@@ -193,7 +195,7 @@
     //                 return false;
     //             }
     //         } else {
-    //             require_once "Database.php";
+    //             
 
     //             $db = new Database();
     //             $pdo = $db->connect();
@@ -229,7 +231,7 @@
     public function save() {
       try {
         if ($this->userId > 0) {
-          require_once "Database.php";
+          
           $db = new Database();
           $pdo = $db->connect();
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -248,7 +250,7 @@
             return false;
           }
         } else if($this->userId === 0) {
-          require_once "Database.php";
+          
 
           $db = new Database();
           $pdo = $db->connect();
@@ -280,7 +282,7 @@
     * @param $attributesToUpdate is an associative array whose keys are the DB's attributes to be updated and values the ones to be added to the DB
     * @return bool true if the query was executed correctly, false otherwise
     */
-    // public function fineSave($attributesToUpdate) {
+    // public function update($attributesToUpdate) {
     //   // this is the part that comes after "SET" in the subsequent sql query:
     //   $sqlSET = '';
     //   // iterate over the input array
@@ -294,7 +296,7 @@
     //   // remove the last ", "
     //   $sqlSET = substr($sqlSET, 0, -2);
     //   // set up the connection to the DB
-    //   require_once "Database.php";
+    //   
     //   $db = new Database();
     //   $pdo = $db->connect();
     //   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -336,8 +338,8 @@
     * @param $attributesToUpdate is an associative array whose keys are the DB's attributes to be updated and values the ones to be added to the DB
     * @return bool true if the DB entry was executed correctly, false otherwise
     */
-    public function fineSave($attributesToUpdate) {
-      return fineSaver('users', $attributesToUpdate);
+    public function update(array $attributesToUpdate): bool {
+      return updater('users', $attributesToUpdate, 'user_id', $this->userId);
     }
 
 
@@ -359,7 +361,7 @@
     * @return bool true if the email isn't used, false otherwise
     */
     public static function checkEmailUnicity($email) {
-      require_once "Database.php";
+      
       $db = new Database();
       $pdo = $db->connect();
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -399,7 +401,7 @@
 
     // Editer un profil utilisateur
     public function edit() {
-      require_once "Database.php";      
+            
       $db = new Database();
       $pdo = $db->connect();
       $sql = "UPDATE users SET last_name = :last_name, first_name = :first_name, email = :email, hash_pass = :hash_pass WHERE user_id = :user_id;";
@@ -409,31 +411,23 @@
       $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
       $query->bindParam(":email", $this->email, PDO::PARAM_STR);
       $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
-      if ($query->execute()) {
-        return true;
-      } else {
-        return false;
-      }
+        return $query->execute();
     }
 
     // Supprimer un profil utilisateur
     public function delete(int $userId) {
-      require_once "Database.php";
+      
       $db = new Database();
       $pdo = $db->connect();
       $sql = "DELETE FROM users WHERE id = :id";
       $query = $pdo->prepare($sql);
       $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
-      if ($query->execute()) {
-        return true;
-      } else {
-        return false;
-      }
+        return $query->execute();
     }
 
     // Trouver tous les profils utilisateurs
     public static function findAll() {
-      require_once "Database.php";
+      
           
       $db = new Database();
       $pdo = $db->connect();
@@ -450,7 +444,7 @@
 
     // Trouver les utilisateurs par leur id
     // public static function findById(int $userId) {
-    //     require_once "Database.php";
+    //     
             
     //     $db = new Database();
     //     $pdo = $db->connect();
@@ -470,7 +464,7 @@
 
     // retrieve user details from the ID (used on most pages)
     public static function getUserDetails(int $userId) {
-      require_once "Database.php";
+      
       $db = new Database();
       $pdo = $db->connect();
       // get all there is about the user
@@ -496,7 +490,7 @@
 
 
     // public static function getUserDetails(int $userId) {
-    //     require_once "Database.php";
+    //     
     //     $db = new Database();
     //     $pdo = $db->connect();
     //     $stmt = "SELECT * FROM users WHERE user_id = :user_id;";
@@ -516,7 +510,7 @@
     // public function connectUser(string $email) {
 
     //     try {
-    //         require_once "Database.php";
+    //         
             
     //         $db = new Database();
     //         $pdo = $db->connect();
@@ -570,7 +564,7 @@
    */
     public static function login(string $email, string $pwd, bool $firstLogin = false) {
       try {
-        require_once "Database.php";      
+              
         $db = new Database();
         $pdo = $db->connect();
         // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

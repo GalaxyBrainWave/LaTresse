@@ -4,7 +4,7 @@
   require_once "../Model/User.php";
   // get hold of the user's object
   $user = User::getUserDetails($_SESSION['user_id']);
-  // this is the associative array to be eventually fed to the fineSave() function at the end of this script
+  // this is the associative array to be eventually fed to the update() function at the end of this script
   $attributesToUpdate = []; 
   // to be able to use Media::checkImgExtension()
   require_once "../Model/Media.php";
@@ -76,7 +76,7 @@
 
   }
 
-  if($user->fineSave($attributesToUpdate)) {
+  if($user->update($attributesToUpdate)) {
     header("Location: rsaccueil.php");
     exit();
   } // une erreur s'est produite...

@@ -100,11 +100,7 @@ class Media {
         $query->bindParam(":media_type", $this->mediaType, PDO::PARAM_STR);
         $query->bindParam(":media_url", $this->mediaUrl, PDO::PARAM_STR);
 
-      if ($query->execute()) {
-        return true;
-      } else {
-        return false;
-      }
+        return $query->execute();
     } catch (PDOException $e) {
       echo "Error : " . $e->getMessage();
     }
@@ -122,11 +118,7 @@ class Media {
       $query = $pdo->prepare($sql);
       $query->bindParam(":media_id", $mediaId, PDO::PARAM_INT);
 
-      if ($query->execute()) {
-        return true;
-      } else {
-        return false;
-      }
+        return $query->execute();
     } catch (PDOException $e) {
       echo "Error : " . $e->getMessage();
     }
