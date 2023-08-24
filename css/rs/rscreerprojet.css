@@ -13,14 +13,27 @@
   margin-top: 16px;
 }
 
+.rslayout .rsform #category {
+  padding: 4px 8px;
+}
+
 
 .rscreerprojet .rscontent label[for="picinput"] {
   width: 200px;
 }
 
-.rslayout .rsform #category {
-  padding: 4px 8px;
+#project-picinputs-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
 }
+
+.project-pic-btn {
+  padding: 8px;
+  border-radius: 16px;
+}
+
 
 @media screen and (min-width: 850px) {
   .rscreerprojet .rscontent label[for="picinput"] {

@@ -1,6 +1,8 @@
 <?php
   session_name('La_Tresse');
   session_start();
+  // to be able to use the sanitize() function
+  require_once "utils.php";
   require_once "../Model/User.php";
   // get hold of the user's object
   $user = User::getUserDetails($_SESSION['user_id']);
@@ -13,8 +15,7 @@
   if (!empty($_POST)) {
     // if the user filled their autodescription
     if (isset($_POST["autodescription"])) {
-      // to be able to use the sanitize() function
-      require_once "utils.php";
+
       // update the associative array
       $attributesToUpdate["autodescription"] = sanitize($_POST["autodescription"]);
     }

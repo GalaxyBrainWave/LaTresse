@@ -29,7 +29,7 @@
       <h2>
         Modifier mon profil
       </h2>
-      <form action="" method="post" id="update-profile-form">
+      <form action="" method="post" id="update-profile-form" enctype="multipart/form-data">
         <input type="password" name="password" id="password" placeholder="Mon mot de passe (obligatoire)" required>
         <input type="text" name="firstname" id="firstname" placeholder="Mettre à jour mon prénom">
         <input type="text" name="lastname" id="lastname" placeholder="Mettre à jour mon nom de famille">

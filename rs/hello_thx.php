@@ -17,7 +17,8 @@
   // if some data has been received via post
   if (!empty($_POST)) {
     // if the user posted some text
-    if (isset($_POST["bjrtxt"])) {      $textContent = sanitize($_POST["bjrtxt"]);
+    if (isset($_POST["bjrtxt"])) {      
+      $textContent = sanitize($_POST["bjrtxt"]);
     }
   }
 
@@ -57,7 +58,7 @@
       //   $valuesToSave['ht_text_content'] = $textContent;
       // }
       $id = $ht->insert();
-      // $id = intval(trim($id));
+      // the following line should be conditionned on $id != null
       $id = (int)$id;
       // if the entry into the DB was made successfully, then $result is an int, the id
       if(is_int($id)) {

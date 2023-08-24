@@ -8,10 +8,11 @@
   margin-bottom: 8px;
 }
 
-.rsform #title,
-.rsform textarea,
-.rsform #category {
+.rsform input {
   border-radius: 5px;
+  margin-bottom: 16px;
+  padding: 4px 8px;
+  display: block;
 }
 
 .rsform label[for="picinput"],
@@ -54,7 +55,7 @@
 
 .rsform #title {
   margin-bottom: 16px;
-  padding: 2px 8px;
+  padding: 4px 8px;
 }
 
 
@@ -77,8 +78,9 @@
     font-size: 16px;
   }
 
-  .rsform #title {
-    margin-bottom: 16px;
+  .rsform #title,
+  .rsform #location {
+    margin-bottom: 24px;
     padding: 8px 12px 4px;
   }
 
@@ -90,9 +92,6 @@
     margin: 14px 0 24px;
   }
   
-  .rsform #title {
-    margin-bottom: 24px;
-  }
 
   .rsform #description {
     margin: 32px 0;

@@ -3,6 +3,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once "../Model/Database.php";
+// to be able to use Media::checkImgExtension()
+require_once "../Model/Media.php";
 
 
 // to remove nasty things from strings before insertion into the DB
@@ -73,8 +75,8 @@ function updater(string $table, array $attributesToUpdate, string $idName, int $
 
 
 // this function is called in methods insert()
-// $values is built on the model $values['databaseKey'] = $value;
-// $table is the name of the target table
+ // $values is built on the model $values['databaseKey'] = $value;
+ // $table is the name of the target table
   /**
   * @param string $table is the name of the target table
   * @param array $values is built on the model $values['databaseKey'] = $value;
@@ -123,4 +125,36 @@ function inserter(string $table, array $values) {
   } else {
     return null;
   }
+}
+
+
+// this function is called when there is a picture input to handle
+  /**
+  * @param array $fileInfo is $_FILES["form_name"]
+  * @param int $targetID is the id in the target row
+  * @param string $pathComponent1 defines the path to the picture
+  * @param string $pathComponent2 defines the path to the picture
+  * @return array array[0] is true if successful, false otherwise. If true, array[1] holds the path to the picture
+  */
+function pichandler(array $fileInfo, int $targetID, string $pathComponent1, string $pathComponent2 = '.') {
+  // make sure no error occured while retrieving the file
+  if ($fileInfo['error'] === UPLOAD_ERR_OK) {
+    // grab the file's original name (from the user's operating system)
+    $picOriginalName = $fileInfo['name'];
+    // find out what the file extension is
+    $fileExtension = pathinfo($picOriginalName, PATHINFO_EXTENSION);
+    // if the file extension is .jpg or .jpeg or .png
+    if (Media::checkImgExtension($fileExtension)) {
+      // define the path to the file 
+      $picPath = $pathComponent1 . $targetID . $pathComponent2 . $fileExtension;
+      // grab the file's current temporary name 
+      $picTmpName = $fileInfo['tmp_name'];
+      // if the file was successfully moved to its destination
+      if (move_uploaded_file($picTmpName, $picPath)) {
+        return [true, $picPath];
+      } else {
+        return [false];
+      }
+    } // wrong file extension >> ??
+  } // une erreur s'est produite...
 }

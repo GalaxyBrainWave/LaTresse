@@ -73,10 +73,9 @@
 
 
     /**
-    * Insert a new row into the database.
-    *
-    * @return int|null The ID of the inserted row on success, or null on failure.
-    */
+     * Insert a new row into the database.
+     * @return int|null The ID of the inserted row on success, or null on failure.
+     */
     public function insert() {
       $values = [];
       $values['ht_text_content'] = $this->htTextContent;
