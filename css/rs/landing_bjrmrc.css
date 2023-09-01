@@ -13,9 +13,10 @@
     border-radius: 5px;
     margin-bottom: 16px;
     border: solid 2px var(--blue-text);
-    height: 42px;
-    transition: height ease-in-out .3s;
+    /* height: 42px;
+    transition: height ease-in-out .3s; */
     resize: none;
+    overflow-y: hidden;
 }
 
 #picinput {

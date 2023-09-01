@@ -90,6 +90,7 @@
   transition: height 0.3s;
   resize: none;
   margin-bottom: 16px;
+  overflow-y: hidden;
 }
 
 .project_discussion h2 {
@@ -104,11 +105,11 @@
   height: 24px;
 }
 
-.project_comments_list {
+#project_comments_list {
   padding: 0 5vw;
 }
 
-.project_comments_list p {
+#project_comments_list p {
   color: var( --ochre-medium)!important;
 }
 
@@ -153,6 +154,7 @@
 
 .leftbar_container {
   display: flex;
+  padding-left: 20px;
 }
 
 .reply_btn {
@@ -194,6 +196,8 @@
 
 
 
+/* .rspageprojet input[type="] */
+
 
 @media screen and (min-width:450px) {
   .project_presentation p {
@@ -210,7 +214,7 @@
   .project_reaction {
     padding: 24px 48px;
   }
-  .project_comments_list {
+  #project_comments_list {
     padding: 0 48px;
   }
 }

@@ -41,6 +41,10 @@ input[type="file"] {
     display: none;
 }
 
+.opac50 {
+    opacity: 50%;
+}
+
 @media screen and (min-width: 520px) {
     .accueilrs {
         display: flex;

@@ -48,8 +48,9 @@
             }
           }
           // if the user sent pic#1
-          if (isset($_FILES["project-picinput1"])) {
+          if (isset($_FILES["project-picinput1"]) && $_FILES['project-picinput1']['error'] === UPLOAD_ERR_OK) {
             $picinput1 = pichandler($_FILES["project-picinput1"], $pjId, '../img/projects/pj', '_pic1.');
+            var_dump($_FILES["project-picinput1"]);die();
             // if the picture was successfully stored
             if ($picinput1[0]) {
               // get the picture's file path
@@ -57,7 +58,7 @@
             }
           }
           // if the user sent pic#2
-          if (isset($_FILES["project-picinput2"])) {
+          if (isset($_FILES["project-picinput2"]) && $_FILES['project-picinput2']['error'] === UPLOAD_ERR_OK) {
             $picinput2 = pichandler($_FILES["project-picinput2"], $pjId, '../img/projects/pj', '_pic2.');
             // if the picture was successfully stored
             if ($picinput2[0]) {
@@ -66,7 +67,7 @@
             }
           }
           // if the user sent pic#3
-          if (isset($_FILES["project-picinput3"])) {
+          if (isset($_FILES["project-picinput3"]) && $_FILES['project-picinput3']['error'] === UPLOAD_ERR_OK) {
             $picinput3 = pichandler($_FILES["project-picinput3"], $pjId, '../img/projects/pj', '_pic3.');
             // if the picture was successfully stored
             if ($picinput3[0]) {
@@ -75,7 +76,7 @@
             }
           }
           // if the user sent pic#4
-          if (isset($_FILES["project-picinput1"])) {
+          if (isset($_FILES["project-picinput1"]) && $_FILES['project-picinput4']['error'] === UPLOAD_ERR_OK) {
             $picinput4 = pichandler($_FILES["project-picinput4"], $pjId, '../img/projects/pj', '_pic4.');
             // if the picture was successfully stored
             if ($picinput4[0]) {
@@ -84,8 +85,8 @@
             }
           }
           if (Project::update($picvalues, $pjId)) {
-            // header('Location: rspageprojet.php?pj_id=' . $pjId);
-            header('Location: rsprofil.php');
+            header('Location: rspageprojet.php?id=' . $pjId);
+            // header('Location: rsprofil.php');
             exit();
           } // error ...
         } else { // if the user didn't upload any picture

@@ -34,6 +34,9 @@
   border-radius: 16px;
 }
 
+.post-loading {
+  opacity: 0.5;
+}
 
 @media screen and (min-width: 850px) {
   .rscreerprojet .rscontent label[for="picinput"] {

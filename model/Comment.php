@@ -1,4 +1,7 @@
 <?php 
+  require_once "Database.php";
+  require_once "../rs/utils.php";
+
   class Comment {
 
     private int $cmId;
@@ -11,15 +14,15 @@
 
 
 
-    public function __construct($cmId = 0, $cmTextContent, $cmAuthor, $projectId, $helloThanksId, $cmParentId = null)
+    public function __construct($cmTextContent, $cmAuthor, $projectId = 0, $helloThanksId = 0, $cmId = 0, $cmParentId = 0)
     {
-      $this-> cmId = $cmId;
-      $this-> cmTextContent = $cmTextContent;
-      $this-> cmMomentCreation = new DateTime();
-      $this-> cmAuthor = $cmAuthor;
-      $this-> projectId = $projectId;
-      $this-> helloThanksId = $helloThanksId;
-      $this-> cmParentId = $cmParentId;
+      $this->cmId = $cmId;
+      $this->cmTextContent = $cmTextContent;
+      $this->cmMomentCreation = new DateTime();
+      $this->cmAuthor = $cmAuthor;
+      $this->projectId = $projectId;
+      $this->helloThanksId = $helloThanksId;
+      $this->cmParentId = $cmParentId;
     }
 
 
@@ -43,31 +46,30 @@
 
 
     public function save() {
-      require_once "Database.php";
       $db = new Database();
       $pdo = $db->connect();
-      if ($this-> cmId > 0) {
+      if ($this->cmId > 0) {
         // this means the object was retrieved from the DB
         $sql = "UPDATE comments SET cm_text_content = :cm_text_content ";
         $sql .= "WHERE cm_id = :id;";
         $query = $pdo-> prepare($sql);
-        $query-> bindParam(":cm_text_content", $this-> cmTextContent);
-        $query-> bindParam(":cm_id", $this-> cmId);
+        $query-> bindParam(":cm_text_content", $this->cmTextContent);
+        $query-> bindParam(":cm_id", $this->cmId);
 
         return $query-> execute();
-      } else if ($this-> cmId === 0) {
+      } else if ($this->cmId === 0) {
         // this means it's a new object that's being created (not present in the DB)
 
         // set up the query
         $sql = "INSERT INTO comments (cm_text_content, cm_moment_creation, cm_author, ht_id, pj_id, cm_parent) ";
         $sql .= "VALUES (:cm_text_content, :cm_moment_creation, :cm_author, :ht_id, :pj_id, :cm_parent)";
         $query = $pdo-> prepare($sql);
-        $query-> bindParam(":cm_text_content", $this-> cmTextContent, PDO::PARAM_STR);
-        $query-> bindParam(":cm_moment_creation", $this-> cmMomentCreation, PDO::PARAM_STR);
-        $query-> bindParam(":cm_author", $this-> cmAuthor, PDO::PARAM_INT);
-        $query-> bindParam(":ht_id", $this-> helloThanksId, PDO::PARAM_INT);
-        $query-> bindParam(":pj_id", $this-> projectId, PDO::PARAM_INT);
-        $query-> bindParam(":cm_parent", $this-> cmParentId, PDO::PARAM_STR);
+        $query-> bindParam(":cm_text_content", $this->cmTextContent, PDO::PARAM_STR);
+        $query-> bindParam(":cm_moment_creation", $this->cmMomentCreation, PDO::PARAM_STR);
+        $query-> bindParam(":cm_author", $this->cmAuthor, PDO::PARAM_INT);
+        $query-> bindParam(":ht_id", $this->helloThanksId, PDO::PARAM_INT);
+        $query-> bindParam(":pj_id", $this->projectId, PDO::PARAM_INT);
+        $query-> bindParam(":cm_parent", $this->cmParentId, PDO::PARAM_STR);
 
         return $query-> execute();
       } else {
@@ -77,8 +79,32 @@
 
 
 
+    public function insert() {
+      $values = [];
+      $values['cm_content'] = $this->cmTextContent;
+      $values['cm_author'] = $this->cmAuthor;
+      $values['cm_creation_datetime'] = $this->cmMomentCreation->format('H:i d/m/Y');
+      if ($this->projectId !== 0) {
+        $values['cm_pj_id'] = $this->projectId;
+      }
+      if ($this->helloThanksId !== 0) {
+        $values['cm_ht_id'] = $this->helloThanksId;
+      }
+      if ($this->projectId !== 0) {
+        $values['cm_parent_id'] = $this->cmParentId;
+      }
+      return inserter('comments', $values) != null;
+    }
+
+
+
+
+
+
+
+
     public function edit(string $text) {
-      $this-> cmTextContent = $text;
+      $this->cmTextContent = $text;
       return true;
     }
 
@@ -92,7 +118,7 @@
       // set up the query
       $sql = "DELETE FROM comments WHERE cm_id = :cm_id;";
       $query = $pdo-> prepare($sql);
-      $query-> bindParam(':cm_id', $this-> cmId, PDO::PARAM_STR);
+      $query-> bindParam(':cm_id', $this->cmId, PDO::PARAM_STR);
 
       return $query-> execute();
     }
@@ -105,22 +131,24 @@
     //   $sql = "SELECT "
     // }
 
-    public function findByProjectId(int $projectId) {
-
+    public static function findByProjectId(int $projectId) {
       // set up the PDO
       require_once "Database.php";
       $db = new Database();
       $pdo = $db->connect();
 
       // set up the query
-      $sql = "SELECT * FROM comments WHERE pj_id = :pj_id ORDER BY cm_parent;";
+      $sql = "SELECT * FROM comments ";
+      $sql .= "JOIN users ON comments.cm_author = users.user_id ";
+      $sql .= "WHERE cm_pj_id = :pj_id ";
+      $sql .= "ORDER BY cm_parent_id ASC, cm_creation_datetime ASC;";
       $query = $pdo-> prepare($sql);
       $query-> bindParam(':pj_id', $projectId, PDO::PARAM_INT);
       $query-> setFetchMode(PDO::FETCH_ASSOC);
       if ($query-> execute()) {
         $results = $query-> fetchAll();
         return $results;
-      }
+      } // error...
     }
 
 

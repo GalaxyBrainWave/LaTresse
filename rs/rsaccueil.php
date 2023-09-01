@@ -5,6 +5,11 @@
 
 	$first15Cards = Hello_Thanks::get15(0);
 
+	function like_btn_class($has_liked) {
+		return $has_liked === '1' ? 'like-btn-active' : 'like-btn-default';
+	}
+
+
 	// show accueil as active on the navbar
 	$accueil_active = 'navbar-active';
 	$projets_active = '';
@@ -137,15 +142,20 @@
 						</div>
 						<div class="bmcard_txt">
 							<p>
-								<?= $card['ht_text_content'] ?>
+								<?= nl2br($card['ht_text_content']) ?>
 							</p>
 						</div>
 						<?php if ($card['ht_image_url'] != '') { ?>
 							<img src="<?= $card['ht_image_url'] ?>" alt="photo associée à la publication" class="bmcard_img dblock">
 						<?php } ?>
 						<div class="bmcard_foot">
-							<img src="../img/icons/like.png" alt="icône j'aime">
-							<p>15</p>
+							<div class="ht-like-btn" data-liked="<?= $card['has_liked'] ?>" data-card="<?= $card['ht_id'] ?>">
+								<svg width="20" height="20" viewBox="0 0 90 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path id="path1-<?= $card['ht_id'] ?>" class="<?= like_btn_class($card['has_liked']) ?>" d="M18.5 85L1.5 62.5C6.29746 50.4098 10.6441 45.7408 22 42C27.3943 41.2335 30.4774 41.5048 36 43L57.5 43.5C63 44.5 64 52.5 57.5 55.5L38 56C36.5 56.5 36.5 59 38 59.5H58C59.8725 59.1695 60.7786 58.7848 62 57.5L78 42C86.5 39 91 43.5 88 51.5L65.5 74C61.9829 77.7723 59.877 78.8437 56 78.5L45.5 77.5C30.0921 75.2017 23.9499 76.7544 18.5 85Z"/>
+									<path d="M85.0062 27.5001C82.0062 32.5 73.5062 38 66.0062 47.5001C64.7149 43.0428 61.5 39 59.0062 39.0001H40.0062C34.1302 38.6457 27 37.5 26.5062 37.0001C0.500718 14.5 29.5 -14 51.0062 11.0001C67.5062 -6.00003 92.0062 0.999996 85.0062 27.5001Z" id="path2-<?= $card['ht_id'] ?>" class="<?= like_btn_class($card['has_liked']) ?>"/>
+								</svg>
+								<p class="<?= like_btn_class($card['has_liked']) ?>" id="like-count-<?= $card['ht_id'] ?>"><?= $card['total_likes'] ?></p>
+							</div>
 						</div>
 					</div>
 				<?php } ?>
@@ -192,10 +202,11 @@
 </main>
 
 	
-
+	<script>const userId = <?= $_SESSION['user_id'] ?>;</script>
 	<script src="../js/resizing_textarea_bjr.js"></script>
 	<script src="../js/burger.js"></script>
 	<script src="../js/load_htcards.js"></script>
 	<script src="../js/modal_img.js"></script>
+	<script src="../js/htcards_likes.js"></script>
 </body>
 </html>

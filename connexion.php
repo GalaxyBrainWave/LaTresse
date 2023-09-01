@@ -63,14 +63,14 @@
     <p id="register-left-tagline">Le réseau social de la Tresse<br>(slide show)</p>
   </div>
   <div class="register-right">
-    // show the register form if the user is trying to register and has to come back here
+    <!-- // show the register form if the user is trying to register and has to come back here -->
     <div id="register-form-container" class="register-form-container <?= registerFormDisplay() ?>">
       <h2>Vous avez déjà un compte&nbsp;?</h2>
       <button id="sidentifier" class="yel-btn green-border-btn">S'identifier</button>
       <p id="sinon">sinon</p>
       <h2>Inscrivez-vous pour participer</h2>
       <div class="register-error-container">
-        // show the registration process error if there is one
+        <!-- here show the registration process error if there is one -->
         <?= registerErrorDisplay() ?>
       </div>  
       <form action="rs/register.php" method="post" class="register-form">
@@ -81,10 +81,10 @@
         <button id="btn-sinscrire" class="yel-btn blue-border-btn">S'inscrire</button>
       </form>
     </div>
-    // show the login form if the user is trying to log in and has to come back here
+     <!-- show the login form if the user is trying to log in and has to come back here -->
     <div id="login-form-container" class="register-form-container <?= loginFormDisplay() ?> w100">
       <div class="login-error-container">
-        // show the login error if there is one
+        <!-- // show the login error if there is one -->
         <?= loginErrorDisplay() ?>
       </div>      
       <form action="rs/login.php" method="post" class="register-form">

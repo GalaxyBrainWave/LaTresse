@@ -15,11 +15,11 @@
 
     public function __construct(int $htAuthor, int $htId = 0, $htTextContent = null, $htImgURL = null)
     {
-      $this-> htId = $htId;
-      $this-> htTextContent = $htTextContent;
-      $this-> htMomentCreation = new DateTime();
-      $this-> htImgURL = $htImgURL;
-      $this-> htAuthor = $htAuthor;
+      $this->htId = $htId;
+      $this->htTextContent = $htTextContent;
+      $this->htMomentCreation = new DateTime();
+      $this->htImgURL = $htImgURL;
+      $this->htAuthor = $htAuthor;
     }
 
 
@@ -113,15 +113,41 @@
       $pdo = $db->connect();
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      $stmt = "SELECT * FROM hello_thanks JOIN users WHERE hello_thanks.ht_author = users.user_id ORDER BY ht_creation_datetime DESC LIMIT 15 OFFSET :offset;";
+      // $stmt = "SELECT * FROM hello_thanks JOIN users WHERE hello_thanks.ht_author = users.user_id ORDER BY ht_creation_datetime DESC LIMIT 15 OFFSET :offset;";
+
+      // $stmt = "SELECT hello_thanks.*, users.first_name, users.avatar_url FROM hello_thanks JOIN users ON hello_thanks.ht_author = users.user_id 
+      // LEFT JOIN ht_reactions ON hello_thanks.ht_id = ht_reactions.htr_ht_id
+      // ORDER BY ht_creation_datetime DESC LIMIT 15 OFFSET :offset;";
+
+
+      $stmt = 
+      "SELECT 
+        hello_thanks.*,
+        users.first_name,
+        users.avatar_url,
+        COUNT(ht_reactions.htr_user_id) AS total_likes,
+        CASE
+          WHEN MAX(ht_reactions.htr_user_id = :current_user_id) = 1 THEN 1
+          ELSE 0
+        END AS has_liked
+        FROM hello_thanks 
+        JOIN users ON hello_thanks.ht_author = users.user_id
+        LEFT JOIN ht_reactions ON hello_thanks.ht_id = ht_reactions.htr_ht_id
+        GROUP BY hello_thanks.ht_id, users.user_id
+        ORDER BY hello_thanks.ht_creation_datetime DESC 
+        LIMIT 15 OFFSET :offset;";
+
       $query = $pdo->prepare($stmt);
 
       // Bind the offset value
       $query->bindValue(':offset', $alreadyShownCards, PDO::PARAM_INT);
+      // Bind the current user value
+      $query->bindValue(':current_user_id', $_SESSION['user_id'], PDO::PARAM_INT);
       
       try {
           if ($query->execute()) {
               $results = $query->fetchAll(PDO::FETCH_ASSOC);
+              // var_dump($results);die();
               return $results;
           } else {
               // Output more meaningful error information
@@ -144,7 +170,7 @@
 
 
     public function edit(string $text) {
-      $this-> cm_text_content = $text;
+      $this->cm_text_content = $text;
       return true;
     }
 
@@ -158,7 +184,7 @@
       // set up the query
       $sql = "DELETE FROM comments WHERE cm_id = :cm_id;";
       $query = $pdo-> prepare($sql);
-      $query-> bindParam(':cm_id', $this-> cmId, PDO::PARAM_STR);
+      $query-> bindParam(':cm_id', $this->cmId, PDO::PARAM_STR);
 
       return $query-> execute();
     }

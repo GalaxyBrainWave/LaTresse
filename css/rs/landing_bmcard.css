@@ -38,9 +38,6 @@
 
 .bmcard_foot {
 	padding: 15px;
-	display: flex;
-	align-items: center;
-	gap: 4px;
 }
 
 #load-button {
@@ -59,7 +56,8 @@
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  /* padding-top: 100px;  */
+	/* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -86,13 +84,36 @@
 #modal-close-btn:focus {
   color: var(--ochre);;
   text-decoration: none;
-  cursor: pointer;
 }
 
 #big-img {
 	width: auto;
 	height: auto;
 	max-width: 100vw;
+	object-fit: contain;
+	max-height: 100vh;
+}
+
+.ht-like-btn {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	max-width: max-content;
+  cursor: pointer;
+}
+
+.like-btn-default {
+  fill: var(--beige);
+  stroke: var(--beige);
+	color: var(--beige)!important;
+  cursor: pointer;
+}
+
+.like-btn-active {
+  fill: var(--ochre);
+  stroke: var(--ochre);
+	color: var(--ochre)!important;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 520px) {

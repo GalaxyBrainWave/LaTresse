@@ -8,7 +8,7 @@ function renderCard(data) {
   const card = document.createElement("div");
   card.className = "bmcard loadedcard";
   card.innerHTML = data;
-  cardsContainer.appendChild(card);
+  cardsContainer.appendChild(card);  
 }
 
 // Function to load and render cards

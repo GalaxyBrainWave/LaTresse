@@ -158,3 +158,29 @@ function pichandler(array $fileInfo, int $targetID, string $pathComponent1, stri
     } // wrong file extension >> ??
   } // une erreur s'est produite...
 }
+
+
+
+
+
+
+// this function is called when there is a picture input to handle
+  /**
+  * @param array $likeData contains: cardId, hasLiked, userId
+  * @return bool true if successful
+  */
+function postLike(array $likeData): bool {
+  $db = new Database();
+  $pdo = $db->connect();
+  // file_put_contents('log.txt', gettype($likeData['hasLiked']));
+  if ($likeData['hasLiked'] === '0') {
+    $sql = "INSERT INTO ht_reactions (htr_user_id, htr_ht_id) VALUES (:htr_user_id, :htr_ht_id);";
+  } else if ($likeData['hasLiked'] === '1') {
+    $sql = "DELETE FROM ht_reactions WHERE htr_user_id = :htr_user_id AND htr_ht_id = :htr_ht_id;";
+  }
+  // file_put_contents('log.txt', $sql);
+  $query = $pdo->prepare($sql);
+  $query->bindValue(":htr_user_id", $likeData['userId']);
+  $query->bindValue(":htr_ht_id", $likeData['cardId']);
+  return $query->execute();
+}

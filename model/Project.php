@@ -1,28 +1,39 @@
 <?php
-
+  require_once "../rs/utils.php";
   require_once "Database.php";
 				
   class Project {
     private int $pjId;
+    private int $pjAuthor;
     private string $pjTitle;
     private string $pjDescription;
-    private DateTime $pjCreationDate;
-    private string $category;
-    private ?int $creator;
-    private ?string $projectBannerURL;
+    private string $pjCreationDateTime;
+    private ?string $pjCategory;
+    private ?string $pjLocation;
+    private ?int $pjBudget;
+    private ?string $pjBannerURL;
+    private ?string $pjPic1URL;
+    private ?string $pjPic2URL;
+    private ?string $pjPic3URL;
+    private ?string $pjPic4URL;
     // private array $projects;
     // private ?array $categories;
 
-    public function __construct($pjId = 0, $pjTitle = "", $pjDescription = "", $category = '', $creator = 0, $projectBannerURL = '') {
+    // public function __construct($pjId = 0, $pjAuthor = 0, $pjTitle = "", $pjDescription = "", $pjCreationDateTime = (new DateTime()), $pjCategory = '', $pjLocation = '', $pjBudget = 0, $pjBannerURL = 'defaultBannerURL (à faire)', $pjPic1URL = '', $pjPic2URL = '', $pjPic3URL = '', $pjPic4URL = '') {
+    public function __construct($pjId, $pjAuthor, $pjTitle, $pjDescription, $pjCreationDateTime, $pjCategory, $pjLocation, $pjBudget, $pjBannerURL, $pjPic1URL, $pjPic2URL, $pjPic3URL, $pjPic4URL) {
       $this->pjId = $pjId;
+      $this->pjAuthor = $pjAuthor;
       $this->pjTitle = $pjTitle;
       $this->pjDescription = $pjDescription;
-      $this->pjCreationDate = new DateTime();
-      $this->category = $category;
-      $this->creator = $creator;
-      $this->projectBannerURL = $projectBannerURL;
-    //   $this->projects = array();
-    //   $this->categories = array();
+      $this->pjCreationDateTime = $pjCreationDateTime;
+      $this->pjCategory = $pjCategory;
+      $this->pjLocation = $pjLocation;
+      $this->pjBudget = $pjBudget;
+      $this->pjBannerURL = $pjBannerURL;
+      $this->pjPic1URL = $pjPic1URL;
+      $this->pjPic2URL = $pjPic2URL;
+      $this->pjPic3URL = $pjPic3URL;
+      $this->pjPic4URL = $pjPic4URL;
     }
 
     public function __get($attribute) {
@@ -179,8 +190,6 @@
 
     // Trouver les projets par leur id
     public static function findById(int $pjId) {
-      
-
       $db = new Database();
       $pdo = $db->connect();
 
@@ -188,13 +197,22 @@
 
       $query = $pdo->prepare($sql);
       $query->bindParam(":pj_id", $pjId, PDO::PARAM_INT);
-      $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Project");
+      // $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Project");
+      $query->setFetchMode(PDO::FETCH_ASSOC);
 
       if ($query->execute()) {
         $results = $query->fetchAll();
-        return $results;
-      }
+        $results = $results[0];
+        // var_dump($results);die();
+        $date = new DateTIme($results['pj_creation_date']);
+        $date = $date->format('d/m/Y H:i');
+        $project = new Project($results['pj_id'], (int)$results['pj_author'], $results['pj_title'], $results['pj_description'], $date, $results['pj_category'], $results['pj_location'], $results['pj_budget'], $results['pj_bannerURL'], $results['pj_pic1URL'], $results['pj_pic2URL'], $results['pj_pic3URL'], $results['pj_pic4URL']);
+        return $project;
+        // return $results[0];
+      } // erreur...
     }
+
+
 
     // Trouver tous les projets par leur titre
     public static function findByTitle(string $pjTitle) {
