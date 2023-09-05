@@ -83,7 +83,7 @@
       $values = [];
       $values['cm_content'] = $this->cmTextContent;
       $values['cm_author'] = $this->cmAuthor;
-      $values['cm_creation_datetime'] = $this->cmMomentCreation->format('H:i d/m/Y');
+      $values['cm_creation_datetime'] = $this->cmMomentCreation->format('Y/m/d H:i:s');
       if ($this->projectId !== 0) {
         $values['cm_pj_id'] = $this->projectId;
       }
@@ -131,17 +131,16 @@
     //   $sql = "SELECT "
     // }
 
-    public static function findByProjectId(int $projectId) {
+    public static function find1stLevelCommentsByProjectId(int $projectId) {
       // set up the PDO
-      require_once "Database.php";
       $db = new Database();
       $pdo = $db->connect();
 
       // set up the query
       $sql = "SELECT * FROM comments ";
       $sql .= "JOIN users ON comments.cm_author = users.user_id ";
-      $sql .= "WHERE cm_pj_id = :pj_id ";
-      $sql .= "ORDER BY cm_parent_id ASC, cm_creation_datetime ASC;";
+      $sql .= "WHERE cm_pj_id = :pj_id AND cm_parent_id IS NULL ";
+      $sql .= "ORDER BY cm_creation_datetime ASC;";
       $query = $pdo-> prepare($sql);
       $query-> bindParam(':pj_id', $projectId, PDO::PARAM_INT);
       $query-> setFetchMode(PDO::FETCH_ASSOC);
@@ -154,6 +153,40 @@
 
 
 
+
+    public static function findSubcomments(int $projectId, int $commentId) {
+      // set up the PDO
+      $db = new Database();
+      $pdo = $db->connect();
+
+      // set up the query
+      $sql = "SELECT * FROM comments ";
+      $sql .= "JOIN users ON comments.cm_author = users.user_id ";
+      $sql .= "WHERE cm_pj_id = :pj_id AND cm_parent_id = :cm_parent_id ";
+      $sql .= "ORDER BY cm_creation_datetime ASC;";
+      $query = $pdo-> prepare($sql);
+      $query-> bindParam(':pj_id', $projectId, PDO::PARAM_INT);
+      $query-> bindParam(':cm_parent_id', $commentId, PDO::PARAM_INT);
+      $query-> setFetchMode(PDO::FETCH_ASSOC);
+      if ($query-> execute()) {
+        $results = $query-> fetchAll();
+        return $results;
+      } // error...
+    }
+
+
+    public static function getNumberOflikes(int $cmId) {
+      $db = new Database();
+      $pdo = $db->connect();
+      $sql = "SELECT COUNT(*) FROM cm_reactions WHERE cmr_cm_id = :cm_id;";
+      $query = $pdo->prepare($sql);
+      $query->bindParam(":cm_id", $cmId, PDO::PARAM_INT);
+      if ($query->execute()) {
+        $results = $query->fetchAll();
+        // file_put_contents('log.txt', var_export((int)$results[0]['COUNT(*)'], true) . PHP_EOL, FILE_APPEND);
+        return $results[0]['COUNT(*)'];
+      }
+    }
 
 
 

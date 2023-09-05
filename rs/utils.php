@@ -143,6 +143,7 @@ function pichandler(array $fileInfo, int $targetID, string $pathComponent1, stri
     $picOriginalName = $fileInfo['name'];
     // find out what the file extension is
     $fileExtension = pathinfo($picOriginalName, PATHINFO_EXTENSION);
+    file_put_contents('log.txt', $fileExtension);
     // if the file extension is .jpg or .jpeg or .png
     if (Media::checkImgExtension($fileExtension)) {
       // define the path to the file 

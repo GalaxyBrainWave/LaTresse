@@ -204,7 +204,7 @@ class Media {
 
   // this method checks if an image's file extension is of the correct kind
   public static function checkImgExtension(string $string) {
-    $safeList = ["jpg", "jpeg", "png"];
+    $safeList = ["jpg", "jpeg", "png", "webp"];
     return in_array($string, $safeList) ? true : false;
   }
 }

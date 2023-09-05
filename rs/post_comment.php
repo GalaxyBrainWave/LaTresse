@@ -11,7 +11,12 @@
   $textContent = '';
   if (!empty($_POST) && isset($_POST['comment_input']) && isset($_POST['pj_id'])) {
     $textContent = sanitize($_POST['comment_input']);
-    $newComment = new Comment($textContent, $_SESSION['user_id'], $_POST['pj_id'], 0, 0, 0);
+    // if it's a first level comment
+    if (!isset($_POST['cm_id'])) {
+      $newComment = new Comment($textContent, $_SESSION['user_id'], $_POST['pj_id'], 0, 0, 0);
+    } else {
+      $newComment = new Comment($textContent, $_SESSION['user_id'], $_POST['pj_id'], 0, 0, $_POST['cm_id']);
+    }
     if ($newComment->insert()) {
       $success = true;
     }

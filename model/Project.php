@@ -212,6 +212,20 @@
       } // erreur...
     }
 
+    public function getNumberOfLikes() {
+      $db = new Database();
+      $pdo = $db->connect();
+      $sql = "SELECT COUNT(*) FROM pj_reactions WHERE pjr_pj_id = :pj_id;";
+      $query = $pdo->prepare($sql);
+      $query->bindParam(":pj_id", $this->pjId, PDO::PARAM_INT);
+      if ($query->execute()) {
+        $results = $query->fetchAll();
+        // file_put_contents('log.txt', var_export((int)$results[0]['COUNT(*)'], true) . PHP_EOL, FILE_APPEND);
+        return $results[0]['COUNT(*)'];
+      }
+    }
+
+
 
 
     // Trouver tous les projets par leur titre

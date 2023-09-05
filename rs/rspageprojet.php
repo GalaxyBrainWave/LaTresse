@@ -4,7 +4,7 @@
   require_once "../Model/Comment.php";
 
   $accueil_active = '';
-  $projets_active = '';
+  $projets_active = 'navbar-active';
   $reseau_active = '';
   $creer_active = '';
   $profil_active = '';
@@ -12,12 +12,38 @@
 
   if (!empty($_GET)) {
     if (isset($_GET['id'])) {
+      // get the project id
       $pjId = $_GET['id'];
+      // build the project object
       $project = Project::findById($pjId);
+      // get the project's number of likes
+      $projectNumberOfLikes = $project->getNumberOfLikes();
+      // find the project's 1st level comments 
+      $comments = Comment::find1stLevelCommentsByProjectId($pjId);
+      $numberOf1stLevelComments = count($comments);
+      // $fullCommentsList will contain comments with subcomments as a sub-array
+      $fullCommentsList = [];
+      foreach($comments as $comment) {
+        $commentNumberOfLikes = Comment::getNumberOflikes($comment['cm_id']);
+        $subcomments = Comment::findSubcomments($pjId, $comment['cm_id']);
+        // Adding & before $subcomment in the foreach loop makes it a reference to the original array elements, allowing to modify them directly
+        foreach($subcomments as &$subcomment) {
+          $subcomment['numberOfLikes'] = Comment::getNumberOflikes($subcomment['cm_id']);
+        }
+        unset($subcomment); // Unset the reference to avoid accidental modification later
+        // file_put_contents('log.txt', var_export($subcomments, true) . PHP_EOL, FILE_APPEND);
+        $numberOfSubcomments = count($subcomments);
+        $comment['numberOfSubcomments'] = $numberOfSubcomments;
+        $comment['numberOfLikes'] = $commentNumberOfLikes;
+        $comment['subcomments'] = $subcomments;
+        // add comment to the full list
+        $fullCommentsList[] = $comment;
+      } 
+      // file_put_contents('log.txt', var_export($fullCommentsList, true) . PHP_EOL, FILE_APPEND);
+
     } // erreur
   } // erreur
     
-  $comments = Comment::findByProjectId($pjId);
 ?>
 
   <title>La Tresse - <?= $project->pjTitle ?></title>
@@ -48,15 +74,15 @@
       <div class="project_reaction">
         <div class="reactions_count_icons">
           <img src="../img/icons/like.png" alt="icone j'aime" class="project_reaction_icon">
-          <p>15</p>
+          <p><?= $projectNumberOfLikes ?></p>
         </div>
-        <p>4 réponses</p>
+        <p><?= $numberOf1stLevelComments ?> réponses</p>
       </div>
       <form class="project_comment_post" id="project-comment-post">
         <textarea name="comment_input" id="comment_input" class="comment_input" placeholder="Ajoutez votre commentaire"></textarea>
         <input type="hidden" id="project-id" name="pj_id" value="<?= $pjId ?>">
         <button class="nice-blue-button" id="comment_input_btn">
-          <svg class="dblock" width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM16.7682 9.64018C17.1218 9.21591 17.0645 8.58534 16.6402 8.23178C16.2159 7.87821 15.5853 7.93554 15.2318 8.35982L11.6338 12.6774C11.2871 13.0934 11.0922 13.3238 10.9366 13.4653L10.9306 13.4707L10.9242 13.4659C10.7564 13.339 10.5415 13.1272 10.1585 12.7443L8.70711 11.2929C8.31658 10.9024 7.68342 10.9024 7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289 12.7071L8.74428 14.1585L8.78511 14.1993L8.78512 14.1993C9.11161 14.526 9.4257 14.8402 9.71794 15.0611C10.0453 15.3087 10.474 15.5415 11.0234 15.5165C11.5728 15.4916 11.9787 15.221 12.2823 14.9448C12.5534 14.6983 12.8377 14.3569 13.1333 14.0021L13.1333 14.0021L13.1703 13.9577L16.7682 9.64018Z" fill="#fbd629"></path> </g></svg>                    
+          <img class="dblock" src="../img/icons/roundtick_yel.svg">
           <p>Publier</p> 
         </button>
       </form>
@@ -72,33 +98,70 @@
       
       <div id="project_comments_list">    
         <div id="new-comment"></div>
-        <?php foreach($comments as $comment) { ?>
-          <div class="project_comment_itself">
-            <div class="project_comment_header">
-              <img src="<?= $comment['avatar_url'] ?>" alt="Photo de profil" class="project_comment_header_pic">
-              <h3><?= $comment['first_name'] ?></h3>
-            </div>
-            <p>
-              <?= nl2br($comment['cm_content']) ?>
-            </p>
-            <div class="project_comment_reaction">
-              <div class="reactions_count_icons">
-                <img src="../img/icons/like.png" alt="icone j'aime" class="project_reaction_icon">
-                <p>15</p> est-ce qu'il vaut mieux garder un 
+        <?php foreach($fullCommentsList as $comment) { 
+          $subcomments = $comment['subcomments']; /*var_dump($fullCommentsList); var_dump($subcomments);die();*/ ?>
+          <div class="project_comment_body">
+            <div data-cmid="<?= $comment['cm_id'] ?>" class="project_comment_itself">
+              <div class="project_comment_header">
+                <img src="<?= $comment['avatar_url'] ?>" alt="Photo de profil" class="project_comment_header_pic">
+                <h3><?= $comment['first_name'] ?></h3>
               </div>
-              <button class="reply_btn">
-                <svg class="activity_card_item_icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" transform="matrix(-1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ffe154" fill-rule="evenodd" d="M2 6a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7.667a1 1 0 0 0-.6.2L3.6 21.8A1 1 0 0 1 2 21V6zm5 0a1 1 0 0 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H7zm0 4a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H7z" clip-rule="evenodd"></path></g></svg>
-                <p class="toggle-comment-form">Répondre</p>
-              </button>
-              <p>49 réponses</p>
+              <p>
+                <?= nl2br($comment['cm_content']) ?>
+              </p>
+              <div class="project_comment_reaction">
+                <div class="reactions_count_icons">
+                  <img src="../img/icons/like.png" alt="icone j'aime" class="project_reaction_icon">
+                  <p><?= $comment['numberOfLikes'] ?></p>  
+                </div>
+                <?php if ($comment['numberOfSubcomments'] === 0) { ?>
+                  <button class="reply_btn nice-blue-button">
+                    <img class="activity_card_item_icon" src="../img/icons/repondre.svg">
+                    <p class="toggle-comment-form">Répondre</p>
+                  </button>
+                <?php } ?>
+                <p class="comment-nb-responses"><?= $comment['numberOfSubcomments'] ?> réponses</p>
+              </div>
             </div>
+
+            <?php if ($comment['numberOfSubcomments'] > 0) {?>
+              <div class="leftbar_container">
+                <div class="leftbar"></div>
+                <div class="project_subcomments_container">
+                  <?php foreach($subcomments as $subcomment) {?>
+                    <div class="project_subcomment">
+                      <div class="project_subcomment_header">
+                        <img src="<?= $subcomment['avatar_url'] ?>" alt="Photo de profil" class="project_comment_header_pic">
+                        <h3><?= $subcomment['first_name'] ?></h3>
+                      </div>
+                      <p>
+                        <?= nl2br($subcomment['cm_content']) ?>
+                      </p>
+                      <div class="project_subcomment_reaction">
+                        <div class="reactions_count_icons">
+                          <img src="../img/icons/like.png" alt="icone j'aime" class="project_reaction_icon">
+                          <p><?= $subcomment['numberOfLikes'] ?></p>
+                        </div>
+
+                      </div>
+                    </div>
+                  <?php } ?>
+                </div>
+              </div>
+              <div class="center">
+                <button class="reply_btn nice-blue-button multisubcom">
+                  <img class="activity_card_item_icon" src="../img/icons/repondre.svg">
+                  <p class="toggle-comment-form">Répondre</p>
+                </button>
+              </div>
+            <?php } ?>
           </div>
         <?php } ?>
         
 
 
 
-        <div class="project_comment_itself">
+        <!-- <div class="project_comment_itself">
           <div class="project_comment_header">
             <img src="../img/rs/alf.jpg" alt="Photo de profil" class="project_comment_header_pic">
             <h3>John Doe</h3>
@@ -229,18 +292,20 @@
               </button>
               <p>49 réponses</p>
             </div>
-          </div>
-        </div>
-      </div>
+          </div> -->
+      </div> <!-- projects comments list -->
     </div>
 
 
   </main>
 
-    
+  <script>
+
+  </script>
   <script src="../js/burger.js"></script>
   <script src="../js/resizing_textarea_comment.js"></script>
   <script src="../js/posting_comments.js"></script>
-  <script src="../js/display_comments_forms.js"></script>
+  <script src="../js/posting_subcomments.js"></script>
+  <script src="../js/display_subcomments_forms.js"></script>
 </body>
 </html>
