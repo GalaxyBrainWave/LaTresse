@@ -7,9 +7,8 @@
   // to be able to use Media::checkImgExtension()
   require_once "../Model/Media.php";
   // to be able to use the sanitize() function
-  require_once "utils.php";
+  require_once "../tools/utils.php";
   require_once "../Model/Project.php";
-
   // if some data has been received via post
   if (!empty($_POST)) {
     // if the user filled the description of their project (as of 23/08/22 the only required field)
@@ -37,9 +36,10 @@
       if ($result[0]) {
         $pjId = (int)$result[1];
         // if some data has been received via files
-        if (!empty($_FILES) && (isset($_FILES["project-banner-picinput"]) || isset($_FILES["project-picinput1"]) || isset($_FILES["project-picinput2"]) || isset($_FILES["project-picinput3"]) || isset($_FILES["project-picinput4"]))) {
+        if (($_FILES["project-banner-picinput"]['size'] > 0 || $_FILES["project-picinput1"]['size'] > 0 || $_FILES["project-picinput2"]['size'] > 0 || $_FILES["project-picinput3"]['size'] > 0 || $_FILES["project-picinput4"]['size'] > 0)) {
           // if the user sent a banner
-          if (isset($_FILES["project-banner-picinput"])) {
+          if ($_FILES["project-banner-picinput"]['size'] > 0) {
+            // file_put_contents('log.txt', var_export($_FILES["project-banner-picinput"], true) . PHP_EOL, FILE_APPEND);
             $banner = pichandler($_FILES["project-banner-picinput"], $pjId, '../img/projects/pj', '_banner.');
             // if the picture was successfully stored
             if ($banner[0]) {
@@ -50,7 +50,6 @@
           // if the user sent pic#1
           if (isset($_FILES["project-picinput1"]) && $_FILES['project-picinput1']['error'] === UPLOAD_ERR_OK) {
             $picinput1 = pichandler($_FILES["project-picinput1"], $pjId, '../img/projects/pj', '_pic1.');
-            var_dump($_FILES["project-picinput1"]);die();
             // if the picture was successfully stored
             if ($picinput1[0]) {
               // get the picture's file path
@@ -86,11 +85,11 @@
           }
           if (Project::update($picvalues, $pjId)) {
             header('Location: rspageprojet.php?id=' . $pjId);
-            // header('Location: rsprofil.php');
             exit();
           } // error ...
         } else { // if the user didn't upload any picture
-
+          header('Location: rspageprojet.php?id=' . $pjId);
+          exit();
         }
       } // error ...
 

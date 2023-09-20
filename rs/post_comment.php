@@ -5,7 +5,7 @@
   require_once "../Model/User.php";
   $user = User::getUserDetails($_SESSION['user_id']);
   // to be able to use the sanitize() function
-  require_once "utils.php";
+  require_once "../tools/utils.php";
   require_once "../Model/Comment.php";
   $success = false;
   $textContent = '';
@@ -17,11 +17,13 @@
     } else {
       $newComment = new Comment($textContent, $_SESSION['user_id'], $_POST['pj_id'], 0, 0, $_POST['cm_id']);
     }
-    if ($newComment->insert()) {
+    $result = $newComment->insert();
+    if ($result != null) {
       $success = true;
+      $cmId = $result;
     }
   }
 
   // Return the data as JSON
   header('Content-Type: application/json');
-  echo json_encode(['inserted'=>$success, 'userAvatarPath'=>$user->avatarURL, 'userFirstName'=>$user->firstName, 'textContent'=>$textContent]);
+  echo json_encode(['inserted'=>$success, 'userAvatarPath'=>$user->avatarURL, 'userFirstName'=>$user->firstName, 'textContent'=>$textContent, 'cmId'=>$cmId]);

@@ -82,20 +82,20 @@ nav ul li p
     transform: translate(0,2px);
 }
 
-.narbar-icons {
+.navbar-icons {
     width: 30px;
     height: 30px;
     fill: var(--beige);
     stroke: var(--beige);
 }
 
-.narbar-icons path {
+.navbar-icons path {
     fill: var(--beige);
     stroke: var(--beige);
 }
 
-nav #menu_container .navbar-active .narbar-icons,
-nav #menu_container .navbar-active .narbar-icons path {
+nav #menu_container .navbar-active .navbar-icons,
+nav #menu_container .navbar-active .navbar-icons path {
     fill: var(--ochre-medium);
     stroke: var(--ochre-medium);
 }
@@ -111,8 +111,8 @@ nav #menu_container .navbar-active .narbar-icons path {
 .navbar-link:hover p {
     color: var(--ochre);
 }
-.navbar-link:hover .narbar-icons,
-.navbar-link:hover .narbar-icons path {
+.navbar-link:hover .navbar-icons,
+.navbar-link:hover .navbar-icons path {
     fill: var(--ochre);
     stroke: var(--ochre);
 }

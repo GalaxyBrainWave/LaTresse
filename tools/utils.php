@@ -7,6 +7,20 @@ require_once "../Model/Database.php";
 require_once "../Model/Media.php";
 
 
+
+
+function like_btn_class($has_liked) {
+  return $has_liked === '1' ? 'like-btn-active' : 'like-btn-default';
+}
+
+
+
+function non0(int $number) {
+  return $number > 0 ? $number : '';
+}
+
+
+
 // to remove nasty things from strings before insertion into the DB
 function sanitize(string $input): string {
   if ($input == null) {
@@ -19,8 +33,7 @@ function sanitize(string $input): string {
   return $output;
 }
 
-// this function is called in methods update() it's so far only related to user. to be updated later
-// >> attribute $id to be added, containing the particular name of the id in that table
+// this method is called in methods update()
 // $attributesToUpdate is built on this model: ['dbKey'=>$value] 
 // ex: |$attributesToUpdate = [];
 //     |...
@@ -74,7 +87,7 @@ function updater(string $table, array $attributesToUpdate, string $idName, int $
 }
 
 
-// this function is called in methods insert()
+// this method is called in methods insert()
  // $values is built on the model $values['databaseKey'] = $value;
  // $table is the name of the target table
   /**
@@ -128,7 +141,7 @@ function inserter(string $table, array $values) {
 }
 
 
-// this function is called when there is a picture input to handle
+// this method is called when there is a picture input to handle
   /**
   * @param array $fileInfo is $_FILES["form_name"]
   * @param int $targetID is the id in the target row
@@ -162,26 +175,53 @@ function pichandler(array $fileInfo, int $targetID, string $pathComponent1, stri
 
 
 
-
-
-
-// this function is called when there is a picture input to handle
+// this method is called when there is a SELECT / fetch operation
+// to be made on the database without any bound parameter or value
   /**
-  * @param array $likeData contains: cardId, hasLiked, userId
-  * @return bool true if successful
+  * @param string $stmt an sql SELECT statement
+  * @return array|false containing the fetched results
   */
-function postLike(array $likeData): bool {
-  $db = new Database();
-  $pdo = $db->connect();
-  // file_put_contents('log.txt', gettype($likeData['hasLiked']));
-  if ($likeData['hasLiked'] === '0') {
-    $sql = "INSERT INTO ht_reactions (htr_user_id, htr_ht_id) VALUES (:htr_user_id, :htr_ht_id);";
-  } else if ($likeData['hasLiked'] === '1') {
-    $sql = "DELETE FROM ht_reactions WHERE htr_user_id = :htr_user_id AND htr_ht_id = :htr_ht_id;";
+  function fetcher($stmt) {
+    $db = new Database();
+    $pdo = $db->connect();
+    $sql = $stmt;
+    $query = $pdo->prepare($sql);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    if ($query->execute()) {
+      $results = $query->fetchAll();
+      return $results;
+    } else {
+      return false;
+    }
   }
-  // file_put_contents('log.txt', $sql);
-  $query = $pdo->prepare($sql);
-  $query->bindValue(":htr_user_id", $likeData['userId']);
-  $query->bindValue(":htr_ht_id", $likeData['cardId']);
-  return $query->execute();
-}
+
+
+
+// this method is called when there is a SELECT / fetch operation
+// to be made on the database and the key value is userId
+  /**
+  * @param string $stmt an sql SELECT statement containing user_id as key
+  * @return array|false containing the fetched results
+  */
+  function userFetcher($stmt, $userId) {
+    $db = new Database();
+    $pdo = $db->connect();
+    $sql = $stmt;
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':user_id', $userId, PDO::PARAM_INT);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    if ($query->execute()) {
+      $results = $query->fetchAll();
+      return $results;
+    } else {
+      return false;
+    }
+  }
+
+
+
+
+
+?>
+
+

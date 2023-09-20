@@ -38,66 +38,34 @@
 
 .bmcard_foot {
 	padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
+
+.bmcard_foot .bmcard_date {
+	color: var(--blue-light);
+	margin-top: 8px;
+	font-size: 0.8em;
+}
+
 
 #load-button {
 	margin: 20px auto;
 	display: block;
 	padding: 10px 20px;
-	background-color: var(--blue-text);
-	color: white;
+	background: linear-gradient(to bottom, var(--beige), var(--ochre));
+	color: var(--blue-text);
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 }
 
-/* The Modal (background) */
-#modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  /* padding-top: 100px;  */
-	/* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: var(--darkblue); /* Fallback color */
-  background-color: rgba(24, 46, 73,0.8); /* Black w/ opacity */
-	place-items: center;
-}
 
-
-/* The Close Button */
-#modal-close-btn {
-	position: absolute;
-  top: 15px;
-  right: 35px;
-  color: var(--beige);
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-#modal-close-btn:hover,
-#modal-close-btn:focus {
-  color: var(--ochre);;
-  text-decoration: none;
-}
-
-#big-img {
-	width: auto;
-	height: auto;
-	max-width: 100vw;
-	object-fit: contain;
-	max-height: 100vh;
-}
-
-.ht-like-btn {
+.like-btn {
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: 8px;
 	max-width: max-content;
   cursor: pointer;
 }

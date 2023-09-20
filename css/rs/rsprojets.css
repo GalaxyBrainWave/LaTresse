@@ -37,8 +37,15 @@
 .rs_cards_container {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 40px;
+  align-items: center;
+  flex-direction: column;
+  gap: 64px;
+  max-width: 800px;
+}
+
+#project-list-centerer {
+  display: grid;
+  place-items: center;
 }
 
 #project-category {
@@ -47,4 +54,20 @@
   min-width: 256px;
   text-align: center;
   padding: 4px
+}
+
+.rsprojets-container {
+  border-radius: 0 32px 32px 32px;
+  user-select: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.rsprojets-container:hover {
+  box-shadow: 0 0 8px 0 var(--beige);
+}
+
+#project-list-container .project-header,
+#project-list-container .project_banner {
+  border-radius: 0 32px 0 0;
 }

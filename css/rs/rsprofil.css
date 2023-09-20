@@ -1,6 +1,11 @@
 .rsprofil .rscontent {
-  position: relative;
   padding-top: 0;
+}
+
+#rsprofil-content {
+  position: relative;
+  max-width: 800px;
+  margin: auto;
 }
 
 .rs_user_banner {
@@ -11,8 +16,17 @@
   max-height: 200px;
   margin: 0 auto;
   border-radius: 0 0 16px 16px;
-  border-bottom: solid 2px var(--blue-light);
+  /* border-bottom: solid 2px var(--blue-light); */
   object-fit: cover;
+}
+
+#user-namepic {
+  position: absolute;
+  top: min(calc(15vw), 136px);
+  left: 15%;
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
 }
 
 .rs_user_profile_pic {
@@ -22,9 +36,7 @@
   max-height: 128px;
   border-radius: 50%;
   object-fit: cover;
-  position: absolute;
-  top: min(calc(15vw), 136px);
-  left: max(calc(50% - 64px),calc(50% - 10vw));
+  /* left: max(calc(25% - 64px),calc(25% - 10vw)); */
   border: solid 2px var(--blue-light);
 }
 
@@ -33,7 +45,7 @@
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  margin-top: min(70px, 12vw);
+  /* margin-bottom: 16px; */
 }
 
 .update_profile_btn {
@@ -101,6 +113,9 @@
 @media screen and (min-width: 580px) {
   .rsprofil .rscontent h1 {
     font-size: 26px;
+  }
+  .rsprofil .rscontent h1 {
+    margin-bottom: 16px;
   }
 }
 

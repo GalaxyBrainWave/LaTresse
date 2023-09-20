@@ -1,6 +1,6 @@
 <?php 
 
-  require_once "../rs/utils.php";
+  require_once "../tools/utils.php";
   require_once "Database.php";
 
   class Hello_Thanks {
@@ -22,9 +22,6 @@
       $this->htAuthor = $htAuthor;
     }
 
-
-    // list of the authorized attributes to be altered by the magic accessors
-    private static $attributeList = ["htId", "htTextContent", "htMomentCreation", "htImgURL", "htAuthor"];
     
 
     // // associates database keys to object keys for saving the data into the DB
@@ -40,6 +37,9 @@
     //   "nbReactions" => "nb_reactions"
     // ];
 
+
+    // list of the authorized attributes to be altered by the magic accessors
+    private static $attributeList = ["htId", "htTextContent", "htMomentCreation", "htImgURL", "htAuthor"];
 
     public function __get(string $attribute) {
       if (in_array($attribute, self::$attributeList)) {
@@ -113,14 +113,7 @@
       $pdo = $db->connect();
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      // $stmt = "SELECT * FROM hello_thanks JOIN users WHERE hello_thanks.ht_author = users.user_id ORDER BY ht_creation_datetime DESC LIMIT 15 OFFSET :offset;";
-
-      // $stmt = "SELECT hello_thanks.*, users.first_name, users.avatar_url FROM hello_thanks JOIN users ON hello_thanks.ht_author = users.user_id 
-      // LEFT JOIN ht_reactions ON hello_thanks.ht_id = ht_reactions.htr_ht_id
-      // ORDER BY ht_creation_datetime DESC LIMIT 15 OFFSET :offset;";
-
-
-      $stmt = 
+      $sql = 
       "SELECT 
         hello_thanks.*,
         users.first_name,
@@ -137,7 +130,7 @@
         ORDER BY hello_thanks.ht_creation_datetime DESC 
         LIMIT 15 OFFSET :offset;";
 
-      $query = $pdo->prepare($stmt);
+      $query = $pdo->prepare($sql);
 
       // Bind the offset value
       $query->bindValue(':offset', $alreadyShownCards, PDO::PARAM_INT);
@@ -227,6 +220,52 @@
 
 
 
+
+// this method is called when the user clicks on a like button on the rsaccueil page
+  /**
+  * @param array $likeData contains: cardId, hasLiked, userId
+  * @return bool true if successful
+  */
+  public static function postLike(array $likeData): bool {
+    $db = new Database();
+    $pdo = $db->connect();
+    // file_put_contents('log.txt', gettype($likeData['hasLiked']));
+    if ($likeData['hasLiked'] === '0') {
+      $sql = "INSERT INTO ht_reactions (htr_user_id, htr_ht_id) VALUES (:htr_user_id, :htr_ht_id);";
+    } else if ($likeData['hasLiked'] === '1') {
+      $sql = "DELETE FROM ht_reactions WHERE htr_user_id = :htr_user_id AND htr_ht_id = :htr_ht_id;";
+    }
+    // file_put_contents('log.txt', $sql);
+    $query = $pdo->prepare($sql);
+    $query->bindValue(":htr_user_id", $likeData['userId']);
+    $query->bindValue(":htr_ht_id", $likeData['cardId']);
+    return $query->execute();
+  }
+
+
+
+
+  // this method is called when the timestamp in $_SESSION['actualized'] is older than 24h
+  /**
+  * @param int $userId
+  * @return int|bool number of HTcards liked by the user or false
+  */
+  public static function countLikes(int $userId) {
+    $sql = "SELECT COUNT(ht_reactions.htr_ht_id) AS likes FROM ht_reactions WHERE ht_reactions.htr_user_id = :user_id";
+    return userFetcher($sql, $userId);
+  }
+
+
+
+  // this method is called when the timestamp in $_SESSION['actualized'] is older than 24h
+  /**
+  * @param int $userId
+  * @return int|bool number of hello/thanks created by the user or false
+  */
+  public static function countUserHTs(int $userId) {
+    $sql = "SELECT COUNT(hello_thanks.ht_id) AS nbHTs FROM hello_thanks WHERE hello_thanks.ht_author = :user_id";
+    return userFetcher($sql, $userId);
+  }
 
 
 

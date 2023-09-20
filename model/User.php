@@ -1,6 +1,6 @@
 <?php
 
-  require_once "../rs/utils.php";
+  require_once "../tools/utils.php";
   require_once "Database.php";
   
 
@@ -14,7 +14,6 @@
     private string $avatarURL;
     private string $bannerURL;
     private ?bool $isAdmin;
-    private ?int $nbReactions;
     private ?int $nbHelloThanks;
     private ?int $nbComments;
     private DateTime $accountCreationDate;
@@ -26,7 +25,7 @@
     private ?array $medias;
 
 
-    public function __construct($userId = 0, $firstName = "", $email = "", $hashPass = "", $isAdmin = false, $colorMode = 'day', $autoDescription = '', $avatarURL = '', $bannerURL = '', $nbReactions = 0, $nbHelloThanks = 0, $nbComments = 0) {
+    public function __construct($userId = 0, $firstName = "", $email = "", $hashPass = "", $isAdmin = false, $colorMode = 'day', $autoDescription = '', $avatarURL = '', $bannerURL = '', $nbHelloThanks = 0, $nbComments = 0) {
       $this->userId = $userId;
       $this->firstName = $firstName;
       $this->email = $email;
@@ -36,7 +35,6 @@
       $this->autoDescription = $autoDescription;
       $this->avatarURL = $avatarURL;
       $this->bannerURL = $bannerURL;
-      $this->nbReactions = $nbReactions;
       $this->accountCreationDate = new DateTime();
       // $this->users = array();
       $this->projects = array();
@@ -65,7 +63,6 @@
       $this->autoDescription = $assocArray['autodescription'];
       $this->avatarURL = $assocArray['avatar_url'];
       $this->bannerURL = $assocArray['banner_url'];
-      $this->nbReactions = $assocArray['nb_reactions'];
       // $this->accountCreationDate = $assocArray['account_creation_date'];
       // $this->users = array();
       // $this->projects = $assocArray['user_id'];
@@ -162,12 +159,7 @@
     //   return $ouput;
     // }
 
-    public function getUsers() {
-        return $this->users;
-    }
-    public function setUsers($users) {
-        $this->users = array($users);
-    }
+
 
     // Méthodes CRUD
     // Inscrire ou modifier un utilisateur : save = create || update
@@ -427,8 +419,6 @@
 
     // Trouver tous les profils utilisateurs
     public static function findAll() {
-      
-          
       $db = new Database();
       $pdo = $db->connect();
       $sql = "SELECT * FROM users ORDER BY user_id DESC";
@@ -438,27 +428,76 @@
         $results = $query->fetchAll();
         return $results;
       } else {
-        return array();
+        return false;
       }
     }
 
-    // Trouver les utilisateurs par leur id
-    // public static function findById(int $userId) {
-    //     
-            
-    //     $db = new Database();
-    //     $pdo = $db->connect();
 
-    //     $sql = "SELECT * FROM users WHERE user_id = :user_id;";
-    //     $query = $pdo->prepare($sql);
-    //     $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
-    //     $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "User");
+      // Trouver les utilisateurs par leur id
+      // public static function findById(int $userId) {
+      //     
+              
+      //     $db = new Database();
+      //     $pdo = $db->connect();
 
-    //     if ($query->execute()) {
-    //         $results = $query->fetchAll();
-    //         return $results;
-    //     } // else afficher message d'erreur
-    // }
+      //     $sql = "SELECT * FROM users WHERE user_id = :user_id;";
+      //     $query = $pdo->prepare($sql);
+      //     $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
+      //     $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "User");
+
+      //     if ($query->execute()) {
+      //         $results = $query->fetchAll();
+      //         return $results;
+      //     } // else afficher message d'erreur
+      // }
+
+
+    // this method is called on the réseau page to count all users
+    /**
+    * @return array|false containing an array with one entry 
+    * containing an associative array ['dbKey'=>$value]
+    */
+      public static function countAll() {
+        $stmt = "SELECT COUNT(*) as user_count FROM users;";
+        return fetcher($stmt);
+      }
+
+
+    // this method is called on the réseau page to count all users
+    /**
+    * @return array|false containing an array with one entry 
+    * containing an associative array ['dbKey'=>$value]
+    */
+    public static function getAll() {
+      $sql = 
+      "SELECT user_id, 
+        first_name AS firstName, 
+        autodescription, 
+        avatar_url AS avatarURL, 
+        banner_url AS bannerURL, 
+        account_creation_date AS registerDate,
+        COUNT(DISTINCT ht_reactions.htr_ht_id) AS htLikesCount,
+        COUNT(DISTINCT pj_reactions.pjr_pj_id) AS pjLikesCount,
+        COUNT(DISTINCT cm_reactions.cmr_cm_id) AS cmLikesCount,
+        COUNT(DISTINCT hello_thanks.ht_id) AS htCount,
+        COUNT(DISTINCT comments.cm_id) AS cmCount,
+        COUNT(DISTINCT projects.pj_id) AS pjCount
+      FROM users
+      LEFT JOIN ht_reactions ON ht_reactions.htr_user_id = users.user_id
+      LEFT JOIN pj_reactions ON pj_reactions.pjr_user_id = users.user_id
+      LEFT JOIN cm_reactions ON cm_reactions.cmr_user_id = users.user_id
+      LEFT JOIN comments ON comments.cm_author = users.user_id
+      LEFT JOIN projects ON projects.pj_author = users.user_id
+      LEFT JOIN hello_thanks ON hello_thanks.ht_author = users.user_id
+      GROUP BY users.user_id
+      ORDER BY users.account_creation_date;";
+      $usersList = fetcher($sql);
+      return json_encode($usersList);
+    }
+
+
+
+
 
 
 
@@ -634,15 +673,9 @@
       $this->users = User::findById($this->userId);
     }
 
-    public function addNbReactions(int $nbReactions) {
 
-    }
 
-    public function addNbHelloThanks(int $nbHelloThanks) {
 
-    }
 
-    public function addNbComments(int $nbComments) {
 
-    }
   }

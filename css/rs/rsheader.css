@@ -12,7 +12,7 @@
 }
 
 .rslayout header {
-    height: 84px;
+    height: 64px;
 }
 
 .rslayout li {
@@ -31,6 +31,23 @@
     transform: translate(-20px, 2px);
 }
 
+.rslayout .navbar-link > li > p {
+    font-size: 12px;
+}
+
+.rslayout ul li > .navbar-icons {
+    width: 25px;
+    height: 25px;
+    fill: var(--beige);
+    stroke: var(--beige);
+}
+
+nav #menu_container .navbar-active .navbar-icons,
+nav #menu_container .navbar-active .navbar-icons path {
+    fill: var(--ochre-medium);
+    stroke: var(--ochre-medium);
+}
+
 @media screen and (min-width: 915px) {
     .rslayout #menu_container {
         border-bottom: none;
@@ -39,7 +56,7 @@
     }
 
     .rslayout li {
-        min-width: 133px;
+        min-width: 100px;
     }
 
     .rslayout nav ul {
@@ -55,4 +72,9 @@
         flex-direction: column;
         gap:4px;
     }
+    
+    .rslayout header {
+        padding: 16px 64px 12px;
+    }
 }
+

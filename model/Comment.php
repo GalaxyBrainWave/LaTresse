@@ -1,6 +1,6 @@
 <?php 
   require_once "Database.php";
-  require_once "../rs/utils.php";
+  require_once "../tools/utils.php";
 
   class Comment {
 
@@ -93,7 +93,7 @@
       if ($this->projectId !== 0) {
         $values['cm_parent_id'] = $this->cmParentId;
       }
-      return inserter('comments', $values) != null;
+      return inserter('comments', $values);
     }
 
 
@@ -151,6 +151,23 @@
     }
 
 
+    public static function count1stLevelCommentsByProjectId(int $projectId) {
+      // set up the PDO
+      $db = new Database();
+      $pdo = $db->connect();
+      // set up the query
+      $sql = "SELECT COUNT(cm_id) FROM comments ";
+      $sql .= "WHERE cm_pj_id = :pj_id AND cm_parent_id IS NULL;";
+      $query = $pdo-> prepare($sql);
+      $query-> bindParam(':pj_id', $projectId, PDO::PARAM_INT);
+      $query-> setFetchMode(PDO::FETCH_ASSOC);
+      if ($query-> execute()) {
+        $results = $query-> fetchAll();
+        return $results[0];
+      } // error...
+    }
+
+
 
 
 
@@ -175,18 +192,122 @@
     }
 
 
-    public static function getNumberOflikes(int $cmId) {
+    public static function getLikes(int $cmId) {
       $db = new Database();
       $pdo = $db->connect();
-      $sql = "SELECT COUNT(*) FROM cm_reactions WHERE cmr_cm_id = :cm_id;";
+      $sql = "SELECT 
+                COUNT(*) AS total_likes,
+                CASE
+                  WHEN MAX(cm_reactions.cmr_user_id = :current_user_id) = 1 
+                  THEN 1
+                  ELSE 0
+                END AS has_liked 
+              FROM cm_reactions 
+              WHERE cmr_cm_id = :cm_id;";
       $query = $pdo->prepare($sql);
-      $query->bindParam(":cm_id", $cmId, PDO::PARAM_INT);
+      $query->bindValue(":cm_id", $cmId, PDO::PARAM_INT);
+      $query->bindValue(':current_user_id', $_SESSION['user_id'], PDO::PARAM_INT);
       if ($query->execute()) {
         $results = $query->fetchAll();
-        // file_put_contents('log.txt', var_export((int)$results[0]['COUNT(*)'], true) . PHP_EOL, FILE_APPEND);
-        return $results[0]['COUNT(*)'];
+        return $results[0];
       }
     }
+
+
+// this method is called when the user clicks on a like button on a comment under a project 
+  /**
+  * @param array $likeData contains: cmId, hasLiked, userId
+  * @return bool true if successful
+  */
+  public static function postLike(array $likeData): bool {
+    $db = new Database();
+    $pdo = $db->connect();
+    if ($likeData['hasLiked'] === 0) {
+      $sql = "INSERT INTO cm_reactions (cmr_user_id, cmr_cm_id) VALUES (:cmr_user_id, :cmr_cm_id);";
+    } else if ($likeData['hasLiked'] === 1) {
+      $sql = "DELETE FROM cm_reactions WHERE cmr_user_id = :cmr_user_id AND cmr_cm_id = :cmr_cm_id;";
+    }
+    $query = $pdo->prepare($sql);
+    $query->bindValue(":cmr_user_id", $likeData['userId']);
+    $query->bindValue(":cmr_cm_id", $likeData['cmId']);
+    return $query->execute();
+  }
+
+
+
+
+
+
+// this method is called on the landing page to load the last three comments 
+  /**
+  * @return array|false true if successful
+  */
+  // public static function getLast3() {
+  //   $db = new Database();
+  //   $pdo = $db->connect();
+  //     $sql = "SELECT * 
+  //     FROM comments 
+  //     JOIN users 
+  //       ON comments.cm_author = users.user_id 
+  //     JOIN projects 
+  //       ON comments.cm_pj_id = projects.pj_id 
+  //     ORDER BY cm_creation_datetime DESC 
+  //     LIMIT 3;";
+  //   $query = $pdo->prepare($sql);
+  //   if ($query->execute()) {
+  //     $results = $query->fetchAll(PDO::FETCH_ASSOC);
+  //     return $results;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+
+// this method is called on the landing page to display the last 3 comments
+  /**
+  * @return array|false containing the fetched results
+  */
+  public static function getLast3() {
+    $stmt = "SELECT * 
+      FROM comments 
+      JOIN users 
+        ON comments.cm_author = users.user_id 
+      JOIN projects 
+        ON comments.cm_pj_id = projects.pj_id 
+      ORDER BY cm_creation_datetime DESC 
+      LIMIT 3;";
+    return fetcher($stmt);
+  }
+
+
+
+
+  // this method is called when the timestamp in $_SESSION['actualized'] is older than 24h
+  /**
+  * @param int $userId
+  * @return int|bool number of comments liked by the user or false
+  */
+  public static function countLikes(int $userId) {
+    $sql = "SELECT COUNT(cm_reactions.cmr_cm_id) AS likes FROM cm_reactions WHERE cm_reactions.cmr_user_id = :user_id";
+    return userFetcher($sql, $userId);
+  }
+
+
+
+
+  // this method is called when the timestamp in $_SESSION['actualized'] is older than 24h
+  /**
+  * @param int $userId
+  * @return int|bool number of comments created by the user or false
+  */
+  public static function countUserComments(int $userId) {
+    $sql = "SELECT COUNT(comments.cm_id) AS nbComments FROM comments WHERE comments.cm_author = :user_id";
+    return userFetcher($sql, $userId);
+  }
+
+
+
+
 
 
 

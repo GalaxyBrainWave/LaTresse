@@ -33,6 +33,26 @@
     display: flex;
 }
 
+.jcc {
+    justify-content: center;
+}
+
+.icon-fill-standard {
+    fill: var(--beige);
+}
+
+.icon-fill-active {
+    fill: var(--ochre);
+}
+
+.icon-fill-blue-medium {
+    fill: var(--blue-medium);
+}
+
+.icon-fill-blue-light {
+    fill: var(--blue-light);
+}
+
 input {
     font-size: 14px;
 }
@@ -44,6 +64,53 @@ input[type="file"] {
 .opac50 {
     opacity: 50%;
 }
+
+.ml48 {
+    margin-left: 48px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+
+/* The Modal (background) */
+#modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Get on top */
+    left: 0; /* Start at the top left corner */
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(24, 46, 73,0.85); /* Black w/ opacity */
+    place-items: center; /* center vertically and horizontally */
+  }
+  
+  
+  /* The Close Button */
+  #modal-close-btn {
+    position: absolute; /* Position absolutely inside the modal */
+    top: 15px; /*Position near the top-right*/
+    right: 35px;
+    color: var(--beige);
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s; /* Transition for 0.3s */
+    cursor: pointer; /* change the mouse cursor to pointer to indicate a possible interaction */
+  }
+  
+  #modal-close-btn:hover,
+  #modal-close-btn:focus {
+    color: var(--ochre);
+  }
+  
+  #big-img {
+      width: auto; /* Let images display in their natural size*/
+      height: auto;
+      max-width: 95vw; /* But don't get larger than the screen*/
+      max-height: 95vh; /* Don't get higher than the screen*/
+  }
 
 @media screen and (min-width: 520px) {
     .accueilrs {

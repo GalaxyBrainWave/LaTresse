@@ -1,24 +1,25 @@
 const bmCardsContainer = document.getElementById('bmcards-container');
 
 // Get the button that opens the modal
-var likeButtonsList = document.getElementsByClassName("ht-like-btn");
+let likeButtonsList = document.getElementsByClassName("like-btn");
+
 
 for (let likeButton of likeButtonsList) {
-  likeButton.addEventListener('click', htlike);
+  likeButton.addEventListener('click', htLike);
 }
 
 
-function htlike(event) {
-  let clickedElement = event.target;
-  let currentLikeIcon = clickedElement.closest('.ht-like-btn');
+async function htLike(event) {
+  const clickedElement = event.target;
+  const currentLikeIcon = clickedElement.closest('.like-btn');
   currentLikeIcon.classList.add('opac50');
-  let cardId = currentLikeIcon.getAttribute('data-card');
-  let hasLiked = currentLikeIcon.getAttribute('data-liked');
-  let likeCounter = document.getElementById('like-count-' + cardId);
+  const cardId = currentLikeIcon.getAttribute('data-card');
+  const hasLiked = currentLikeIcon.getAttribute('data-liked');
+  const likeCounter = document.getElementById('like-count-' + cardId);
   let numberOfLikes = +likeCounter.innerText;
-  let path1 = document.getElementById('path1-' + cardId);
-  let path2 = document.getElementById('path2-' + cardId);
-  let likeData = {
+  const path1 = document.getElementById('path1-' + cardId);
+  const path2 = document.getElementById('path2-' + cardId);
+  const likeData = {
     cardId: cardId,
     hasLiked: hasLiked,
     userId: userId

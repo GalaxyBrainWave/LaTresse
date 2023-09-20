@@ -2,7 +2,7 @@
   session_name('La_Tresse');
   session_start();
   // to be able to use the sanitize() function
-  require_once "utils.php";
+  require_once "../tools/utils.php";
   require_once "../Model/User.php";
   // get hold of the user's object
   $user = User::getUserDetails($_SESSION['user_id']);

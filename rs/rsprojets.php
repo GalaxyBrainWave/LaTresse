@@ -1,13 +1,16 @@
 <?php
-    require_once "phpinclude/rs_pagetop.php";
+  require_once "phpinclude/rs_pagetop.php";
+  require_once "../Model/Project.php";
 
-    $accueil_active = '';
-    $projets_active = 'navbar-active';
-    $reseau_active = '';
-    $creer_active = '';
-    $profil_active = '';
-    $notifications_active = '';
 
+  $accueil_active = '';
+  $projets_active = 'navbar-active';
+  $reseau_active = '';
+  $creer_active = '';
+  $profil_active = '';
+  $notifications_active = '';
+
+    
 ?>
 
     <title>La Tresse - Projets</title>
@@ -33,173 +36,21 @@
       </select>
       <!-- compléter tout ceci en JS -->
     </div>
-
-    <div class="rs_cards_container">
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
+    <div id="project-list-centerer">
+      <div class="rs_cards_container" id="project-list-container">
+        <!-- <div class="rs_card">
+          <h3>Passerelle De Mémoire</h3>
+          <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
+          </p>
+        </div> -->
       </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
-      <div class="rs_card">
-        <h3>Passerelle De Mémoire</h3>
-        <img src="../img/rs/pdm.png" alt="Passerelle de mémoire">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quos, obcaecati molestias assumenda similique, soluta odit enim voluptates saepe libero deserunt reprehenderit in laboriosam eligendi nam tempora voluptas quaerat recusandae.
-        </p>
-      </div>
-
     </div>
   </main>
-
     
+  <script> const projectsList = <?= Project::findAll() ?>;</script>
   <script src="../js/burger.js"></script>
+  <script src="../js/display_projects.js"></script>
 </body>
 </html>

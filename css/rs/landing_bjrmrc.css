@@ -1,8 +1,8 @@
 
 .bjrmrc {
     padding: 40px 40px 20px;
-    background-color: var(--green);
-    box-shadow: 0px 3px 0px 0px var(--ochre);
+    background-color: var(--darkgreen);
+    background: linear-gradient(180deg, var(--green) 0%, var(--darkgreen) 100%);
     margin-bottom: 32px;
 }
 
@@ -29,11 +29,12 @@
     border-radius: 10px;
     color: var(--ochre);
     background: linear-gradient(180deg, var(--blue) 0%, var(--darkblue) 100%);
-
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 4px;
-    border: 2px solid var(--beige);
+	box-shadow: -1px -1px 0px 0px var(--blue-medium);
+
 }
 
 .nice-blue-button p {
@@ -50,7 +51,7 @@
     .bjrmrc {
         width: 500px;
         border-radius: 10px;
-        box-shadow: 1px 1px 4px 2px var(--ochre);
+        box-shadow: 1px 1px 5px 0px var(--ochre);
     }
     .nice-blue-button p {
         color: var(--ochre);

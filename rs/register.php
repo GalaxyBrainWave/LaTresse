@@ -3,7 +3,7 @@
   session_start();
 
   // to make sure that the sanitize() function is available
-  require_once "utils.php";
+  require_once "../tools/utils.php";
 
   // only execute the following code if the form has been filled,  
   // which means the user has submitted the register form

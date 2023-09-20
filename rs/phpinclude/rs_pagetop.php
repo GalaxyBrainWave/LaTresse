@@ -1,13 +1,42 @@
 <?php 
-  session_name('La_Tresse');
-  session_start();
-  if (!isset($_SESSION['user_id'])) {
-    header("Location: ../connexion.php");
-    exit();
+  session_name('La_Tresse');  // keep the user
+  session_start();            // connected
+
+  if (!isset($_SESSION['user_id'])) { // if no session exists
+    header("Location: ../connexion.php"); // redirect to connexion.php
+    exit(); // don't linger here
+  }
+  if (!isset($_SESSION['actualized']) || time() - $_SESSION['actualized'] > 24*60*60 ) {
+    // $_SESSION['actualized'] = time();
+    // // Parent process
+    // $pid = pcntl_fork();
+
+    // if ($pid === -1) {
+    //     // Forking failed. handle
+    // } elseif ($pid === 0) {
+    //     // Child process
+
+    //     // Close standard input, output, and error streams to detach from the terminal
+    //     fclose(STDIN);
+    //     fclose(STDOUT);
+    //     fclose(STDERR);
+
+    //     // Run the background script
+    //     include('update_user_info.php');
+
+    //     // Exit the child process
+    //     exit(0);
+    // } else {
+    //     // Parent process
+    //     // The child process ID ($pid) is returned here
+
+    //     // You can continue executing code in the parent process, if needed
+    //     echo "Child process started with PID: $pid\n";
+    // }
   }
 ?>
-
-<!DOCTYPE html>
+<!-- Standard HTML page top -->
+<!DOCTYPE html> 
 <html lang="fr">
 
 <head>
