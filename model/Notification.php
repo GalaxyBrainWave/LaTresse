@@ -1,32 +1,35 @@
 <?php 
+  require_once "../tools/utils.php";
   class Notification {
 
     private int $nfId;
     private string $nfTextContent;
     private DateTime $nfDateTime;
-    private int $nfOriginUser;
+    private ?int $nfOriginUser;
+    private ?int $nfDestinationUser;
     private ?int $nfOriginProjectId;
     private ?int $nfOriginHelloThanksId;
     private ?int $nfOriginCommentId;
+    private ?bool $isRead;
 
 
 
-    public function __construct($nfId = 0, $nfTextContent, $nfOriginUser, 
-    $nfOriginProjectId, $nfOriginHelloThanksId, $nfOriginCommentId)
+    public function __construct($nfId = 0, $nfTextContent ='', $nfOriginUser = 0, $nfDestinationUser = 0, $nfOriginProjectId = 0, $nfOriginHelloThanksId = null, $nfOriginCommentId = null, $isRead = false)
     {
       $this->nfId = $nfId;
       $this->nfTextContent = $nfTextContent;
       $this->nfDateTime = new DateTime();
       $this->nfOriginUser = $nfOriginUser;
+      $this->nfDestinationUser = $nfDestinationUser;
       $this->nfOriginProjectId = $nfOriginProjectId;
       $this->nfOriginHelloThanksId = $nfOriginHelloThanksId;
       $this->nfOriginCommentId = $nfOriginCommentId;
+      $this->isRead = $isRead;
     }
 
 
 
-    private static $attributeList = ["nfId", "nfTextContent", "nfOriginUser", "nfOriginProjectId", 
-    "nfOriginHelloThanksId", "nfOriginCommentId"];
+    private static $attributeList = ["nfId", "nfTextContent", "nfOriginUser", "nfDestinationUser", "nfOriginProjectId", "nfOriginHelloThanksId", "nfOriginCommentId", "isRead"];
     
     public function __get(string $attribute) {
       if (in_array($attribute, self::$attributeList)) {
@@ -48,30 +51,32 @@
       require_once "Database.php";
       $db = new Database();
       $pdo = $db->connect();
-      if ($this->nfId > 0) {
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+      if (+$this->nfId > 0) {
         // this means the object was retrieved from the DB
-        $stmt = "UPDATE notifications SET (nf_content, ht_id, cm_id) VALUES (:nf_content, ht_id, cm_id);";
-        $stmt .= "WHERE cm_id = :id;";
+        // $stmt = "UPDATE notifications SET (nf_content, ht_id, cm_id) VALUES (:nf_content, ht_id, cm_id);";
+        // $stmt .= "WHERE cm_id = :id;";
+        // $query = $pdo-> prepare($stmt);
+        // $query-> bindParam(":cm_text_content", $this->cm_text_content);
+        // $query-> bindParam(":cm_id", $this->nfOriginCommentId);
+
+        // return $query-> execute();
+      } else if (+$this->nfId === 0) {
+        // this means it's a new entry in in the DB
+        $stmt = "INSERT INTO notifications (nf_content, nf_datetime, pj_id, cm_id, origin_user, destination_user, is_read) ";
+        $stmt .= "VALUES (:nf_content, :nf_datetime, :pj_id, :cm_id, :origin_user, :destination_user, :is_read)";
+        file_put_contents('log.txt', var_export($stmt, true) . PHP_EOL, FILE_APPEND);
         $query = $pdo-> prepare($stmt);
-        $query-> bindParam(":cm_text_content", $this->cm_text_content);
-        $query-> bindParam(":cm_id", $this->nfOriginCommentId);
+        $query-> bindValue(":nf_content", $this->nfTextContent, PDO::PARAM_STR);
+        $query-> bindValue(":nf_datetime", $this->nfDateTime->format('Y/m/d H:i:s'), PDO::PARAM_STR);
+        $query-> bindValue(":pj_id", $this->nfOriginProjectId, PDO::PARAM_INT);
+        $query-> bindValue(":cm_id", $this->nfOriginCommentId, PDO::PARAM_INT);
+        $query-> bindValue(":origin_user", $this->nfOriginUser, PDO::PARAM_INT);
+        $query-> bindValue(":destination_user", $this->nfDestinationUser, PDO::PARAM_INT);
+        $query-> bindValue(":is_read", $this->isRead, PDO::PARAM_INT);
 
-        return $query-> execute();
-      } else if ($this->cmId === 0) {
-        // this means it's a new object that's being created (not present in the DB)
-
-        // set up the query
-        $stmt = "INSERT INTO comments (cm_text_content, cm_date_creation, cm_author, ht_id, pj_id, cm_parent) ";
-        $stmt .= "VALUES (:cm_text_content, :cm_date_creation, :cm_author, :ht_id, :pj_id, :cm_parent)";
-        $query = $pdo-> prepare($stmt);
-        $query-> bindParam(":cm_text_content", $this->cm_text_content, PDO::PARAM_STR);
-        $query-> bindParam(":cm_date_creation", $this->cm_date_creation, PDO::PARAM_STR);
-        $query-> bindParam(":cm_author", $this->cm_author, PDO::PARAM_INT);
-        $query-> bindParam(":ht_id", $this->ht_id, PDO::PARAM_INT);
-        $query-> bindParam(":pj_id", $this->pj_id, PDO::PARAM_INT);
-        $query-> bindParam(":cm_parent", $this->cm_parent, PDO::PARAM_STR);
-
-        return $query-> execute();
+        return $query->execute();
       } else {
         return false;
       }
@@ -127,10 +132,68 @@
 
 
 
+  // this method is called in the header to check for new notifications
+  /**
+   * @param int $userId
+  * @return int number of new notifications
+  */
+  public static function getNumberOfNewNotifications(int $userId) {
+    $sql = "
+      SELECT nf_id 
+      FROM notifications 
+      WHERE destination_user = :user_id
+      AND is_read = 0
+    ";
+    $notifications = userFetcher($sql, $userId);
+    return count($notifications);
+  }
 
 
 
+  // this method is called in rsnotifications.php to load the user's new notifications
+  /**
+   * @param int $userId
+  * @return array array of notifications
+  */
+  public static function getNew(int $userId) {
+    $sql = "
+      SELECT notifications.* , users.first_name, users.avatar_url
+      FROM notifications
+      JOIN users ON notifications.origin_user = users.user_id
+      WHERE destination_user = :user_id
+      AND is_read = 0
+      ORDER BY nf_datetime DESC
+    ";
+    $notifications = userFetcher($sql, $userId);
+    $sql = "
+      UPDATE notifications
+      SET is_read = 1
+      WHERE destination_user = :user_id
+      AND is_read = 0
+    ";
+    // paramExecuter('user_id',$userId, $sql);
+    return $notifications;
+  }
 
+
+
+  // this method is called in rsnotifications.php to load the user's new notifications
+  /**
+   * @param int $userId
+  * @return array stringified json to pass on to a js variable
+  */
+  public static function getOld(int $userId) {
+    $sql = "
+      SELECT notifications.* , users.first_name, users.avatar_url
+      FROM notifications
+      JOIN users ON notifications.origin_user = users.user_id
+      WHERE destination_user = :user_id
+      AND is_read = 1
+      ORDER BY nf_datetime DESC
+    ";
+    $notifications = userFetcher($sql, $userId);
+    return $notifications;
+  }
 
 
 

@@ -668,11 +668,6 @@
 
 
           
-    public function loadAllUsers() {
-      require_once "User.php";
-      $this->users = User::findById($this->userId);
-    }
-
 
 
 

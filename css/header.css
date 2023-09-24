@@ -82,6 +82,8 @@ nav ul li p
     transform: translate(0,2px);
 }
 
+
+
 .navbar-icons {
     width: 30px;
     height: 30px;
@@ -99,6 +101,8 @@ nav #menu_container .navbar-active .navbar-icons path {
     fill: var(--ochre-medium);
     stroke: var(--ochre-medium);
 }
+
+
 
 .navbar-active p {
     color: var(--ochre-medium);
@@ -189,5 +193,8 @@ nav #menu_container .navbar-active .navbar-icons path {
 
     #navbar_submenu_container:hover .navbar_submenu{
         display: flex;
+    }
+    nav #menu_container .navbar-active {
+        border-bottom: solid 2px var(--ochre-medium);
     }
 }

@@ -9,6 +9,7 @@
     padding-left: 25px;
     border-bottom: solid 1px var(--blue-light);
     border-left: solid 1px var(--blue-light);
+    z-index: 2;
 }
 
 .rslayout header {
@@ -46,6 +47,25 @@ nav #menu_container .navbar-active .navbar-icons,
 nav #menu_container .navbar-active .navbar-icons path {
     fill: var(--ochre-medium);
     stroke: var(--ochre-medium);
+}
+
+#notification-icon-container {
+    position: relative;
+    /* user-select: none; */
+}
+
+#notification-badge {
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 20%;
+    right: 24px;
+}
+
+#notification-badge p {
+    font-size: 14px;
+    padding: 0 4px;
+    font-weight: 600;
 }
 
 @media screen and (min-width: 915px) {

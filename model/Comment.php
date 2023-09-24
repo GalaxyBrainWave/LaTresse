@@ -9,25 +9,23 @@
     private DateTime $cmMomentCreation;
     private int $cmAuthor;
     private ?int $projectId;
-    private ?int $helloThanksId;
     private ?int $cmParentId;
 
 
 
-    public function __construct($cmTextContent, $cmAuthor, $projectId = 0, $helloThanksId = 0, $cmId = 0, $cmParentId = 0)
+    public function __construct($cmTextContent, $cmAuthor, $projectId = 0, $cmId = 0, $cmParentId = 0)
     {
       $this->cmId = $cmId;
       $this->cmTextContent = $cmTextContent;
       $this->cmMomentCreation = new DateTime();
       $this->cmAuthor = $cmAuthor;
       $this->projectId = $projectId;
-      $this->helloThanksId = $helloThanksId;
       $this->cmParentId = $cmParentId;
     }
 
 
 
-    private static $attributeList = ["cmId", "cmTextContent", "cmAuthor", "projectId", "helloThanksId", "cmParentId"];
+    private static $attributeList = ["cmId", "cmTextContent", "cmAuthor", "projectId", "cmParentId"];
     
     public function __get(string $attribute) {
       if (in_array($attribute, self::$attributeList)) {
@@ -61,13 +59,12 @@
         // this means it's a new object that's being created (not present in the DB)
 
         // set up the query
-        $sql = "INSERT INTO comments (cm_text_content, cm_moment_creation, cm_author, ht_id, pj_id, cm_parent) ";
-        $sql .= "VALUES (:cm_text_content, :cm_moment_creation, :cm_author, :ht_id, :pj_id, :cm_parent)";
+        $sql = "INSERT INTO comments (cm_text_content, cm_moment_creation, cm_author, pj_id, cm_parent) ";
+        $sql .= "VALUES (:cm_text_content, :cm_moment_creation, :cm_author, :pj_id, :cm_parent)";
         $query = $pdo-> prepare($sql);
         $query-> bindParam(":cm_text_content", $this->cmTextContent, PDO::PARAM_STR);
         $query-> bindParam(":cm_moment_creation", $this->cmMomentCreation, PDO::PARAM_STR);
         $query-> bindParam(":cm_author", $this->cmAuthor, PDO::PARAM_INT);
-        $query-> bindParam(":ht_id", $this->helloThanksId, PDO::PARAM_INT);
         $query-> bindParam(":pj_id", $this->projectId, PDO::PARAM_INT);
         $query-> bindParam(":cm_parent", $this->cmParentId, PDO::PARAM_STR);
 
@@ -87,9 +84,6 @@
       if ($this->projectId !== 0) {
         $values['cm_pj_id'] = $this->projectId;
       }
-      if ($this->helloThanksId !== 0) {
-        $values['cm_ht_id'] = $this->helloThanksId;
-      }
       if ($this->projectId !== 0) {
         $values['cm_parent_id'] = $this->cmParentId;
       }
@@ -99,6 +93,22 @@
 
 
 
+    // Trouver les commentaires par leur id
+    public static function findById(int $cmId) {
+      $db = new Database();
+      $pdo = $db->connect();
+      $sql = "SELECT * FROM comments WHERE cm_id = :cm_id;";
+      $query = $pdo->prepare($sql);
+      $query->bindParam(":cm_id", $cmId, PDO::PARAM_INT);
+      // $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, "Project");
+      $query->setFetchMode(PDO::FETCH_ASSOC);
+      if ($query->execute()) {
+        $results = $query->fetchAll();
+        $results = $results[0];
+        $comment = new Comment($results['cm_content'], +$results['cm_author'], +$results['cm_pj_id'], +$results['cm_id'], +$results['cm_parent_id']);
+        return $comment;
+      } // erreur...
+    }
 
 
 

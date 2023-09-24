@@ -198,7 +198,7 @@ function pichandler(array $fileInfo, int $targetID, string $pathComponent1, stri
 
 
 // this method is called when there is a SELECT / fetch operation
-// to be made on the database and the key value is userId
+// to be made on the database and there is a placeholder for userId
   /**
   * @param string $stmt an sql SELECT statement containing user_id as key
   * @return array|false containing the fetched results
@@ -220,6 +220,60 @@ function pichandler(array $fileInfo, int $targetID, string $pathComponent1, stri
 
 
 
+// this method is called when there is a SELECT / fetch operation
+// to be made on the database and there is a custom placeholder
+  /**
+  * @param string $placeholder
+  * @param int $idValue the id value referred to by the placeholder
+  * @param string $stmt
+  * @return array|false containing the fetched results
+  */
+  function paramFetcher($placeholder, $idValue, $stmt) {
+    $db = new Database();
+    $pdo = $db->connect();
+    $sql = $stmt;
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':'. $placeholder, $idValue, PDO::PARAM_INT);
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    if ($query->execute()) {
+      $results = $query->fetchAll();
+      return $results;
+    } else {
+      return false;
+    }
+  }
+
+
+
+// this method is called to execute a request with a parameter but without returned data
+  /**
+  * @param string $stmt an sql statement
+  * @return bool 
+  */
+  function paramExecuter($placeholder, $idValue, $stmt) {
+    $db = new Database();
+    $pdo = $db->connect();
+    $sql = $stmt;
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':'. $placeholder, $idValue, PDO::PARAM_INT);
+    return $query->execute();
+  }
+
+
+
+// this method is called to execute a request without parameter and without returned data
+  /**
+  * @param string $stmt an sql statement
+  * @return bool 
+  */
+  function executer($stmt) {
+    $db = new Database();
+    $pdo = $db->connect();
+    $sql = $stmt;
+    $query = $pdo->prepare($sql);
+    // $query->setFetchMode(PDO::FETCH_ASSOC);
+    return $query->execute();
+  }
 
 
 ?>

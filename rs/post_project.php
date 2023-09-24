@@ -84,6 +84,7 @@
             }
           }
           if (Project::update($picvalues, $pjId)) {
+            Project::createNotifications($pjId);
             header('Location: rspageprojet.php?id=' . $pjId);
             exit();
           } // error ...

@@ -2,6 +2,7 @@
   require_once "../tools/utils.php";
   require_once "Database.php";
   require_once "Comment.php";
+  require_once "User.php";
 				
   class Project {
     private int $pjId;
@@ -409,6 +410,57 @@
   }
 
 
+  
+
+  // this method is called one the user's page
+  /**
+  * @param int $userId
+  * @return string|bool stringified json to pass on to a js variable
+  */
+  public static function findByUser(int $userId) {
+    $sql = "
+    SELECT projects.*, users.first_name, users.avatar_url
+    FROM projects
+    JOIN users ON projects.pj_author = users.user_id
+    WHERE projects.pj_author = :user_id
+    ORDER BY pj_creation_date DESC";
+    $projectsList = userFetcher($sql, $userId);
+    foreach($projectsList as &$project) {
+      $tempProject = new Project($project['pj_id']);
+      $likes = $tempProject->getLikes();
+      $project['total_likes'] = $likes['total_likes'];
+      $nbComments = Comment::count1stLevelCommentsByProjectId($project['pj_id']);
+      $project['nbComments'] = $nbComments['COUNT(cm_id)'];
+    }
+    unset($project);
+    return json_encode($projectsList);
+  }
+
+
+
+
+  // this method is called when a user posts a project to notify everyone else
+  /**
+  * @param int $pjId
+  * @return bool 
+  */
+  public static function createNotifications(int $pjId) {
+    $sql = "
+    SELECT user_id
+    FROM users
+    ";
+    $userIdList = fetcher($sql);
+    if($userIdList) {
+      foreach($userIdList as $userId) {
+        $tempProject = new Project($project['pj_id']);
+        $likes = $tempProject->getLikes();
+        $project['total_likes'] = $likes['total_likes'];
+        $nbComments = Comment::count1stLevelCommentsByProjectId($project['pj_id']);
+        $project['nbComments'] = $nbComments['COUNT(cm_id)'];
+      }
+    }
+    return json_encode($projectsList);
+  }
 
 
 

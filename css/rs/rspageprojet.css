@@ -149,7 +149,7 @@
   padding: 16px;
   margin-top: 48px;
   margin-bottom: 16px;
-  background-color: #122337;
+  background-color: var(--blue-mediumdark);
   border-radius: 0 16px 16px 16px;
 }
 /* 

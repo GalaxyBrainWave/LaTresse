@@ -50,7 +50,7 @@
   </main>
     
   <script> const projectsList = <?= Project::findAll() ?>;</script>
-  <script src="../js/burger.js"></script>
   <script src="../js/display_projects.js"></script>
+  <script src="../js/burger.js"></script>
 </body>
 </html>

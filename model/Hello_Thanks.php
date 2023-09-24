@@ -6,9 +6,9 @@
   class Hello_Thanks {
 
     private int $htId;
-    private string $htTextContent;
+    private string|null $htTextContent;
     private DateTime $htMomentCreation;
-    private string $htImgURL;
+    private string|null $htImgURL;
     private ?int $htAuthor;
 
 
@@ -268,6 +268,37 @@
   }
 
 
+
+  // this method is called one the user's page
+  /**
+  * @param int $userId
+  * @return array|bool stringified json to pass on to a js variable
+  */
+  public static function findByUser(int $userId) {
+    $sql = "
+    SELECT hello_thanks.*, users.first_name, users.avatar_url
+    FROM hello_thanks
+    JOIN users ON hello_thanks.ht_author = users.user_id
+    WHERE hello_thanks.ht_author = :user_id
+    ORDER BY ht_creation_datetime DESC
+    -- LIMIT 15
+    ";
+    $htList = userFetcher($sql, $userId);
+    foreach($htList as &$ht) {
+      $sql = "
+        SELECT COUNT(ht_reactions.htr_user_id) AS total_likes
+        /*CASE
+          WHEN MAX(ht_reactions.htr_user_id = :current_user_id) = 1 
+          THEN 1
+          ELSE 0
+        END AS has_liked*/
+        FROM ht_reactions WHERE ht_reactions.htr_ht_id = :ht_id;
+      ";
+      $ht['total_likes'] = paramFetcher('ht_id', +$ht['ht_id'], $sql)[0]['total_likes'];
+    }
+    unset($ht);
+    return $htList;
+  }
 
   }
 

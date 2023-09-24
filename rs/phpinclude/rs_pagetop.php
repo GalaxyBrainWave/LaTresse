@@ -6,6 +6,11 @@
     header("Location: ../connexion.php"); // redirect to connexion.php
     exit(); // don't linger here
   }
+  
+  require_once "../Model/Notification.php";
+  // here notifications is an int, the number of notifications
+  $notifications = Notification::getNumberOfNewNotifications($_SESSION['user_id']);
+
   if (!isset($_SESSION['actualized']) || time() - $_SESSION['actualized'] > 24*60*60 ) {
     // $_SESSION['actualized'] = time();
     // // Parent process

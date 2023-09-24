@@ -1,5 +1,4 @@
 const projectListContainer = document.getElementById('project-list-container');
-console.log(projectsList[2].nbComments);
 const projectsLisLength = projectsList.length
 renderProjectList(projectsList);
 
