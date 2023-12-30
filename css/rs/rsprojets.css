@@ -18,6 +18,10 @@
   margin-bottom: 32px;
 }
 
+.rs_card:hover {
+  background-color: var(--blue-mediumdark);
+}
+
 .rs_card p {
   margin: 16px;
   text-align: center;

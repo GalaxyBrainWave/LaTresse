@@ -173,6 +173,26 @@ function pichandler(array $fileInfo, int $targetID, string $pathComponent1, stri
   } // une erreur s'est produite...
 }
 
+function picUpdater(array $fileInfo, string $oldURL, string $urlStart) {
+  $picOriginalName = $fileInfo['name'];
+  $fileExtension = pathinfo($picOriginalName, PATHINFO_EXTENSION);
+  if (Media::checkImgExtension($fileExtension)) {
+    $picPath = $urlStart . uniqid() . '.' . $fileExtension;
+    $picTmpName = $fileInfo['tmp_name'];
+    if (file_exists($oldURL)) {
+      unlink($oldURL);
+    }
+    if (move_uploaded_file($picTmpName, $picPath)) {
+      return $picPath;
+    } else {
+      return false;
+    }
+  } else {
+    // error wrong file extension
+    return false;
+  }
+}
+
 
 
 // this method is called when there is a SELECT / fetch operation
@@ -274,6 +294,33 @@ function pichandler(array $fileInfo, int $targetID, string $pathComponent1, stri
     // $query->setFetchMode(PDO::FETCH_ASSOC);
     return $query->execute();
   }
+
+
+
+  // this function is called to execute a request without parameter and without returned data
+  /**
+  * @param string $tableName name of the target table
+  * @param int $idName name of the id in the table
+  * @param int $idValue value of the id attribute
+  * @return bool 
+  */
+  function deleter($tableName, $idName, $idValue) {
+    $db = new Database();
+    $pdo = $db->connect();
+    $sql = 'DELETE FROM ' . $tableName . ' WHERE ' . $idName . ' = :idvalue';
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':idvalue', $idValue);
+    return $query->execute();
+  }
+
+
+  // function to make links clickable
+  function includeLinks(string $text) {
+    $hyperlinkPattern = '/(https?:\/\/\S+)/';
+    $textWithLinks = preg_replace($hyperlinkPattern, '<a href="$1" target="_blank">$1</a>', $text);
+    return $textWithLinks;
+  }
+
 
 
 ?>

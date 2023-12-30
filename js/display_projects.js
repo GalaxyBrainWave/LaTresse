@@ -7,11 +7,10 @@ function renderProjectList(projectList) {
   // projectsList.foreach((project)=> {
     const projectContainer = document.createElement('a');
     projectContainer.href = 'rspageprojet.php?id=' + projectList[i].pj_id;
-    projectContainer.target = "_blank";
     projectContainer.classList.add('w100');
     const chunk1 = '<div class="project-container rsprojets-container"><div class="project-header"><div class="project-author"><img src="';
     const chunk2 = '" alt="Photo de profil" class="bmcard_profile_pic"><p class="project-author-name">';
-    const chunk3 = '</p></div><p class="project-date">le ';
+    const chunk3 = '</p></div><p class="project-date">Le ';
     const chunk4 = '</p></div><img src="';
     const chunk5 = '" alt="bannière du projet" class="project_banner"><div class="project_presentation"><h1>';
     const chunk6 = '</h1><div class="project-attributes"><div class="project-card"><svg class="project-category-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g><path class="icon-fill-blue-medium" opacity="0.8" d="M18.6695 2H16.7695C14.5895 2 13.4395 3.15 13.4395 5.33V7.23C13.4395 9.41 14.5895 10.56 16.7695 10.56H18.6695C20.8495 10.56 21.9995 9.41 21.9995 7.23V5.33C21.9995 3.15 20.8495 2 18.6695 2Z"></path><path class="icon-fill-blue-light" opacity="0.9" d="M7.24 13.4302H5.34C3.15 13.4302 2 14.5802 2 16.7602V18.6602C2 20.8502 3.15 22.0002 5.33 22.0002H7.23C9.41 22.0002 10.56 20.8502 10.56 18.6702V16.7702C10.57 14.5802 9.42 13.4302 7.24 13.4302Z"></path><path class="icon-fill-standard" d="M6.29 10.58C8.6593 10.58 10.58 8.6593 10.58 6.29C10.58 3.9207 8.6593 2 6.29 2C3.9207 2 2 3.9207 2 6.29C2 8.6593 3.9207 10.58 6.29 10.58Z"></path><path class="icon-fill-active" d="M17.7099 21.9999C20.0792 21.9999 21.9999 20.0792 21.9999 17.7099C21.9999 15.3406 20.0792 13.4199 17.7099 13.4199C15.3406 13.4199 13.4199 15.3406 13.4199 17.7099C13.4199 20.0792 15.3406 21.9999 17.7099 21.9999Z"></path></g></svg><p class="project_category tcenter">';
@@ -37,8 +36,9 @@ function renderProjectList(projectList) {
     } else {
       nbCommentaires = projectList[i].nbComments;
     }
-
-    const projectHtml = chunk1 + projectList[i].avatar_url + chunk2 + projectList[i].first_name + chunk3 + projectList[i].pj_creation_date + chunk4 + projectList[i].pj_bannerURL + chunk5 + projectList[i].pj_title + chunk6 + 'Aucune' + chunk7 + projectList[i].pj_location + chunk8 + projectList[i].pj_budget + chunk9 + projectList[i].pj_description.substring(0,400) + ' …' + chunk10 + totalLikes + chunk11 + nbCommentaires + chunk12;
+    const pjDate = new Date(projectList[i].pj_creation_date);
+    const pjYear = pjDate.getFullYear().toString().substring(2);
+    const projectHtml = chunk1 + projectList[i].avatar_url + chunk2 + projectList[i].first_name + chunk3 + pjDate.getDate() + '/' + pjDate.getMonth() + '/' + pjYear + chunk4 + projectList[i].pj_bannerURL + chunk5 + projectList[i].pj_title + chunk6 + 'Aucune' + chunk7 + projectList[i].pj_location + chunk8 + projectList[i].pj_budget + chunk9 + projectList[i].pj_description.substring(0,400) + ' …' + chunk10 + totalLikes + chunk11 + nbCommentaires + chunk12;
     projectContainer.innerHTML = projectHtml;
     projectListContainer.appendChild(projectContainer);
   // })

@@ -11,8 +11,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
-  justify-content: flex-start;
-  width: 100%;
+  justify-content: center;
   margin: auto;
 }
 

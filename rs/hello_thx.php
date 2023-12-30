@@ -5,6 +5,7 @@
   require_once "../Model/User.php";      
   // to be able to use the sanitize() function
   require_once "../tools/utils.php";
+  
   require_once "../Model/Media.php";
   require_once "../Model/Hello_Thanks.php";
   // get hold of the user's object

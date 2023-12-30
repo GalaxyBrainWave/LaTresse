@@ -51,16 +51,30 @@
       return '';
     }
   }
+  ?>
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/rs/rsmain.css">
+  <link rel="stylesheet" href="css/rs/variables.css">
+  <title>La Tresse - Connexion</title>
 
-  include "phpinclude/header.php";
+</head>
 
+<body>
+
+<?php include "phpinclude/header.php"
 ?>
 
+<main>
 <div id="register-page">
   <div class="register-left">
-    <h1>La Tresse</h1>
-    <img src="img/logo/tresseaux.png" alt="Logo de La Tresse">
-    <p id="register-left-tagline">Le réseau social de la Tresse<br>(slide show)</p>
+    <h1>Le réseau social de La Tresse</h1>
+    <img id="caroussel" src="img/caroussel/caroussel-1.jpg" alt="Logo de La Tresse">
+    <!-- <p id="register-left-tagline">Le réseau social de la Tresse<br>(slide show)</p> -->
   </div>
   <div class="register-right">
     <!-- // show the register form if the user is trying to register and has to come back here -->
@@ -97,8 +111,12 @@
         </div>
         <button class="yel-btn blue-border-btn">Connexion</button>
       </form>
-      <p id="pasdecompte">Vous n'avez pas encore de compte&nbsp;?</p>
-      <button class="yel-btn green-border-btn" id="login-retour">Inscription</button>
+      <div class="center">
+       <p id="pasdecompte">Vous n'avez pas encore de compte&nbsp;?</p>
+      </div>
+      <div class="center">
+        <button class="yel-btn green-border-btn" id="login-retour">Inscription</button>
+      </div>
     </div>
     
   </div>
@@ -106,6 +124,7 @@
 </div>
 
 <script src="js/connexion.js"></script>
+<script src="js/caroussel.js"></script>
 <?php
   include "phpinclude/longedging.php";
 ?>

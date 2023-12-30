@@ -8,10 +8,18 @@
       return 'dispnone';
     }
   }
+  $logoUrl = $_SESSION['colorMode'] === 'day' ? '../img/logo/logo1.png' : '../img/logo/logo3.png';
+  $colorCheckboxState = $_SESSION['colorMode'] === 'day' ? 'checked' : '';
 ?>
 
 <header class="bg_rsblue">
-  <img class="header_logo" src="../img/logo/logo3.png" alt="Logo de la Tresse">
+  <a href="../index.php">
+    <img id="header-logo" class="header_logo" src="<?= $logoUrl ?>" alt="Logo de la Tresse">
+  </a>
+  <label class="switch">
+    <input type="checkbox" id="color-checkbox" <?= $colorCheckboxState ?>>
+    <span class="slider"></span>
+  </label>
   <nav>
     <img id="nav_burger" class="pointer" src="../img/icons/burger3.png" alt="burger menu icon">
     <div id="menu_container">

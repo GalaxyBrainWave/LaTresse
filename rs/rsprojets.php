@@ -48,9 +48,12 @@
       </div>
     </div>
   </main>
-    
+  <?php
+include "phpinclude/rs_footer.php";
+?>
   <script> const projectsList = <?= Project::findAll() ?>;</script>
   <script src="../js/display_projects.js"></script>
   <script src="../js/burger.js"></script>
+	<script src="../js/color_checkbox.js"></script>
 </body>
 </html>

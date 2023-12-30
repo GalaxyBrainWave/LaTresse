@@ -8,6 +8,14 @@
   margin: auto;
 }
 
+#update-profile-icon {
+  fill: var(--beige);
+}
+
+#disconnect-icon {
+  fill: var(--beige);
+}
+
 .rs_user_banner {
   display: block;
   width: 100%;
@@ -78,7 +86,6 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 16px;
 }
 
 #scores p {
@@ -228,6 +235,11 @@
   margin-bottom: 32px;
 }
 
+.profile_score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 
 

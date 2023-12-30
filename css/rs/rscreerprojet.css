@@ -38,6 +38,38 @@
   opacity: 0.5;
 }
 
+.picinput-confirm-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin-top: 8px;
+}
+
+.picinput-confirm-icon path {
+  stroke: var(--beige);
+}
+
+.icon-container {
+  min-height: 24px;
+}
+
+#project-banner-input-container {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+#process-error {
+  display: grid;
+  place-items: center;
+}
+#process-error p {
+  color: white;
+  background-color: red;
+  padding: 4px 8px;
+}
+
+
 @media screen and (min-width: 850px) {
   .rscreerprojet .rscontent label[for="picinput"] {
     width: 250px;

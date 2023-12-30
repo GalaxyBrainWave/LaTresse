@@ -8,9 +8,14 @@
   justify-content: center;
 }
 
+.welcome-body {
+  background-color: var(--beige-to-blue-text);
+}
 
-
-
+.welcome-body p, 
+.welcome-body h1 {
+  color: var(--beige);
+}
 
 #welcome h1 {
   text-align: center;

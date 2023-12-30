@@ -20,7 +20,6 @@
       $attributesToUpdate["autodescription"] = sanitize($_POST["autodescription"]);
     }
   }
-
   // if some data has been received via files
   if (!empty($_FILES)) {
     // if the user sent an avatar
@@ -37,6 +36,7 @@
         $fileExtension = pathinfo($avatarOriginalName, PATHINFO_EXTENSION);
         // define the path to the file 
         $avatarPath = "../img/users/" . $user->userId . "/avatar." . $fileExtension;
+
         // if the file extension is .jpg or .jpeg or .png
         if (Media::checkImgExtension($fileExtension)) {
           // if the file was successfully moved to its destination

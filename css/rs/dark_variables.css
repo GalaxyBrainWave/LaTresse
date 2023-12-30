@@ -1,0 +1,53 @@
+
+
+:root {
+    --darkblue: #0c1725;
+    --blue-text: #182e49;
+    --beige: #fffced;
+    --blue: #034c8c;
+    --blue-medium: #007be7;
+    --blue-medium-dimmer: #2d7abe;
+    --blue-light: #9bcffd;
+    --green: #14a68c;
+    --darkgreen: #024539;
+    --green-medium: #21e9c5;
+    --green-light: #95ffec;
+    --darkochre: #25200c;
+    --ochre: #fbd629;
+    --ochre-medium: #ffe154;
+    --ochre-light: #fff176;
+    --beige-to-blue-text: #182e49;
+
+    --green50: rgba(20, 166, 140, 0.5);
+    --blue-mediumdark: #122337;
+    --blue-mediumtext: #153f72;
+    --project-header-bar: rgba(12,23,37, 0.5);
+
+    --nice-btn-top: #034c8c;
+    --nice-btn-btm: #0c1725;
+    --greenput-top: #14a68c;
+    --greenput-top-darker: #2e665d;
+    --greenput-btm: #024539;
+    --greenput-btm-lighter: #056150;
+    --links: #9bcffd;
+    --links-hover: #fcf4af;
+    --yelbtn-border: #fffced;
+}
+
+/* :root {
+  --green50: rgba(20, 166, 140, 0.5);
+  --blue-mediumdark: #fcf8cb;
+  --blue-mediumtext: rgb(228, 225, 190);
+  --project-header-bar: rgba(255, 252, 235, 0.7);
+  
+  --nice-btn-top: #034c8c;
+  --nice-btn-btm: #0c1725;
+  --greenput-top: #14a68c;
+  --greenput-btm: #024539;
+} */
+
+
+*
+{
+    color: #182e49;
+}

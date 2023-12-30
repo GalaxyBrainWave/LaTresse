@@ -26,7 +26,7 @@
         if (User::checkEmailUnicity($registerEmail)) { // if the email is new in the database
           if ($_POST["register-pwd"] === $_POST["register-pwd2"]) { // if the passwords match
             // create user object
-            $newUser = new User(0, $firstName, $registerEmail, $registerPwdHash, false);
+            $newUser = new User(0, $firstName, $registerEmail, $registerPwdHash, false, uniqid());
             // use its save method to enter the data in the database
             if ($newUser->save()) {
               // create the directory to store avatar and banner in img folder

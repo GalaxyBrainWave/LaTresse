@@ -18,7 +18,7 @@
                         <input type="email" placeholder="E-mail" name="email" id="email">
                     </div>
                 </div>
-                    <button type="submit" id="footer_cta_form_submit" class="button_yellow pointer">
+                    <button type="submit" id="footer_cta_form_submit" class="button_yellow_footer_cta pointer">
                         <p>
                             S'abonner
                         </p>

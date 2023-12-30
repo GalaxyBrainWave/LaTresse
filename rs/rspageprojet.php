@@ -18,6 +18,8 @@
     }
   }
 
+   
+
 
   if (!empty($_GET)) {
     if (isset($_GET['id'])) {
@@ -60,7 +62,6 @@
 
 
 ?>
-
   <title>La Tresse - <?= $project->pjTitle ?></title>
 
 </head>
@@ -70,6 +71,16 @@
   <div id="modal">
     <span id="modal-close-btn">&times;</span>
     <img src="" alt="photo associée à la publication" id="big-img">
+  </div>
+
+  <div id="confirm_modal" class="dispnone">
+    <div id="confirm_box">
+      <p id="confirm-message">Etes-vous certain.e de vouloir supprimer&nbsp;?</p>
+      <div id="confirm_modal_btns">
+        <p id="confirm_modal_y">Oui</p>
+        <p id="confirm_modal_n">Non</p>
+      </div>
+    </div>
   </div>
 
 <?php
@@ -87,12 +98,32 @@
             </p>
           </div>
         <p class="project-date">
-          le <?=  date('d/m/y', strtotime($project->pjCreationDateTime)) ?>
+          Le <?=  date('d/m/y', strtotime($project->pjCreationDateTime)) ?>
         </p>
       </div>
       <img src="<?= $project->pjBannerURL ?>" alt="bannière du projet" class="project_banner">
-      <div class="project_presentation">
-        <h1><?= $project->pjTitle ?></h1>
+      <div id="project-presentation" class="project_presentation">
+        <?php if(+$project->pjAuthor === +$_SESSION['user_id'] || (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] === 1)) { ?>
+          <div id="project-edit-icon-supercontainer">
+            <div class="edit-icon-container">
+              <svg class="edit-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="25" cy="25" r="10"/>
+                <circle cx="75" cy="25" r="10"/>
+                <circle cx="75" cy="75" r="10"/>
+                <circle cx="25" cy="75" r="10"/>
+              </svg>
+              <div class="edit-modal dispnone">
+                <ul>
+                  <li class="edit-btn"><p>Editer</p></li>
+                  <li class="delete-btn"><p>Supprimer</p></li>
+                </ul>
+              </div>
+            </div>
+          </div>          
+        <?php } ?>
+        <div id="project-title-container">
+          <h1 id="project-title"><?= $project->pjTitle ?></h1>
+        </div>
         <div class="project-attributes">
           <div class="project-card">
             <svg class="project-category-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g> 
@@ -117,9 +148,11 @@
             <p class="project_category tcenter"><?= $project->pjBudget ?>&nbsp;€</p>
           </div>
         </div>
-        <p>
-          <?= nl2br($project->pjDescription) ?>
-        </p>
+        <div id="description-container">
+          <p id="description">
+            <?= nl2br($project->pjDescription) ?>
+          </p>
+        </div>
       </div>
       <div id="project_reaction" class="project-reaction">
         <div class="like-btn" data-liked="<?= $projectLikesInfo['has_liked'] ?>" data-pj="<?= $pjId ?>">
@@ -171,39 +204,66 @@
         <?php foreach($fullCommentsList as $comment) { 
           $subcomments = $comment['subcomments']; /*var_dump($fullCommentsList); var_dump($subcomments);die();*/ ?>
           <div class="project_comment_body" id="cm<?= $comment['cm_id'] ?>">
-            <div data-cmid="<?= $comment['cm_id'] ?>" class="project_comment_itself">
+            <div data-cmid="<?= $comment['cm_id'] ?>" class="project_comment_itself general_comment">
               <div class="project_comment_header">
-                <img src="<?= $comment['avatar_url'] ?>" alt="Photo de profil" class="project_comment_header_pic">
-                <h3><?= $comment['first_name'] ?></h3>
-              </div>
-              <p>
-                <?= nl2br($comment['cm_content']) ?>
-              </p>
-              <div class="project_comment_reaction">
-                <div class="reactions_count_icons" data-liked="<?= $comment['has_liked'] ?>" data-cmid="<?= $comment['cm_id'] ?>">
-                  <svg width="20" height="20" viewBox="0 0 90 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path id="path1-cm<?= $comment['cm_id'] ?>" class="<?= like_btn_class($comment['has_liked']) ?>" d="M18.5 85L1.5 62.5C6.29746 50.4098 10.6441 45.7408 22 42C27.3943 41.2335 30.4774 41.5048 36 43L57.5 43.5C63 44.5 64 52.5 57.5 55.5L38 56C36.5 56.5 36.5 59 38 59.5H58C59.8725 59.1695 60.7786 58.7848 62 57.5L78 42C86.5 39 91 43.5 88 51.5L65.5 74C61.9829 77.7723 59.877 78.8437 56 78.5L45.5 77.5C30.0921 75.2017 23.9499 76.7544 18.5 85Z"/>
-                    <path id="path2-cm<?= $comment['cm_id'] ?>" class="<?= like_btn_class($comment['has_liked']) ?>" d="M85.0062 27.5001C82.0062 32.5 73.5062 38 66.0062 47.5001C64.7149 43.0428 61.5 39 59.0062 39.0001H40.0062C34.1302 38.6457 27 37.5 26.5062 37.0001C0.500718 14.5 29.5 -14 51.0062 11.0001C67.5062 -6.00003 92.0062 0.999996 85.0062 27.5001Z"/>
-                  </svg>
-                  <p class="<?= like_btn_class($comment['has_liked']) ?>" id="like-count-cm<?= $comment['cm_id'] ?>"><?= non0($comment['numberOfLikes']) ?></p>  
+                <div class="project_comment_header_author">
+                  <img src="<?= $comment['avatar_url'] ?>" alt="Photo de profil" class="project_comment_header_pic">
+                  <h3><?= $comment['first_name'] ?></h3>
                 </div>
-                <?php
-                  if($comment['numberOfSubcomments'] > 1) {
-                    $dispSubcommentsNumber = 'disp-subcomment-number';
-                    $showSubcomments = 'dispnone';
-                  } else {
-                    $dispSubcommentsNumber = 'dispnone';
-                    $showSubcomments = '';
-                  }
-                ?>
-                <p class="comment-nb-responses <?= $dispSubcommentsNumber ?>">Montrer <?= $comment['numberOfSubcomments'] ?> réponses</p>
+                <?php if(+$comment['cm_author'] === +$_SESSION['user_id'] || (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] === 1)) { ?>
+                  <div class="edit-icon-container">
+                    <svg class="edit-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="25" cy="25" r="10"/>
+                      <circle cx="75" cy="25" r="10"/>
+                      <circle cx="75" cy="75" r="10"/>
+                      <circle cx="25" cy="75" r="10"/>
+                    </svg>
+                    <div class="edit-modal dispnone">
+                      <ul>
+                        <li class="edit-btn"><p>Editer</p></li>
+                        <li class="delete-btn"><p>Supprimer</p></li>
+                      </ul>
+                    </div>
+                  </div>
+                <?php } ?>
+              </div>
+              <div class="general_comment_itself_content_container">
+                <p class="comment_itself_content">
+                  <?= nl2br(includeLinks($comment['cm_content'])) ?>
+                </p>
+              </div>
+              <div class="project_comment_footer">
+                <div class="project_comment_reaction">
+                  <div class="reactions_count_icons" data-liked="<?= $comment['has_liked'] ?>" data-cmid="<?= $comment['cm_id'] ?>">
+                    <svg width="20" height="20" viewBox="0 0 90 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path id="path1-cm<?= $comment['cm_id'] ?>" class="<?= like_btn_class($comment['has_liked']) ?>" d="M18.5 85L1.5 62.5C6.29746 50.4098 10.6441 45.7408 22 42C27.3943 41.2335 30.4774 41.5048 36 43L57.5 43.5C63 44.5 64 52.5 57.5 55.5L38 56C36.5 56.5 36.5 59 38 59.5H58C59.8725 59.1695 60.7786 58.7848 62 57.5L78 42C86.5 39 91 43.5 88 51.5L65.5 74C61.9829 77.7723 59.877 78.8437 56 78.5L45.5 77.5C30.0921 75.2017 23.9499 76.7544 18.5 85Z"/>
+                      <path id="path2-cm<?= $comment['cm_id'] ?>" class="<?= like_btn_class($comment['has_liked']) ?>" d="M85.0062 27.5001C82.0062 32.5 73.5062 38 66.0062 47.5001C64.7149 43.0428 61.5 39 59.0062 39.0001H40.0062C34.1302 38.6457 27 37.5 26.5062 37.0001C0.500718 14.5 29.5 -14 51.0062 11.0001C67.5062 -6.00003 92.0062 0.999996 85.0062 27.5001Z"/>
+                    </svg>
+                    <p class="<?= like_btn_class($comment['has_liked']) ?>" id="like-count-cm<?= $comment['cm_id'] ?>"><?= non0($comment['numberOfLikes']) ?></p>  
+                  </div>
+                  <?php
+                    if($comment['numberOfSubcomments'] > 1) {
+                      $dispSubcommentsNumber = 'disp-subcomment-number';
+                      $showSubcomments = 'dispnone';
+                    } else {
+                      $dispSubcommentsNumber = 'dispnone';
+                      $showSubcomments = '';
+                    }
+                  ?>
+                </div>
+                <p><?= date('d/m/y H:i', strtotime($comment['cm_creation_datetime'])) ?></p>
+              </div>
+              <div class="center">
+                <p class="comment-nb-responses <?= $dispSubcommentsNumber ?>">
+                  Montrer <?= $comment['numberOfSubcomments'] ?> réponses
+                </p>
               </div>
             </div>
 
             <?php if ($comment['numberOfSubcomments'] === 0) { ?>
               <div class="center">
                 <button class="reply_btn nice-blue-button">
-                  <img class="activity_card_item_icon" src="../img/icons/repondre.svg">
+                  <img class="reply_btn_icon" src="../img/icons/repondre.svg">
                   <p class="toggle-comment-form">Répondre</p>
                 </button>
               </div>
@@ -214,22 +274,59 @@
                 <div class="leftbar"></div>
                 <div class="project_subcomments_container">
                   <?php foreach($subcomments as $subcomment) {?>
-                    <div class="project_subcomment">
+                    <div data-cmid="<?= $subcomment['cm_id'] ?>" class="project_subcomment general_comment">
                       <div class="project_subcomment_header">
-                        <img src="<?= $subcomment['avatar_url'] ?>" alt="Photo de profil" class="project_comment_header_pic">
-                        <h3><?= $subcomment['first_name'] ?></h3>
-                      </div>
-                      <p>
-                        <?= nl2br($subcomment['cm_content']) ?>
-                      </p>
-                      <div class="project_subcomment_reaction">
-                        <div class="reactions_count_icons" data-liked="<?= $subcomment['has_liked'] ?>" data-cmid="<?= $subcomment['cm_id'] ?>">
-                          <svg width="20" height="20" viewBox="0 0 90 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path id="path1-cm<?= $subcomment['cm_id'] ?>" class="<?= like_btn_class($subcomment['has_liked']) ?>" d="M18.5 85L1.5 62.5C6.29746 50.4098 10.6441 45.7408 22 42C27.3943 41.2335 30.4774 41.5048 36 43L57.5 43.5C63 44.5 64 52.5 57.5 55.5L38 56C36.5 56.5 36.5 59 38 59.5H58C59.8725 59.1695 60.7786 58.7848 62 57.5L78 42C86.5 39 91 43.5 88 51.5L65.5 74C61.9829 77.7723 59.877 78.8437 56 78.5L45.5 77.5C30.0921 75.2017 23.9499 76.7544 18.5 85Z"/>
-                            <path id="path2-cm<?= $subcomment['cm_id'] ?>" class="<?= like_btn_class($subcomment['has_liked']) ?>" d="M85.0062 27.5001C82.0062 32.5 73.5062 38 66.0062 47.5001C64.7149 43.0428 61.5 39 59.0062 39.0001H40.0062C34.1302 38.6457 27 37.5 26.5062 37.0001C0.500718 14.5 29.5 -14 51.0062 11.0001C67.5062 -6.00003 92.0062 0.999996 85.0062 27.5001Z"/>
-                          </svg>
-                          <p class="<?= like_btn_class($subcomment['has_liked']) ?>" id="like-count-cm<?= $subcomment['cm_id'] ?>"><?= non0($subcomment['numberOfLikes']) ?></p>
+                        <div class="project_comment_header_author">
+                          <img src="<?= $subcomment['avatar_url'] ?>" alt="Photo de profil" class="project_comment_header_pic">
+                          <h3><?= $subcomment['first_name'] ?></h3>
                         </div>
+                        <?php if(+$subcomment['cm_author'] === +$_SESSION['user_id'] || (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] === 1)) { ?>
+                          <div class="edit-icon-container">
+                            <svg class="edit-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="25" cy="25" r="10"/>
+                              <circle cx="75" cy="25" r="10"/>
+                              <circle cx="75" cy="75" r="10"/>
+                              <circle cx="25" cy="75" r="10"/>
+                            </svg>
+                            <div class="edit-modal dispnone">
+                              <ul>
+                                <li class="edit-btn"><p>Editer</p></li>
+                                <li class="delete-btn"><p>Supprimer</p></li>
+                              </ul>
+                            </div>
+                          </div>
+                        <?php } ?>
+                        <!-- <div class="edit-icon-container">
+                          <svg class="edit-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="25" cy="25" r="10"/>
+                            <circle cx="75" cy="25" r="10"/>
+                            <circle cx="75" cy="75" r="10"/>
+                            <circle cx="25" cy="75" r="10"/>
+                          </svg>
+                          <div class="edit-modal dispnone">
+                            <ul>
+                              <li><p id="edit-btn">Editer</p></li>
+                              <li><p>Supprimer</p></li>
+                            </ul>
+                          </div>
+                        </div> -->
+                      </div>
+                      <div class="general_comment_itself_content_container">
+                        <p class="comment_itself_content">
+                          <?= nl2br(includeLinks($subcomment['cm_content'])) ?>
+                        </p>
+                      </div>
+                      <div class="project_comment_footer">
+                        <div class="project_subcomment_reaction">
+                          <div class="reactions_count_icons" data-liked="<?= $subcomment['has_liked'] ?>" data-cmid="<?= $subcomment['cm_id'] ?>">
+                            <svg width="20" height="20" viewBox="0 0 90 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path id="path1-cm<?= $subcomment['cm_id'] ?>" class="<?= like_btn_class($subcomment['has_liked']) ?>" d="M18.5 85L1.5 62.5C6.29746 50.4098 10.6441 45.7408 22 42C27.3943 41.2335 30.4774 41.5048 36 43L57.5 43.5C63 44.5 64 52.5 57.5 55.5L38 56C36.5 56.5 36.5 59 38 59.5H58C59.8725 59.1695 60.7786 58.7848 62 57.5L78 42C86.5 39 91 43.5 88 51.5L65.5 74C61.9829 77.7723 59.877 78.8437 56 78.5L45.5 77.5C30.0921 75.2017 23.9499 76.7544 18.5 85Z"/>
+                              <path id="path2-cm<?= $subcomment['cm_id'] ?>" class="<?= like_btn_class($subcomment['has_liked']) ?>" d="M85.0062 27.5001C82.0062 32.5 73.5062 38 66.0062 47.5001C64.7149 43.0428 61.5 39 59.0062 39.0001H40.0062C34.1302 38.6457 27 37.5 26.5062 37.0001C0.500718 14.5 29.5 -14 51.0062 11.0001C67.5062 -6.00003 92.0062 0.999996 85.0062 27.5001Z"/>
+                            </svg>
+                            <p class="<?= like_btn_class($subcomment['has_liked']) ?>" id="like-count-cm<?= $subcomment['cm_id'] ?>"><?= non0($subcomment['numberOfLikes']) ?></p>
+                          </div>
+                        </div>
+                        <p><?= date('d/m/y H:i', strtotime($subcomment['cm_creation_datetime'])) ?></p>
                       </div>
                     </div>
                   <?php } ?>
@@ -237,7 +334,7 @@
               </div>
               <div class="center">
                 <button class="reply_btn nice-blue-button multisubcom">
-                  <img class="activity_card_item_icon" src="../img/icons/repondre.svg">
+                  <img class="reply_btn_icon" src="../img/icons/repondre.svg">
                   <p class="toggle-comment-form">Répondre</p>
                 </button>
               </div>
@@ -251,10 +348,12 @@
 
   </main>
 <?php
-  // include "../phpinclude/footer.php";
+include "phpinclude/rs_footer.php";
 ?>
 
 	<script>const userId = <?= $_SESSION['user_id'] ?>;</script>
+  <script>const pjId = <?= $pjId ?></script>
+  <!-- <script type="module" src="../js/comment_rendering_module.js"></script> -->
   <script src="../js/burger.js"></script>
   <script src="../js/resizing_textarea_comment.js"></script>
   <script src="../js/posting_comments.js"></script>
@@ -264,5 +363,7 @@
   <script src="../js/comment_likes.js"></script>
   <script src="../js/show_subcomments.js"></script>
 	<script src="../js/project_modal_img.js"></script>
+	<script src="../js/project_edit_modals.js"></script>
+	<script src="../js/color_checkbox.js"></script>
 </body>
 </html>

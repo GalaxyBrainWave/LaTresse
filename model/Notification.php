@@ -8,13 +8,14 @@
     private ?int $nfOriginUser;
     private ?int $nfDestinationUser;
     private ?int $nfOriginProjectId;
-    private ?int $nfOriginHelloThanksId;
+    // private ?int $nfOriginHelloThanksId;
     private ?int $nfOriginCommentId;
+    private ?int $nfGeneratorCommentId;
     private ?bool $isRead;
 
 
 
-    public function __construct($nfId = 0, $nfTextContent ='', $nfOriginUser = 0, $nfDestinationUser = 0, $nfOriginProjectId = 0, $nfOriginHelloThanksId = null, $nfOriginCommentId = null, $isRead = false)
+    public function __construct($nfId = 0, $nfTextContent ='', $nfOriginUser = 0, $nfDestinationUser = 0, $nfOriginProjectId = 0, /*$nfOriginHelloThanksId = null,*/ $nfOriginCommentId = null, $isRead = false, $nfGeneratorCommentId = null)
     {
       $this->nfId = $nfId;
       $this->nfTextContent = $nfTextContent;
@@ -22,14 +23,15 @@
       $this->nfOriginUser = $nfOriginUser;
       $this->nfDestinationUser = $nfDestinationUser;
       $this->nfOriginProjectId = $nfOriginProjectId;
-      $this->nfOriginHelloThanksId = $nfOriginHelloThanksId;
+      // $this->nfOriginHelloThanksId = $nfOriginHelloThanksId;
       $this->nfOriginCommentId = $nfOriginCommentId;
       $this->isRead = $isRead;
+      $this->nfGeneratorCommentId = $nfGeneratorCommentId;
     }
 
 
 
-    private static $attributeList = ["nfId", "nfTextContent", "nfOriginUser", "nfDestinationUser", "nfOriginProjectId", "nfOriginHelloThanksId", "nfOriginCommentId", "isRead"];
+    private static $attributeList = ["nfId", "nfTextContent", "nfOriginUser", "nfDestinationUser", "nfOriginProjectId", "nfGeneratorCommentId", "nfOriginCommentId", "isRead"];
     
     public function __get(string $attribute) {
       if (in_array($attribute, self::$attributeList)) {
@@ -55,28 +57,25 @@
 
       if (+$this->nfId > 0) {
         // this means the object was retrieved from the DB
-        // $stmt = "UPDATE notifications SET (nf_content, ht_id, cm_id) VALUES (:nf_content, ht_id, cm_id);";
-        // $stmt .= "WHERE cm_id = :id;";
-        // $query = $pdo-> prepare($stmt);
-        // $query-> bindParam(":cm_text_content", $this->cm_text_content);
-        // $query-> bindParam(":cm_id", $this->nfOriginCommentId);
-
-        // return $query-> execute();
       } else if (+$this->nfId === 0) {
         // this means it's a new entry in in the DB
-        $stmt = "INSERT INTO notifications (nf_content, nf_datetime, pj_id, cm_id, origin_user, destination_user, is_read) ";
-        $stmt .= "VALUES (:nf_content, :nf_datetime, :pj_id, :cm_id, :origin_user, :destination_user, :is_read)";
-        file_put_contents('log.txt', var_export($stmt, true) . PHP_EOL, FILE_APPEND);
+        $stmt = "INSERT INTO notifications (nf_content, nf_datetime, pj_id, parent_cm_id, origin_user, destination_user, is_read, cm_id) ";
+        // file_put_contents('log.txt', var_export('stmt: ' . $stmt, true) . PHP_EOL, FILE_APPEND);die();
+        $stmt .= "VALUES (:nf_content, :nf_datetime, :pj_id, :parent_cm_id, :origin_user, :destination_user, :is_read, :cm_id)";
+        //file_put_contents('log.txt', var_export($stmt, true) . PHP_EOL, FILE_APPEND);
         $query = $pdo-> prepare($stmt);
+        // the following output gives the correct value, yet a wrong value (value+1) is entered in the db
+        // file_put_contents('log.txt', var_export('destinationUserId: ' . $this->nfDestinationUser, true) . PHP_EOL, FILE_APPEND);
         $query-> bindValue(":nf_content", $this->nfTextContent, PDO::PARAM_STR);
         $query-> bindValue(":nf_datetime", $this->nfDateTime->format('Y/m/d H:i:s'), PDO::PARAM_STR);
         $query-> bindValue(":pj_id", $this->nfOriginProjectId, PDO::PARAM_INT);
-        $query-> bindValue(":cm_id", $this->nfOriginCommentId, PDO::PARAM_INT);
+        $query-> bindValue(":parent_cm_id", $this->nfOriginCommentId, PDO::PARAM_INT);
         $query-> bindValue(":origin_user", $this->nfOriginUser, PDO::PARAM_INT);
         $query-> bindValue(":destination_user", $this->nfDestinationUser, PDO::PARAM_INT);
         $query-> bindValue(":is_read", $this->isRead, PDO::PARAM_INT);
-
-        return $query->execute();
+        $query-> bindValue(":cm_id", $this->nfGeneratorCommentId, PDO::PARAM_INT);
+        $query->execute();
+        return true;
       } else {
         return false;
       }
@@ -104,13 +103,6 @@
       return $query-> execute();
     }
     
-    // public function findAll() {
-    //   // set up the PDO
-    //   require_once "Database.php";
-    //   $db = new Database();
-    //   $pdo = $db->connect();
-    //   $sql = "SELECT "
-    // }
 
     public function findByProjectId(int $projectId) {
 
@@ -157,9 +149,11 @@
   */
   public static function getNew(int $userId) {
     $sql = "
-      SELECT notifications.* , users.first_name, users.avatar_url
+      SELECT notifications.* , users.first_name, users.avatar_url, comments.cm_content, projects.pj_title
       FROM notifications
       JOIN users ON notifications.origin_user = users.user_id
+      JOIN comments ON notifications.cm_id = comments.cm_id
+      JOIN projects ON notifications.pj_id = projects.pj_id
       WHERE destination_user = :user_id
       AND is_read = 0
       ORDER BY nf_datetime DESC
@@ -171,7 +165,7 @@
       WHERE destination_user = :user_id
       AND is_read = 0
     ";
-    // paramExecuter('user_id',$userId, $sql);
+    paramExecuter('user_id',$userId, $sql);
     return $notifications;
   }
 
@@ -184,12 +178,15 @@
   */
   public static function getOld(int $userId) {
     $sql = "
-      SELECT notifications.* , users.first_name, users.avatar_url
+      SELECT notifications.* , users.first_name, users.avatar_url, comments.cm_content, projects.pj_title
       FROM notifications
       JOIN users ON notifications.origin_user = users.user_id
+      JOIN comments ON notifications.cm_id = comments.cm_id
+      JOIN projects ON notifications.pj_id = projects.pj_id
       WHERE destination_user = :user_id
       AND is_read = 1
       ORDER BY nf_datetime DESC
+      LIMIT 100;
     ";
     $notifications = userFetcher($sql, $userId);
     return $notifications;

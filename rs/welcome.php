@@ -1,5 +1,12 @@
 <?php
-  require_once "phpinclude/rs_pagetop.php";
+  session_name('La_Tresse');  // keep the user
+  session_start();            // connected
+  // session_destroy();
+
+  if (!isset($_SESSION['user_id'])) { // if no session exists
+    header("Location: ../connexion.php"); // redirect to connexion.php
+    exit(); // don't linger here
+  }
   // create the user's directory in img/users/ if it doesn't already exist
   if (!file_exists("../img/users/" . $_SESSION['user_id'])) {
     mkdir("../img/users/" . $_SESSION['user_id'], 0777, true);
@@ -8,10 +15,20 @@
   // get the user's details to display their first name
   $user = User::getUserDetails($_SESSION['user_id']);
 ?>
+
+
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/rs/rsmain.css">
+  <link id="color-theme-stylesheet" rel="stylesheet" href="../css/rs/variables.css">
   <title>Bienvenue sur La Tresse</title>
 </head>
 
-<body class="rslayout">
+<body class="rslayout welcome-body">
   <main id="welcome"  class="rsform">
     <div id="welcome-left">
       <h1>Merci, <?= $user-> firstName ?>. <br>Bienvenue sur La Tresse</h1>
@@ -19,7 +36,14 @@
     </div>
     <div id="welcome-right">
       <div id="welcome-right-first-display">
-        <p>(toggle jour/nuit)</p>
+        <p>Préfères-tu le mode clair ou le mode sombre&nbsp;?</p>
+        <div class="center">
+          <label class="switch">
+            <input type="checkbox" id="color-checkbox" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <br>
         <p id="welcome-question">Souhaites-tu compléter ton profil maintenant&nbsp;?</p>
         <div id="welcome-choice">
           <button class="yel-btn green-border-btn" id="welcome-maintenant">Maintenant</button>
@@ -72,6 +96,8 @@
       </div>
     </div>
   </main>
+  <script>const welcome = true;</script>
   <script src="../js/welcome.js"></script>
+	<script src="../js/color_checkbox_welcome.js"></script>
 </body>
 </html>

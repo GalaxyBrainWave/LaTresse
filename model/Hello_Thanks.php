@@ -167,54 +167,35 @@
       return true;
     }
 
-    public function delete() {
-
+    public static function deleteOne(int $htId) {
       // set up the PDO
-      
       $db = new Database();
       $pdo = $db->connect();
-
       // set up the query
-      $sql = "DELETE FROM comments WHERE cm_id = :cm_id;";
-      $query = $pdo-> prepare($sql);
-      $query-> bindParam(':cm_id', $this->cmId, PDO::PARAM_STR);
+      $sql = "DELETE FROM hello_thanks WHERE ht_id = :ht_id;";
 
+      $query = $pdo-> prepare($sql);
+      $query-> bindParam(':ht_id', $htId);
+      file_put_contents('log.txt', print_r($pdo, true) . PHP_EOL, FILE_APPEND);
       return $query-> execute();
     }
     
-    // public function findAll() {
-    //   // set up the PDO
-    //   
-    //   $db = new Database();
-    //   $pdo = $db->connect();
-    //   $sql = "SELECT "
-    // }
 
-    public function findByProjectId(int $projectId) {
-
+    public static function updateOne(int $htId, string $textContent) {
       // set up the PDO
-      
       $db = new Database();
       $pdo = $db->connect();
-
       // set up the query
-      $sql = "SELECT * FROM comments WHERE pj_id = :pj_id ORDER BY cm_parent;";
+      $sql = "UPDATE hello_thanks SET ht_text_content = :ht_text_content WHERE ht_id = :ht_id;";
+      // file_put_contents('log.txt', print_r($sql, true) . PHP_EOL, FILE_APPEND);
+
       $query = $pdo-> prepare($sql);
-      $query-> bindParam(':pj_id', $projectId, PDO::PARAM_INT);
-      $query-> setFetchMode(PDO::FETCH_ASSOC);
-      if ($query-> execute()) {
-        $results = $query-> fetchAll();
-        return $results;
-      }
+      $query-> bindParam(':ht_id', $htId);
+      $query-> bindParam(':ht_text_content', $textContent);
+      return $query-> execute();
     }
+    
 
-
-    public function retrieveId() {
-      
-      $db = new Database();
-      $pdo = $db->connect();
-
-    }
 
 
 

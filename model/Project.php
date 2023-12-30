@@ -194,8 +194,9 @@
     }
 
     // Supprimer un projet
-    public function delete(int $pjId) {
-      
+    public static function delete(int $pjId) {
+      file_put_contents('log.txt', print_r('198', true) . PHP_EOL, FILE_APPEND);          
+      file_put_contents('log.txt', print_r($pjId, true) . PHP_EOL, FILE_APPEND);
 
       $db = new Database();
       $pdo = $db->connect();
@@ -203,7 +204,7 @@
       $sql = "DELETE FROM projects WHERE pj_id = :pj_id;";
 
       $query = $pdo->prepare($sql);
-      $query->bindParam(":pj_id", $this->pjId, PDO::PARAM_INT);
+      $query->bindParam(":pj_id", $pjId, PDO::PARAM_INT);
 
       if ($query->execute()) {
         return true;
@@ -439,28 +440,30 @@
 
 
 
-  // this method is called when a user posts a project to notify everyone else
-  /**
-  * @param int $pjId
-  * @return bool 
-  */
-  public static function createNotifications(int $pjId) {
-    $sql = "
-    SELECT user_id
-    FROM users
-    ";
-    $userIdList = fetcher($sql);
-    if($userIdList) {
-      foreach($userIdList as $userId) {
-        $tempProject = new Project($project['pj_id']);
-        $likes = $tempProject->getLikes();
-        $project['total_likes'] = $likes['total_likes'];
-        $nbComments = Comment::count1stLevelCommentsByProjectId($project['pj_id']);
-        $project['nbComments'] = $nbComments['COUNT(cm_id)'];
-      }
-    }
-    return json_encode($projectsList);
-  }
+  // // this method is called when a user posts a project to notify everyone else
+  // /**
+  // * @param int $pjId
+  // * @param int $originUserId
+  // * @return bool 
+  // */
+  // public static function createNotifications(int $pjId, int $originUserId) {
+  //   $sql = "
+  //   SELECT user_id
+  //   FROM users
+  //   ";
+  //   $userIdList = fetcher($sql);
+
+  //   if($userIdList) {
+  //     foreach($userIdList as $userId) {
+  //       $notification = new Notification(0, );
+  //       $likes = $tempProject->getLikes();
+  //       $project['total_likes'] = $likes['total_likes'];
+  //       $nbComments = Comment::count1stLevelCommentsByProjectId($project['pj_id']);
+  //       $project['nbComments'] = $nbComments['COUNT(cm_id)'];
+  //     }
+  //   }
+  //   return json_encode($projectsList);
+  // }
 
 
 

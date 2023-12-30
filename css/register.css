@@ -21,7 +21,8 @@
 
 #register-page h1 {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.7em;
+  margin-bottom: 16px;
 }
 
 #register-page .register-left img {
@@ -41,21 +42,25 @@
   font-size: 0.8em;
 }
 
+#caroussel {
+  border: solid 1px var(--green);
+}
+
 .yel-btn {
   display: block;
   padding: 8px 16px;
-  background-color: var(--ochre);
+  background-color: #fbd629;
   border-radius: 8px;
   font-weight: 500;
-  color: var(--blue);
+  color: #034c8c;
 }
 
 .green-border-btn {
-  border: solid 3px var(--green);
+  border: solid 3px #14a68c;
 }
 
 .blue-border-btn {
-  border: solid 3px var(--blue-medium);
+  border: solid 3px #007be7;
 }
 
 .register-form-container {
@@ -97,7 +102,7 @@
 #mdpoublie-link {
   display: none;
   font-size: 0.8em;
-  color: var(--blue);
+  color: #034c8c;
   text-decoration: underline;
 }
 
@@ -150,9 +155,9 @@
   .register-form {
     padding-bottom: 96px;
   }
-  #register-page h1 {
-    font-size: 2.5em;
-  }
+  /* #register-page h1 {
+    font-size: 2em;
+  } */
   #register-page .register-left img {
     height: 256px;
   }

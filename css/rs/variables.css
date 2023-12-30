@@ -1,0 +1,42 @@
+/* Variables */
+
+:root {
+    --darkblue: #fffced;
+    --blue-text: #e9de9f;
+    --beige: #0c1725;
+    --blue: #ffea8d;
+    --blue-light: #182e49;
+    --green: #2d7abe;
+    --darkgreen: #14a68c;
+    --ochre: #036ecc;
+    --ochre-medium: #0472d1;
+    --beige-to-blue-text: #fffced;
+    
+    --ochre-light: #fff176;
+    --blue-medium: #007be7;
+    --blue-medium-dimmer: #2d7abe;
+    --green-medium: #21e9c5;
+    --green-light: #95ffec;
+    --darkochre: #25200c;
+
+    --green50: rgba(20, 166, 140, 0.5);
+    --blue-mediumdark: #fcf8cb;
+    --blue-mediumtext: rgb(228, 225, 190);
+    --project-header-bar: rgba(255, 252, 235, 0.7);
+    
+    --nice-btn-top: #034c8c;
+    --nice-btn-btm: #0c1725;
+    --greenput-top-darker: #3a796e;
+    --greenput-top: #14a68c;
+    --greenput-btm: #024539;
+    --greenput-btm-lighter: #04705c;
+    --links: #036ecc;
+    --links-hover: #14a68c;
+    --yelbtn-border: #64b9aa;
+}
+
+
+*
+{
+    color: #182e49;
+}

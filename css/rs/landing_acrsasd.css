@@ -14,7 +14,8 @@
 .acrsasd_card_container {
     padding: 20px 15px;
     /* not sure which is best  */
-    /* background-color: var(--darkgreen); */
+    /* background-color: var(--greenput-btm); */
+    background: linear-gradient(0deg, var(--greenput-top-darker) 0%, var(--greenput-btm-lighter) 100%);
     border-radius: 0 0 10px 10px;
 }
 
@@ -23,6 +24,10 @@
     border-radius: 5px;
     margin-bottom: 25px;
     box-shadow: 1px 1px 4px 0 var(--beige);
+}
+
+.acrsasd_card:hover {
+    background-color: var(--blue-text);
 }
 
 .acrsasd_card_head {

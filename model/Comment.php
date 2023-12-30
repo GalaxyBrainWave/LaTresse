@@ -15,6 +15,8 @@
 
     public function __construct($cmTextContent, $cmAuthor, $projectId = 0, $cmId = 0, $cmParentId = 0)
     {
+      // file_put_contents('log.txt', var_export('$cmParentId =', true) . PHP_EOL, FILE_APPEND);
+      // file_put_contents('log.txt', var_export($cmParentId, true) . PHP_EOL, FILE_APPEND);
       $this->cmId = $cmId;
       $this->cmTextContent = $cmTextContent;
       $this->cmMomentCreation = new DateTime();
@@ -25,7 +27,7 @@
 
 
 
-    private static $attributeList = ["cmId", "cmTextContent", "cmAuthor", "projectId", "cmParentId"];
+    private static $attributeList = ["cmId", "cmTextContent", "cmAuthor", "projectId", "cmParentId", "cmMomentCreation"];
     
     public function __get(string $attribute) {
       if (in_array($attribute, self::$attributeList)) {
@@ -48,10 +50,13 @@
       $pdo = $db->connect();
       if ($this->cmId > 0) {
         // this means the object was retrieved from the DB
-        $sql = "UPDATE comments SET cm_text_content = :cm_text_content ";
-        $sql .= "WHERE cm_id = :id;";
+        $sql = "UPDATE comments SET cm_content = :cm_content, cm_creation_datetime = :cm_creation_datetime ";
+        $sql .= "WHERE cm_id = :cm_id;";
+        file_put_contents('log.txt', print_r($sql, true) . PHP_EOL, FILE_APPEND);
         $query = $pdo-> prepare($sql);
-        $query-> bindParam(":cm_text_content", $this->cmTextContent);
+        $now = $this->cmMomentCreation->format('Y/m/d H:i:s');
+        $query-> bindParam(":cm_creation_datetime", $now);
+        $query-> bindParam(":cm_content", $this->cmTextContent);
         $query-> bindParam(":cm_id", $this->cmId);
 
         return $query-> execute();
@@ -59,10 +64,10 @@
         // this means it's a new object that's being created (not present in the DB)
 
         // set up the query
-        $sql = "INSERT INTO comments (cm_text_content, cm_moment_creation, cm_author, pj_id, cm_parent) ";
-        $sql .= "VALUES (:cm_text_content, :cm_moment_creation, :cm_author, :pj_id, :cm_parent)";
+        $sql = "INSERT INTO comments (cm_content, cm_moment_creation, cm_author, pj_id, cm_parent) ";
+        $sql .= "VALUES (:cm_content, :cm_moment_creation, :cm_author, :pj_id, :cm_parent)";
         $query = $pdo-> prepare($sql);
-        $query-> bindParam(":cm_text_content", $this->cmTextContent, PDO::PARAM_STR);
+        $query-> bindParam(":cm_content", $this->cmTextContent, PDO::PARAM_STR);
         $query-> bindParam(":cm_moment_creation", $this->cmMomentCreation, PDO::PARAM_STR);
         $query-> bindParam(":cm_author", $this->cmAuthor, PDO::PARAM_INT);
         $query-> bindParam(":pj_id", $this->projectId, PDO::PARAM_INT);
@@ -118,28 +123,46 @@
       return true;
     }
 
-    public function delete() {
 
-      // set up the PDO
-      require_once "Database.php";
-      $db = new Database();
-      $pdo = $db->connect();
 
-      // set up the query
-      $sql = "DELETE FROM comments WHERE cm_id = :cm_id;";
-      $query = $pdo-> prepare($sql);
-      $query-> bindParam(':cm_id', $this->cmId, PDO::PARAM_STR);
-
-      return $query-> execute();
-    }
     
-    // public function findAll() {
-    //   // set up the PDO
-    //   require_once "Database.php";
-    //   $db = new Database();
-    //   $pdo = $db->connect();
-    //   $sql = "SELECT "
-    // }
+    // this method is called when the user seeks to delete a comment 
+    /**
+    * @param int $cmId id of the comment to be deleted
+    * @return bool true if successful
+    */
+    public static function delete(int $cmId) {
+      return deleter('comments', 'cm_id', $cmId);
+    }
+
+
+
+
+        
+    // this method is called when the user seeks to delete a comment 
+    /**
+    * @param int $cmId id of the comment to be deleted
+    * @return bool true if successful
+    */
+    public static function nullify(int $cmId) {
+      $newValues = [
+        'cm_content' => 'Ce commentaire a été effacé par son auteur.e'
+      ];
+      return updater('comments', $newValues, 'cm_id', $cmId);
+    }
+
+
+
+
+
+    
+  // public function findAll() {
+  //   // set up the PDO
+  //   require_once "Database.php";
+  //   $db = new Database();
+  //   $pdo = $db->connect();
+  //   $sql = "SELECT "
+  // }
 
     public static function find1stLevelCommentsByProjectId(int $projectId) {
       // set up the PDO
@@ -314,6 +337,9 @@
     $sql = "SELECT COUNT(comments.cm_id) AS nbComments FROM comments WHERE comments.cm_author = :user_id";
     return userFetcher($sql, $userId);
   }
+
+
+
 
 
 

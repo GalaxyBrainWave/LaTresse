@@ -1,0 +1,141 @@
+#footer_cta
+{
+    padding: 60px 20px 30px;
+    background-color: #14a68c;
+}
+
+
+
+.footer_cta_heading
+{
+    background-color: #fffced;
+    width: 290px;
+    text-align: center;
+    padding: 8px 0;
+    border: solid 1px #182e49;
+    box-shadow: 6px 6px #fbd629;
+    margin-bottom: 45px;
+}
+
+#footer_cta > p 
+{
+    color: #fffced;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#footer_cta .button_yellow
+{
+    margin: 10px auto 30px;
+}
+
+ .footer_cta_form
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} 
+
+#firstname,
+#email
+{
+    width: 300px;
+    border-radius: 10px;
+    padding: 6px 10px 4px;
+    margin-bottom: 25px;
+}
+
+#footer_cta_form_submit
+{
+    border: solid 2px #fbd629;
+    margin: auto;
+}
+
+#footer_cta_form_submit:hover
+{
+    background-color: #182e49;
+}
+
+#footer_cta_form_submit:hover p
+{
+    color: #fbd629;
+}
+
+.footer_cta_form_input_container_left,
+.footer_cta_form_input_container_right
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#footer_cta form
+{
+    width: 100%;
+}
+
+
+.button_yellow_footer_cta
+{
+    width: 180px;
+    background-color: #fbd629;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 6px 12px 5px 40px;
+    border-radius: 50px;
+}
+
+.button_yellow_footer_cta p
+{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+@media screen and (min-width:700px)
+{
+    .footer_cta_form
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 50px
+    } 
+    
+    .footer_cta_form_input_container_left
+    {
+        justify-content: flex-end;
+
+    }
+
+    .footer_cta_form_input_container_right
+    {
+         justify-content: flex-start;
+    }
+
+    .footer_cta_heading
+    {
+        transform: translate(-180px, 0);
+    }
+
+    #footer_cta_form_submit
+    {
+        transform: translate(230px, 0);
+    }
+}
+
+
+
+@media screen and (min-width:1200px)
+{
+    .footer_cta_heading
+    {
+        max-width: 1000px;
+    }
+}
+
+

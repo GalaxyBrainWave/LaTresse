@@ -13,19 +13,16 @@
     private string $autoDescription;
     private string $avatarURL;
     private string $bannerURL;
+    private string $slug;
     private ?bool $isAdmin;
     private ?int $nbHelloThanks;
     private ?int $nbComments;
+    private ?int $nbLikes;
+    private ?int $nbProjects;
     private DateTime $accountCreationDate;
-    // private array $users;
-    private ?array $projects;
-    // private ?array $articles;
-    private ?array $comments;
-    private ?array $helloThanks;
-    private ?array $medias;
 
 
-    public function __construct($userId = 0, $firstName = "", $email = "", $hashPass = "", $isAdmin = false, $colorMode = 'day', $autoDescription = '', $avatarURL = '', $bannerURL = '', $nbHelloThanks = 0, $nbComments = 0) {
+    public function __construct($userId = 0, $firstName = "", $email = "", $hashPass = "", $isAdmin = false, $slug = '', $colorMode = 'day', $autoDescription = '', $avatarURL = '', $bannerURL = '', $nbHelloThanks = 0, $nbComments = 0, $nbLikes = 0, $nbProjects = 0) {
       $this->userId = $userId;
       $this->firstName = $firstName;
       $this->email = $email;
@@ -35,18 +32,12 @@
       $this->autoDescription = $autoDescription;
       $this->avatarURL = $avatarURL;
       $this->bannerURL = $bannerURL;
+      $this->slug = $slug;
+      $this->nbHelloThanks = $nbHelloThanks;
+      $this->nbComments = $nbComments;
+      $this->nbLikes = $nbLikes;
+      $this->nbProjects = $nbProjects;
       $this->accountCreationDate = new DateTime();
-      // $this->users = array();
-      $this->projects = array();
-      // $this->articles = array();
-      $this->comments = array();
-      $this->helloThanks = array();
-      // medias contains: (?)
-      // medias['banner_url']
-      // medias['avatar_url']
-      // medias['autodescription']
-      // medias['location']
-      $this->medias = array();
     }
 
     
@@ -57,82 +48,45 @@
       $this->userId = $assocArray['user_id'];
       $this->firstName = $assocArray['first_name'];
       $this->email = $assocArray['user_email'];
-      // $this->hashPass = $assocArray['hash_pass'];
+      $this->hashPass = $assocArray['hash_pass'];
       $this->isAdmin = $assocArray['is_admin'];
       $this->colorMode = $assocArray['color_mode'];
       $this->autoDescription = $assocArray['autodescription'];
       $this->avatarURL = $assocArray['avatar_url'];
       $this->bannerURL = $assocArray['banner_url'];
-      // $this->accountCreationDate = $assocArray['account_creation_date'];
-      // $this->users = array();
-      // $this->projects = $assocArray['user_id'];
-      // $this->articles = $assocArray['user_id'];
-      // $this->comments = $assocArray['user_id'];
-      // $this->helloThanks = $assocArray['user_id'];
-      // medias contains: (?)
-      // medias['banner_url']
-      // medias['avatar_url']
-      // medias['autodescription']
-      // medias['location']
-      // $this->medias = $assocArray['user_id'];
+      $this->slug = $assocArray['slug'];
+      $this->nbHelloThanks = $assocArray['nb_ht'];
+      $this->nbComments = $assocArray['nb_comments'];
+      $this->nbLikes = $assocArray['nb_likes'];
+      $this->nbProjects = $assocArray['nb_projects'];
+      $this->accountCreationDate = new DateTime($assocArray['account_creation_date']);
     }
 
-    // Accesseur magique
-    // public function __get($attribute) {
-    //     return $this->$attribute;
-    // }
-
-    // public function __set($attribute, $value) {
-    //   switch ($attribute) {
-    //     case "userId":
-    //       if ($value > 0) {
-    //           $this->$attribute = $value;
-    //       } else {
-    //           $this->$attribute = 0;
-    //       }
-    //       break;
-    //     case "accountCreationDate":
-    //       $this->$attribute = new DateTime($value);
-    //       break;
-    //     case "users":
-    //       $this->$attribute = array($value);
-    //       break;
-    //     case "projects":
-    //       $this->$attribute = array($value);
-    //       break;
-    //     case "articles":
-    //       $this->$attribute = array($value);
-    //       break;
-    //     case "comments":
-    //       $this->$attribute = array($value);
-    //       break;
-    //     case "helloThanks":
-    //       $this->$attribute = array($value);
-    //       break;
-    //     case "medias":
-    //       $this->$attribute = array($value);
-    //       break;
-    //     default:
-    //       $this->$attribute = $value;
-    //   }
-    // }
 
     // list of the authorized attributes to be altered by the magic accessors
-    private static $attributeList = ["userId", "firstName", "email", "hashPass", "colorMode", "autoDescription", "avatarURL", "bannerURL", "nbReactions", "nbHelloThanks", "nbComments", "accountCreationDate", "projects", "comments", "helloThanks", "medias"];
+    private static $attributeList = ["userId", "firstName", "email", "hashPass", "colorMode", "autoDescription", "avatarURL", "bannerURL", "nbLikes", "nbHelloThanks", "nbComments", "accountCreationDate", "nbProjects", "isAdmin", "slug"];
+
 
     // associates database keys to object keys for saving the data into the DB
-    private static $dbAttributes = [
-      "userId" => "user_id",
-      "firstName" => "firstName",
-      "email" => "user_email",
-      "hashPass" => "hash_pass",
-      "colorMode" => "color_mode",
-      "autoDescription" => "autodescription",
-      "avatarURL" => "avatar_url",
-      "bannerURL" => "banner_url",
-      "nbReactions" => "nb_reactions"
+    private static $frontAttributes = [
+      "user_id" => "userId",
+      "first_name" => "firstName",
+      "user_email" => "email",
+      "hash_pass" => "hashPass",
+      "is_admin" => "isAdmin",
+      "color_mode" => "colorMode",
+      "autodescription" => "autodescription",
+      "avatar_url" => "avatarURL",
+      "banner_url" => "bannerURL",
+      "slug" => "slug",
+      "account_creation_date" => "registerDate",
+      "nb_likes" => "likes",
+      "nb_comments" => "cmCount",
+      "nb_ht" => "htCount",
+      "nb_projects" => "pjCount"
     ];
     
+
     // magic accessors that work only on authorized properties
     public function __get(string $attribute) {
       if (in_array($attribute, self::$attributeList)) {
@@ -145,74 +99,6 @@
         $this->$attribute = $value;
       }
     }
-
-      // this function is actually useless
-    // this function creates an associative array whose keys are 
-    // User's attributes and values are all set to null
-    // this array will then be used as input for the update() method
-    // after being set up properly before the update() call
-    // public static function generateAttributesList() {
-    //   $ouput = array();
-    //   foreach(self::$attributeList as $attribute) {
-    //     $ouput[$attribute] = null;
-    //   }
-    //   return $ouput;
-    // }
-
-
-
-    // Méthodes CRUD
-    // Inscrire ou modifier un utilisateur : save = create || update
-    // public function save() {
-    //     try {
-    //         if ($this->userId > 0) {
-    //             
-
-    //             $db = new Database();
-    //             $pdo = $db->connect();
-    //             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    //             $sql = "UPDATE users SET last_name = :last_name, first_name = :first_name, email = :email, hash_pass = :hash_pass WHERE user_id = :user_id;";
-
-    //             $pdo = $query->prepare($sql);
-    //             $query->bindParam(":user_id", $this->userId, PDO::PARAM_INT);
-    //             $query->bindParam(":last_name", $this->lastName, PDO::PARAM_STR);
-    //             $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
-    //             $query->bindParam(":email", $this->email, PDO::PARAM_STR);
-    //             $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
-
-    //             if ($query->execute()) {
-    //                 return true;
-    //             } else {
-    //                 return false;
-    //             }
-    //         } else {
-    //             
-
-    //             $db = new Database();
-    //             $pdo = $db->connect();
-    //             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    //             $sql = "INSERT INTO users (last_name, first_name, email, hash_pass) VALUES (:last_name, :first_name, :email, :hash_pass);";
-
-    //             $query = $pdo->prepare($sql);
-    //             $query->bindParam(":last_name", $this->lastName, PDO::PARAM_STR);
-    //             $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
-    //             $query->bindParam(":email", $this->email, PDO::PARAM_STR);
-    //             $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
-
-    //             if ($query->execute()) {
-    //                 return true;
-    //             } else {
-    //                 return false;
-    //             }
-    //         }
-    //     } catch (PDOException $e) {
-    //         echo "Erreur :" . $e->getMessage();
-    //     }
-    // }
-
-
 
 
     /**
@@ -248,12 +134,13 @@
           $pdo = $db->connect();
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-          $sql = "INSERT INTO users (first_name, user_email, hash_pass) VALUES (:first_name, :email, :hash_pass);";
+          $sql = "INSERT INTO users (first_name, user_email, hash_pass, slug) VALUES (:first_name, :email, :hash_pass, :slug);";
 
           $query = $pdo->prepare($sql);
           $query->bindParam(":first_name", $this->firstName, PDO::PARAM_STR);
           $query->bindParam(":email", $this->email, PDO::PARAM_STR);
           $query->bindParam(":hash_pass", $this->hashPass, PDO::PARAM_STR);
+          $query->bindParam(":slug", $this->slug, PDO::PARAM_STR);
 
           if ($query->execute()) {
             return true;
@@ -470,29 +357,18 @@
     */
     public static function getAll() {
       $sql = 
-      "SELECT user_id, 
-        first_name AS firstName, 
-        autodescription, 
-        avatar_url AS avatarURL, 
-        banner_url AS bannerURL, 
-        account_creation_date AS registerDate,
-        COUNT(DISTINCT ht_reactions.htr_ht_id) AS htLikesCount,
-        COUNT(DISTINCT pj_reactions.pjr_pj_id) AS pjLikesCount,
-        COUNT(DISTINCT cm_reactions.cmr_cm_id) AS cmLikesCount,
-        COUNT(DISTINCT hello_thanks.ht_id) AS htCount,
-        COUNT(DISTINCT comments.cm_id) AS cmCount,
-        COUNT(DISTINCT projects.pj_id) AS pjCount
-      FROM users
-      LEFT JOIN ht_reactions ON ht_reactions.htr_user_id = users.user_id
-      LEFT JOIN pj_reactions ON pj_reactions.pjr_user_id = users.user_id
-      LEFT JOIN cm_reactions ON cm_reactions.cmr_user_id = users.user_id
-      LEFT JOIN comments ON comments.cm_author = users.user_id
-      LEFT JOIN projects ON projects.pj_author = users.user_id
-      LEFT JOIN hello_thanks ON hello_thanks.ht_author = users.user_id
-      GROUP BY users.user_id
-      ORDER BY users.account_creation_date;";
+      "SELECT * FROM users;";
       $usersList = fetcher($sql);
-      return json_encode($usersList);
+      $newUserList = [];
+      foreach($usersList as $user) {
+        $newUser = [];
+        foreach($user as $key => $value) {
+          $newKey = self::$frontAttributes[$key];
+          $newUser[$newKey] = $value;
+        }
+        $newUserList[] = $newUser;
+      }
+      return json_encode($newUserList);
     }
 
 
@@ -510,6 +386,29 @@
       $stmt = "SELECT * FROM users WHERE user_id = :user_id;";
       $query = $pdo->prepare($stmt);
       $query->bindParam(":user_id", $userId, PDO::PARAM_INT);
+      if ($query->execute()) {
+        // get the results
+        $results = $query->fetch(PDO::FETCH_ASSOC);
+        if ($results) {
+          // create a new User object
+          $user = new User();
+          // fill the object's property values
+          $user-> populateProperties($results);
+          return $user;
+        } // else une erreur s'est produite
+      } // else afficher message d'erreur
+    }
+
+
+
+    // retrieve user details from the ID (used on most pages)
+    public static function getUserDetailsFromSlug(string $slug) {
+      $db = new Database();
+      $pdo = $db->connect();
+      // get all there is about the user
+      $stmt = "SELECT * FROM users WHERE slug = :slug;";
+      $query = $pdo->prepare($stmt);
+      $query->bindParam(":slug", $slug, PDO::PARAM_STR);
       if ($query->execute()) {
         // get the results
         $results = $query->fetch(PDO::FETCH_ASSOC);
@@ -608,7 +507,7 @@
         $pdo = $db->connect();
         // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // from the email, find the user's ID and password hash
-        $sql = "SELECT user_id, hash_pass FROM users WHERE user_email = :email;";
+        $sql = "SELECT * FROM users WHERE user_email = :email;";
         $query = $pdo->prepare($sql);
         $query->bindParam(":email", $email, PDO::PARAM_STR);
         if ($query->execute()) {
@@ -617,10 +516,16 @@
           // if there is only one result        
           if (count($results) === 1) {
             // if the password hashs match, open sesame
+            // var_dump(password_verify($pwd, $results[0]["hash_pass"]));
+            // var_dump($pwd);
+            // die($results[0]["hash_pass"]);
             if (password_verify($pwd, $results[0]["hash_pass"])) {
               session_unset();
               // get the user ID and store it in $_SESSION
               $_SESSION['user_id'] = (int) $results[0]["user_id"];
+              $_SESSION['colorMode'] = $results[0]["color_mode"];
+              +$results[0]["is_admin"] === 1 && $_SESSION['isAdmin'] = 1;
+              // var_dump($_SESSION['isAdmin']);die();
               unset($_SESSION['connectionError'] );
               if ($firstLogin === false) {
                 // go to the main page

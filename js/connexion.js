@@ -14,7 +14,7 @@ let linkMdpOublie = document.querySelector('#mdpoublie-link');
 // define the behavior of the button "S'identifi'er"
 btnSIdentifier.addEventListener('click', ()=> {
   registerForm.style.display = 'none';
-  loginForm.style.display = 'flex';
+  loginForm.classList.remove('dispnone');
 });
 
 // define the behavior of the button "Mot de passe oublié ?"
@@ -25,7 +25,7 @@ btnMdpOublie.addEventListener('click', ()=> {
 // define the behavior of the button "Retour"
 btnRetour.addEventListener('click', ()=> {
   registerForm.style.display = 'flex';
-  loginForm.style.display = 'none';
+  loginForm.classList.add('dispnone');
 });
 
 

@@ -12,6 +12,24 @@
     z-index: 2;
 }
 
+.navbar-icons {
+    width: 30px;
+    height: 30px;
+    fill: var(--beige);
+    stroke: var(--beige);
+}
+
+.navbar-icons path {
+    fill: var(--beige);
+    stroke: var(--beige);
+}
+
+nav ul li p
+{
+    color: var(--beige);
+    font-weight: bold;
+}
+
 .rslayout header {
     height: 64px;
 }
@@ -58,15 +76,79 @@ nav #menu_container .navbar-active .navbar-icons path {
     background-color: red;
     border-radius: 50%;
     position: absolute;
-    top: 20%;
-    right: 24px;
+    padding: 0 4px;
+    top: 16px;
+    right: 16px;
+    min-width: 19px;
+    display: grid;
+    place-items: center;
 }
 
 #notification-badge p {
     font-size: 14px;
-    padding: 0 4px;
     font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #fffced;
 }
+
+.switch {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 24px;
+}
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #9bcffd;
+    border-radius: 24px;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    /* background-color: white; */
+    background: url(../../img/icons/moon.svg);
+    border-radius: 50%;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #182e49;
+  }
+  
+  /* input:focus + .slider {
+    box-shadow: 0 0 1px red;
+  } */
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+    background: url(../../img/icons/sun.svg);
+  }
+  
+
+
+
+
 
 @media screen and (min-width: 915px) {
     .rslayout #menu_container {
@@ -95,6 +177,9 @@ nav #menu_container .navbar-active .navbar-icons path {
     
     .rslayout header {
         padding: 16px 64px 12px;
+    }
+    #notification-badge {
+        top: 0;
     }
 }
 

@@ -1,0 +1,31 @@
+
+#rs-footer {
+  padding: 32px;
+  background-color: var(--darkochre);
+}
+
+
+#rs-footer #footer-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+#footer-menu a:hover {
+  color: #fbd629;
+}
+
+#footer-menu a {
+  color: #fffced;
+}
+
+
+
+@media screen and (min-width: 780px) {
+  
+  #rs-footer #footer-menu {
+    flex-direction: row;
+    margin-top: 0;
+  }
+}

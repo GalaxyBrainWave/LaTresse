@@ -2,7 +2,7 @@
 .bjrmrc {
     padding: 40px 40px 20px;
     background-color: var(--darkgreen);
-    background: linear-gradient(180deg, var(--green) 0%, var(--darkgreen) 100%);
+    background: linear-gradient(180deg, var(--greenput-top) 0%, var(--greenput-btm) 100%);
     margin-bottom: 32px;
 }
 
@@ -25,10 +25,11 @@
 
 
 .nice-blue-button {
-    padding: 4px 16px;
+    padding: 8px 16px;
     border-radius: 10px;
     color: var(--ochre);
-    background: linear-gradient(180deg, var(--blue) 0%, var(--darkblue) 100%);
+    /* background: linear-gradient(180deg, var(--blue) 0%, var(--darkblue) 100%); */
+    background: linear-gradient(180deg, var(--nice-btn-top) 0%, var(--nice-btn-btm) 100%);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -37,14 +38,24 @@
 
 }
 
-.nice-blue-button p {
-    color: var(--ochre);
+.nice-blue-button:hover {
+    background: #01447e;
+}
+
+html body .nice-blue-button p {
+    /* color: var(--ochre); */
+    color: #fffced;
     font-size: 12px;
 }
 
 .bmbuttons {
     display: flex;
     justify-content: space-between;
+}
+
+#picinput-container {
+    display: flex;
+    gap: 8px;
 }
 
 @media screen and (min-width:520px) {
