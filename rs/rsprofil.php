@@ -50,6 +50,7 @@
   else {
     $loyalty = 'Mordu';
   }
+  $sourires = $user->nbHelloThanks ?  $user->nbHelloThanks : 0;
 ?>
 
     <title>La Tresse - Mon profil</title>
@@ -117,7 +118,7 @@
           <p>Projets (<?= Project::countUserProjects($user->userId)[0]['nbProjects'] ?>)</p>
         </div>
         <div id="smiles" class="pointer">
-          <p>Sourires (<?= $user->nbHelloThanks ?>)</p>
+          <p>Sourires (<?= $sourires ?>)</p>
         </div>
       </div>
       <div id="profile-project-list" class="toggled">

@@ -4,7 +4,7 @@
 }
 
 #main-page-projet {
-  padding-top: 0;
+  padding-top: 64px;
 }
 
 .project-container {
@@ -65,8 +65,8 @@
 
 
 .project-container .project-reaction p {
-  font-weight: bold;
-  color: var(--ochre);
+  /* font-weight: bold; */
+  color: var(--ochre-lighter);
 }
 
 .reactions_count_icons {

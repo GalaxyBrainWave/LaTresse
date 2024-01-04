@@ -26,8 +26,7 @@
 }
 
 #register-page .register-left img {
-  height: 96px;
-  width: auto;
+  width: 90vw;
 }
 
 #register-left-tagline {
@@ -129,6 +128,10 @@
   margin-top: 8px;
 }
 
+#connexion-body header {
+  position: relative;
+}
+
 /* #retour-chevron {
   display: inline-block;
   font-size: 1.2em;
@@ -159,7 +162,7 @@
     font-size: 2em;
   } */
   #register-page .register-left img {
-    height: 256px;
+    width: 45vw;
   }
   #login-form-container {
     padding-top: 32px;

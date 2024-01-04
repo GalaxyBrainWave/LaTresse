@@ -64,7 +64,7 @@
 
 </head>
 
-<body>
+<body id="connexion-body">
 
 <?php include "phpinclude/header.php"
 ?>
